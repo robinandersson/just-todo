@@ -1,0 +1,16 @@
+{
+  "name": "recap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "backend:start": "cd backend && npm start",
+    "frontend:start": "cd frontend && npm start",
+    "start": "npm run backend:start & npm run frontend:start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
+}

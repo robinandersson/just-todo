@@ -1,0 +1,57 @@
+.btn { @apply bg-blue-400 border border-blue-400 py-1 px-3 rounded-lg text-white text-lg; }
+
+.btn:not([disabled]):hover { @apply bg-blue-350 shadow-md; }
+.btn:not([disabled]):active { @apply bg-blue-500; }
+.btn:not([disabled]):focus { @apply outline-none shadow-outline; }
+.btn:not([disabled]):focus:active { @apply shadow; }
+
+.btn:not([disabled]).mode--positive { @apply bg-green-400 border-green-400; }
+.btn:not([disabled]).mode--positive:hover { @apply bg-green-350 border-green-350; }
+.btn:not([disabled]).mode--positive:active { @apply bg-green-500 border-green-500; }
+
+.btn:not([disabled]).mode--danger { @apply bg-red-400 border-red-400; }
+.btn:not([disabled]).mode--danger:hover { @apply bg-red-350 border-red-350; }
+.btn:not([disabled]).mode--danger:active { @apply bg-red-500 border-red-500; }
+
+.btn:disabled,
+.btn[disabled] { @apply bg-white text-gray-500 border border-gray-300; }
+.btn:disabled:hover,
+.btn[disabled]:hover { @apply cursor-not-allowed; }
+
+.form { @apply mx-auto flex flex-col p-10 border rounded-lg max-w-lg shadow-lg; }
+
+.input-label { @apply mt-5 mb-2; }
+
+.text-input { @apply rounded border-b-2 border-transparent bg-gray-100 px-3 py-1 tracking-wide; }
+
+.text-input:not([disabled]):hover { @apply shadow-md; }
+.text-input:not([disabled]):focus { @apply outline-none bg-white rounded-none border-blue-300 shadow-md; }
+
+.text-input:disabled,
+.text-input[disabled] { @apply bg-white text-gray-500 border border-gray-300; }
+.text-input:disabled:hover,
+.text-input[disabled]:hover { @apply cursor-not-allowed; }
+
+
+/* Todo-checkbox Styling (all checkbox-styling is consolidated here to avoid styles being scattered)
+**********************************************/
+
+.checkbox-container { @apply flex cursor-pointer; }
+.native-checkbox { @apply absolute opacity-0 w-0 h-0; }
+.checkbox { @apply rounded-full border border-blue-350 p-5 my-4 mx-6 max-w-xs flex-grow-0 flex-shrink relative shadow; }
+.checkbox:focus { @apply shadow-outline; }
+.checkbox-container:hover .checkbox { @apply border-blue-300 bg-blue-300 shadow; }
+.native-checkbox:checked ~ .checkbox { @apply bg-blue-350 shadow-none; }
+.native-checkbox:checked:hover ~ .checkbox { @apply bg-blue-300 border-blue-300; }
+
+.checkbox:after {
+  @apply border-b-6 border-r-6 border-white w-4 h-7 left-0 top-0 ml-3 absolute hidden;
+  margin-top: 0.2rem;
+  content: "️️";
+  transform: rotate(45deg);
+}
+
+.native-checkbox:checked ~ .checkbox:after { @apply block; }
+.checkbox-container:active .checkbox,
+.checkbox-container:active .native-checkbox:checked ~ .checkbox { @apply bg-blue-400 shadow-md; }
+.native-checkbox:focus ~ .checkbox { @apply shadow-outline; }
