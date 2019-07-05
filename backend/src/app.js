@@ -17,6 +17,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/graphql', graphqlRoutes)
+app.use('/graphql', graphqlRoutes);
 
 app.listen(8000);

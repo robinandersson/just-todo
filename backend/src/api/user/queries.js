@@ -9,9 +9,10 @@ const userQuery = {
   args: { id: { type: GraphQLID } },
   resolve(parent, args) {
     const query = 'SELECT * FROM users WHERE id = $1';
-    const values = [ args.id ];
+    const values = [args.id];
 
-    return db.oneOrNone(query, values)
+    return db
+      .oneOrNone(query, values)
       .then(res => res)
       .catch(err => err);
   },
@@ -22,13 +23,14 @@ const usersQuery = {
   type: new GraphQLList(UserType),
   resolve(parent) {
     const query = 'SELECT * FROM users';
-    return db.manyOrNone(query)
+    return db
+      .manyOrNone(query)
       .then(res => res)
       .catch(err => {
         console.log(err);
         throw err;
       });
-  }
-}
+  },
+};
 
 module.exports = { userQuery, usersQuery };

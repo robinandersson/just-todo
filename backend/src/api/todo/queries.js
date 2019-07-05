@@ -9,9 +9,10 @@ const todoQuery = {
   args: { id: { type: GraphQLID } },
   resolve(parent, args, req) {
     const query = 'SELECT * FROM todos WHERE id = $1';
-    const values = [ args.id ];
+    const values = [args.id];
 
-    return db.oneOrNone(query, values)
+    return db
+      .oneOrNone(query, values)
       .then(res => res)
       .catch(err => err);
   },
@@ -23,9 +24,10 @@ const todosQuery = {
   args: { userId: { type: GraphQLID } },
   resolve(parent, args) {
     const query = 'SELECT * FROM todos WHERE user_id = $1';
-    const values = [ args.userId ];
+    const values = [args.userId];
 
-    return db.manyOrNone(query, values)
+    return db
+      .manyOrNone(query, values)
       .then(res => res)
       .catch(err => err);
   },

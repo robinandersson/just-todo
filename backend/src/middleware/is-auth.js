@@ -10,7 +10,7 @@ const isAuthenticated = (req, res, next) => {
 
   const token = authHeader.split(' ')[1];
 
-  if (!token || token === '') {
+  if (!token || token === '') {
     req.isAuth = false;
     return next();
   }
@@ -19,9 +19,9 @@ const isAuthenticated = (req, res, next) => {
 
   try {
     decodedToken = jwt.verify(token, 'supersecretkey', {
-      ignoreExpiration: true,   // TODO: make use of expiration
+      ignoreExpiration: true, // TODO: make use of expiration
     });
-  } catch(err) {
+  } catch (err) {
     console.log(err);
     req.isAuth = false;
     return next();
@@ -32,10 +32,10 @@ const isAuthenticated = (req, res, next) => {
     return next();
   }
 
-  req.isAuth = true
+  req.isAuth = true;
   req.userId = decodedToken.userId;
 
   next();
-}
+};
 
 module.exports = { isAuthenticated };

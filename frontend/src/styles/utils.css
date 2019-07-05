@@ -1,2 +1,6 @@
-.attached-right { @apply mr-0 rounded-br-none rounded-tr-none; }
-.attached-left { @apply ml-0 rounded-bl-none rounded-tl-none; }
+.attached-right {
+  @apply mr-0 rounded-br-none rounded-tr-none;
+}
+.attached-left {
+  @apply ml-0 rounded-bl-none rounded-tl-none;
+}

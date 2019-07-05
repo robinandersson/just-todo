@@ -1,4 +1,9 @@
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLList } = require('graphql');
+const {
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLString,
+  GraphQLList,
+} = require('graphql');
 
 const db = require('../pgAdapter');
 const { TodoType } = require('../todo/types');
@@ -26,9 +31,10 @@ const UserType = new GraphQLObjectType({
       type: new GraphQLList(TodoType),
       resolve(parent) {
         const query = 'SELECT * FROM todos WHERE user_id = $1';
-        const values = [ parent.id ];
+        const values = [parent.id];
 
-        return db.manyOrNone(query, values)
+        return db
+          .manyOrNone(query, values)
           .then(res => res)
           .catch(err => err);
       },

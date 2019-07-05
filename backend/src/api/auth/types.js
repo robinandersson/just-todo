@@ -1,4 +1,9 @@
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt } = require('graphql');
+const {
+  GraphQLObjectType,
+  GraphQLID,
+  GraphQLString,
+  GraphQLInt,
+} = require('graphql');
 
 const AuthDataType = new GraphQLObjectType({
   name: 'AuthData',

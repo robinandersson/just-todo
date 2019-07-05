@@ -6,11 +6,14 @@
   "scripts": {
     "backend:start": "cd backend && npm start",
     "frontend:start": "cd frontend && npm start",
-    "start": "npm run backend:start & npm run frontend:start"
+    "start": "npm run backend:start & npm run frontend:start",
+    "prettier": "prettier --write '**/*.{js,css,html}'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "^1.18.2"
+  }
 }

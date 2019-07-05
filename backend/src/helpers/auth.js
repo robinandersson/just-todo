@@ -1,5 +1,4 @@
-const secureGraphqlRoute = (graphqlRoute) => {
-
+const secureGraphqlRoute = graphqlRoute => {
   return {
     ...graphqlRoute,
     resolve() {
@@ -8,7 +7,7 @@ const secureGraphqlRoute = (graphqlRoute) => {
 
       return graphqlRoute.resolve(...arguments);
     },
-  }
+  };
 };
 
 // TODO: share code between backend and frontend somehow? (this is duplicated on the frontend)

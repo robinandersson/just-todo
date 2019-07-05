@@ -5,7 +5,12 @@ const { userQuery, usersQuery } = require('./user/queries');
 const { createUserMutation, updateUserMutation } = require('./user/mutations');
 const { loginQuery } = require('./auth/queries');
 const { todoQuery, todosQuery } = require('./todo/queries');
-const { createTodoMutation, removeTodoMutation, toggleTodoMutation, modifyTodoDescriptionMutation } = require('./todo/mutations');
+const {
+  createTodoMutation,
+  removeTodoMutation,
+  toggleTodoMutation,
+  modifyTodoDescriptionMutation,
+} = require('./todo/mutations');
 const { secureGraphqlRoute } = require('./../helpers/auth');
 
 const rootQuery = new GraphQLObjectType({
@@ -46,7 +51,7 @@ const graphqlRoutes = graphqlHTTP({
     console.log(err.code);
 
     return err;
-  },   // include status code in graphql response
+  }, // include status code in graphql response
   pretty: true,
   graphiql: true,
 });

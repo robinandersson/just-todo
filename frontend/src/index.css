@@ -616,165 +616,289 @@ body {
   font-family: Quicksand, Futura, Roboto, sans-serif;
 }
 
-.title { font-family: Baumans, Optima, sans-serif
+.title {
+  font-family: Baumans, Optima, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 { font-family: Quicksand, Futura, Roboto, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Quicksand, Futura, Roboto, sans-serif;
 }
 
-h1 { font-size: 2.25rem;
+h1 {
+  font-size: 2.25rem;
 }
 
-h2 { font-size: 1.5rem;
+h2 {
+  font-size: 1.5rem;
 }
 
-h3 { font-size: 1.25rem;
+h3 {
+  font-size: 1.25rem;
 }
 
-p { font-size: 1.125rem;
+p {
+  font-size: 1.125rem;
 }
 
 @keyframes animate-spin {
-  0% { transform: rotate(0deg);
+  0% {
+    transform: rotate(0deg);
   }
 
-  100% { transform: rotate(360deg);
+  100% {
+    transform: rotate(360deg);
   }
 }
 
 @keyframes animate-scale {
-  0% { transform: scale(1);
+  0% {
+    transform: scale(1);
   }
 
-  33% { transform: scale(1.3);
+  33% {
+    transform: scale(1.3);
   }
 
-  66% { transform: scale(0.8);
+  66% {
+    transform: scale(0.8);
   }
 
-  100% { transform: scale(1);
+  100% {
+    transform: scale(1);
   }
 }
 
-.spin { animation: animate-spin linear 1.5s infinite;
+.spin {
+  animation: animate-spin linear 1.5s infinite;
 }
 
-.scale { animation: animate-scale ease-in-out 2s infinite;
+.scale {
+  animation: animate-scale ease-in-out 2s infinite;
 }
 
-.transition { transition: all 0.5s;
+.transition {
+  transition: all 0.5s;
 }
 
-.mode--instant { transition-duration: 0.1s;
+.mode--instant {
+  transition-duration: 0.1s;
 }
 
-.mode--fast { transition-duration: 0.25s;
+.mode--fast {
+  transition-duration: 0.25s;
 }
 
-.mode--slow { transition-duration: 3s;
+.mode--slow {
+  transition-duration: 3s;
 }
 
-html, body, #root { width: 100%; height: 100%;
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
 }
 
-#root { display: flex; flex-direction: column;
+#root {
+  display: flex;
+  flex-direction: column;
 }
 
-a { color: #2b6cb0;
+a {
+  color: #2b6cb0;
 }
 
-a:hover { color: #2a4365;
+a:hover {
+  color: #2a4365;
 }
 
-a:focus { outline: 0; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+a:focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
 
-.btn { background-color: #63b3ed; border-width: 1px; border-color: #63b3ed; padding-top: 0.25rem; padding-bottom: 0.25rem; padding-left: 0.75rem; padding-right: 0.75rem; border-radius: 0.5rem; color: #fff; font-size: 1.125rem;
+.btn {
+  background-color: #63b3ed;
+  border-width: 1px;
+  border-color: #63b3ed;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1.125rem;
 }
 
-.btn:not([disabled]):hover { background-color: #77C0EE; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.btn:not([disabled]):hover {
+  background-color: #77C0EE;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.btn:not([disabled]):active { background-color: #4299e1;
+.btn:not([disabled]):active {
+  background-color: #4299e1;
 }
 
-.btn:not([disabled]):focus { outline: 0; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+.btn:not([disabled]):focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
 
-.btn:not([disabled]):focus:active { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+.btn:not([disabled]):focus:active {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
-.btn:not([disabled]).mode--positive { background-color: #68d391; border-color: #68d391;
+.btn:not([disabled]).mode--positive {
+  background-color: #68d391;
+  border-color: #68d391;
 }
 
-.btn:not([disabled]).mode--positive:hover { background-color: #7EDCA2; border-color: #7EDCA2;
+.btn:not([disabled]).mode--positive:hover {
+  background-color: #7EDCA2;
+  border-color: #7EDCA2;
 }
 
-.btn:not([disabled]).mode--positive:active { background-color: #48bb78; border-color: #48bb78;
+.btn:not([disabled]).mode--positive:active {
+  background-color: #48bb78;
+  border-color: #48bb78;
 }
 
-.btn:not([disabled]).mode--danger { background-color: #fc8181; border-color: #fc8181;
+.btn:not([disabled]).mode--danger {
+  background-color: #fc8181;
+  border-color: #fc8181;
 }
 
-.btn:not([disabled]).mode--danger:hover { background-color: #fc9696; border-color: #fc9696;
+.btn:not([disabled]).mode--danger:hover {
+  background-color: #fc9696;
+  border-color: #fc9696;
 }
 
-.btn:not([disabled]).mode--danger:active { background-color: #f56565; border-color: #f56565;
+.btn:not([disabled]).mode--danger:active {
+  background-color: #f56565;
+  border-color: #f56565;
 }
 
 .btn:disabled,
-.btn[disabled] { background-color: #fff; color: #a0aec0; border-width: 1px; border-color: #e2e8f0;
+.btn[disabled] {
+  background-color: #fff;
+  color: #a0aec0;
+  border-width: 1px;
+  border-color: #e2e8f0;
 }
 
 .btn:disabled:hover,
-.btn[disabled]:hover { cursor: not-allowed;
+.btn[disabled]:hover {
+  cursor: not-allowed;
 }
 
-.form { margin-left: auto; margin-right: auto; display: flex; flex-direction: column; padding: 2.5rem; border-width: 1px; border-radius: 0.5rem; max-width: 32rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  border-width: 1px;
+  border-radius: 0.5rem;
+  max-width: 32rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.input-label { margin-top: 1.25rem; margin-bottom: 0.5rem;
+.input-label {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
-.text-input { border-radius: 0.25rem; border-bottom-width: 2px; border-color: transparent; background-color: #f7fafc; padding-left: 0.75rem; padding-right: 0.75rem; padding-top: 0.25rem; padding-bottom: 0.25rem; letter-spacing: 0.025em;
+.text-input {
+  border-radius: 0.25rem;
+  border-bottom-width: 2px;
+  border-color: transparent;
+  background-color: #f7fafc;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  letter-spacing: 0.025em;
 }
 
-.text-input:not([disabled]):hover { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.text-input:not([disabled]):hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.text-input:not([disabled]):focus { outline: 0; background-color: #fff; border-radius: 0; border-color: #90cdf4; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.text-input:not([disabled]):focus {
+  outline: 0;
+  background-color: #fff;
+  border-radius: 0;
+  border-color: #90cdf4;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .text-input:disabled,
-.text-input[disabled] { background-color: #fff; color: #a0aec0; border-width: 1px; border-color: #e2e8f0;
+.text-input[disabled] {
+  background-color: #fff;
+  color: #a0aec0;
+  border-width: 1px;
+  border-color: #e2e8f0;
 }
 
 .text-input:disabled:hover,
-.text-input[disabled]:hover { cursor: not-allowed;
+.text-input[disabled]:hover {
+  cursor: not-allowed;
 }
 
 /* Todo-checkbox Styling (all checkbox-styling is consolidated here to avoid styles being scattered)
 **********************************************/
 
-.checkbox-container { display: flex; cursor: pointer;
+.checkbox-container {
+  display: flex;
+  cursor: pointer;
 }
 
-.native-checkbox { position: absolute; opacity: 0; width: 0; height: 0;
+.native-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.checkbox { border-radius: 9999px; border-width: 1px; border-color: #77C0EE; padding: 1.25rem; margin-top: 1rem; margin-bottom: 1rem; margin-left: 1.5rem; margin-right: 1.5rem; max-width: 20rem; flex-grow: 0; flex-shrink: 1; position: relative; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+.checkbox {
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: #77C0EE;
+  padding: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  max-width: 20rem;
+  flex-grow: 0;
+  flex-shrink: 1;
+  position: relative;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
-.checkbox:focus { box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+.checkbox:focus {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
 
-.checkbox-container:hover .checkbox { border-color: #90cdf4; background-color: #90cdf4; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+.checkbox-container:hover .checkbox {
+  border-color: #90cdf4;
+  background-color: #90cdf4;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
-.native-checkbox:checked ~ .checkbox { background-color: #77C0EE; box-shadow: none;
+.native-checkbox:checked ~ .checkbox {
+  background-color: #77C0EE;
+  box-shadow: none;
 }
 
-.native-checkbox:checked:hover ~ .checkbox { background-color: #90cdf4; border-color: #90cdf4;
+.native-checkbox:checked:hover ~ .checkbox {
+  background-color: #90cdf4;
+  border-color: #90cdf4;
 }
 
 .checkbox:after {
@@ -789,18 +913,22 @@ a:focus { outline: 0; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
   position: absolute;
   display: none;
   margin-top: 0.2rem;
-  content: "️️";
+  content: '️️';
   transform: rotate(45deg);
 }
 
-.native-checkbox:checked ~ .checkbox:after { display: block;
+.native-checkbox:checked ~ .checkbox:after {
+  display: block;
 }
 
 .checkbox-container:active .checkbox,
-.checkbox-container:active .native-checkbox:checked ~ .checkbox { background-color: #63b3ed; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.checkbox-container:active .native-checkbox:checked ~ .checkbox {
+  background-color: #63b3ed;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.native-checkbox:focus ~ .checkbox { box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+.native-checkbox:focus ~ .checkbox {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
 
 .appearance-none {
@@ -9031,10 +9159,16 @@ a:focus { outline: 0; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
   z-index: auto;
 }
 
-.attached-right { margin-right: 0; border-bottom-right-radius: 0; border-top-right-radius: 0;
+.attached-right {
+  margin-right: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
-.attached-left { margin-left: 0; border-bottom-left-radius: 0; border-top-left-radius: 0;
+.attached-left {
+  margin-left: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 
 @media (min-width: 640px) {

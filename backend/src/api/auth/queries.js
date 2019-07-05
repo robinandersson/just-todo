@@ -14,8 +14,8 @@ const loginQuery = {
     password: { type: GraphQLString },
   },
   resolve(parent, { email, password }) {
-    const query = 'SELECT * FROM users WHERE email = $1'
-    const values = [ email ];
+    const query = 'SELECT * FROM users WHERE email = $1';
+    const values = [email];
 
     const userPromise = db.oneOrNone(query, values);
 
@@ -28,22 +28,28 @@ const loginQuery = {
     // login successfull
     return Promise.all([userPromise, passwordPromise])
       .then(([user, passwordIsCorrect]) => {
-
-        if (!passwordIsCorrect) throw new AuthError('Password is incorrect!', 401);
+        if (!passwordIsCorrect)
+          throw new AuthError('Password is incorrect!', 401);
 
         const token = jwt.sign(
           { userId: user.id, email: user.email },
           'supersecretkey', //TODO: generate secure key and store elswehere
-          { expiresIn: '1h' },
+          { expiresIn: '1h' }
         );
 
         // AuthDataType expected
-        return { userId: user.id, username: user.username, token, tokenExpiration: 1 };
-      }).catch(err => {
+        return {
+          userId: user.id,
+          username: user.username,
+          token,
+          tokenExpiration: 1,
+        };
+      })
+      .catch(err => {
         console.log(err);
         throw err;
       });
   },
-}
+};
 
 module.exports = { loginQuery };

@@ -1,7 +1,18 @@
+html,
+body,
+#root {
+  @apply w-full h-full;
+}
+#root {
+  @apply flex flex-col;
+}
 
-html, body, #root { @apply w-full h-full; }
-#root { @apply flex flex-col; }
-
-a { @apply text-blue-700; }
-a:hover { @apply text-blue-900; }
-a:focus { @apply outline-none shadow-outline; }
+a {
+  @apply text-blue-700;
+}
+a:hover {
+  @apply text-blue-900;
+}
+a:focus {
+  @apply outline-none shadow-outline;
+}

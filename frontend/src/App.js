@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-import AuthContext from "./context/auth-context";
-import ProtectedRoute from "./helpers/ProtectedRoute";
-import MainNavigation from "./components/MainNavigation";
+import AuthContext from './context/auth-context';
+import ProtectedRoute from './helpers/ProtectedRoute';
+import MainNavigation from './components/MainNavigation';
 
-import AuthPage from "./pages/AuthPage";
-import TodosPage from "./pages/TodosPage";
-import PreferencesPage from "./pages/PreferencesPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import AuthPage from './pages/AuthPage';
+import TodosPage from './pages/TodosPage';
+import PreferencesPage from './pages/PreferencesPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   const [auth, setAuth] = useState(() => {
-    if (!localStorage.hasOwnProperty("auth")) return {};
+    if (!localStorage.hasOwnProperty('auth')) return {};
     try {
-      return JSON.parse(localStorage.getItem("auth"));
+      return JSON.parse(localStorage.getItem('auth'));
     } catch (err) {
       console.log(err);
       localStorage.clear(); // reset localstorage, could be corrupt
@@ -25,7 +25,7 @@ function App() {
     // TODO: make use of tokenExpiration
     setAuth({ userId, username, token }); // set local state...
     // TODO: use cookies instead?
-    localStorage.setItem("auth", JSON.stringify({ userId, username, token })); // ...and persist state
+    localStorage.setItem('auth', JSON.stringify({ userId, username, token })); // ...and persist state
   };
 
   const logout = () => {
