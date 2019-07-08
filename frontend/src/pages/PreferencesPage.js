@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog } from '@fortawesome/free-solid-svg-icons';
-
 import AuthContext from '../context/auth-context';
 import InputField from '../components/InputField';
+import LoadingIcon from '../components/LoadingIcon';
 
 const {
   REACT_APP_SERVER_URL: SERVER_URL,
@@ -171,20 +169,8 @@ class PreferencesPage extends Component {
             disabled={!this.isReadyToSubmit()}
           >
             Update
+            <LoadingIcon isLoading={this.state.isLoading} />
           </button>
-
-          <div
-            className={'transition' + (!this.state.isLoading ? ' scale' : '')}
-          >
-            <FontAwesomeIcon
-              icon={faCog}
-              className={
-                'ml-2 text-green-400 transition mode--instant spin' +
-                (!this.state.isLoading ? ' opacity-100' : ' opacity-0')
-              }
-              size="2x"
-            />
-          </div>
         </div>
       </form>
     );
