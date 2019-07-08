@@ -24,13 +24,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm backend:start`
+### `npm run backend:start`
 
 Runs the backend in development mode.<br>
 Listens on port 8000 and uses /graphql for api calls.<br>
 Open [http://localhost:8000/graphql](http://localhost:8000/graphql) for interactive graphql interface.
 
-### `npm frontend:start`
+### `npm run frontend:start`
 
 Runs the frontend in development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -40,4 +40,4 @@ You will also see any lint errors in the console.
 
 ### `npm run prettier`
 
-Format project through [https://prettier.io/](Prettier). See /.prettierrc for custom rules.
+Format project through [https://prettier.io/](Prettier). See _/.prettierrc_ for custom rules.
