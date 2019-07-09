@@ -15,7 +15,7 @@ const DynamicIcon = ({
   const opacity = isVisible ? 'opacity-100' : 'opacity-0';
   const css = concatClassNames(className, opacity);
 
-  return <Icon icon={icon} className={css} />;
+  return <Icon symbol={icon} className={css} />;
 };
 
 const LoadingIcon = ({
@@ -24,7 +24,7 @@ const LoadingIcon = ({
   alwaysOccupySpace = false,
 }) => (
   <DynamicIcon
-    icon="cog"
+    symbol="cog"
     className={concatClassNames(
       className,
       'ml-2 text-blue transition mode--instant spin'
@@ -40,7 +40,7 @@ const SuccessIcon = ({
   alwaysOccupySpace = false,
 }) => (
   <DynamicIcon
-    icon="check"
+    symbol="check"
     className={concatClassNames(
       className,
       'ml-2 text-green transition mode--instant'
@@ -56,7 +56,7 @@ const FailureIcon = ({
   alwaysOccupySpace = false,
 }) => (
   <DynamicIcon
-    icon="cross"
+    symbol="cross"
     className={concatClassNames(
       className,
       'ml-2 text-red transition mode--instant'

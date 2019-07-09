@@ -9,7 +9,7 @@ import {
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
-const iconMap = {
+const symbolMap = {
   exclamationCircle: faExclamationCircle,
   cog: faCog,
   check: faCheck,
@@ -17,8 +17,8 @@ const iconMap = {
   cross: faTimes,
 };
 
-const Icon = ({ icon = 'exclamationCircle', className, size = '1x' }) => {
-  const faIcon = typeof icon === 'string' ? iconMap[icon] : icon;
+const Icon = ({ symbol = 'exclamationCircle', className, size = '1x' }) => {
+  const faIcon = typeof symbol === 'string' ? symbolMap[symbol] : symbol;
 
   return <FontAwesomeIcon icon={faIcon} className={className} size={size} />;
 };
