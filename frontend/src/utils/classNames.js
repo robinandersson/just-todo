@@ -1,7 +1,10 @@
 const concatenateClassNames = (...classNames) => {
-  return classNames.reduce((className, current) => {
-    return className.concat(current.trim().split(' '));
-  }, '');
+  // split classNames into arrays and concatenate
+  const cssProperties = classNames.reduce((arr, cssString) => {
+    return arr.concat(cssString.trim().split(' '));
+  }, []);
+
+  return cssProperties.join(' ');
 };
 
 export { concatenateClassNames };
