@@ -153,6 +153,7 @@ class PreferencesPage extends Component {
           type="password"
           value={this.state.newPassword}
           onChange={this.onPasswordChange}
+          disabled={this.state.isUpdating}
         />
 
         <label className="input-label" htmlFor="repeat-password">
@@ -164,6 +165,7 @@ class PreferencesPage extends Component {
           type="password"
           value={this.state.repeatPassword}
           onChange={this.onPasswordChange}
+          disabled={this.state.isUpdating}
         />
         <div className="mt-5 mb-2 flex items-center">
           <button
