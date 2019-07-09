@@ -14,8 +14,8 @@
     "react-scripts": "3.0.0"
   },
   "scripts": {
-    "build:css": "postcss src/styles/main.css -o src/index.css",
-    "watch:css": "postcss src/styles/main.css -o src/index.css -w",
+    "build:css": "postcss src/styles/main.css -o src/index.build.css",
+    "watch:css": "postcss src/styles/main.css -o src/index.build.css -w",
     "start": "npm run watch:css & react-scripts start",
     "build": "npm run build:css && react-scripts build"
   },
