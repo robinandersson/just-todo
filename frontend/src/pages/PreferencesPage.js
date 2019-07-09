@@ -104,6 +104,8 @@ class PreferencesPage extends Component {
           throw new Error('Failed to update user preferences!');
         this.setState({
           updateSuccessful: true,
+          newPassword: '',
+          repeatPassword: '',
         });
       })
       .catch(err => {
