@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import AuthContext from '../context/auth-context';
 import InputField from '../components/InputField';
-import LoadingIcon from '../components/LoadingIcon';
+import { DynamicLoadingOutcomeIcon } from '../components/DynamicIcons';
 
 const {
   REACT_APP_SERVER_URL: SERVER_URL,
@@ -18,7 +18,8 @@ class PreferencesPage extends Component {
     newPassword: '',
     repeatPassword: '',
     errorMessage: '',
-    isLoading: false,
+    isUpdating: false,
+    updateSuccessful: null,
   };
 
   //TODO: store all userdata when first logging in (along with username, id, etc.?)
@@ -75,7 +76,7 @@ class PreferencesPage extends Component {
       return;
     }
 
-    this.setState({ isLoading: true });
+    this.setState({ isUpdating: true });
 
     fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
       method: 'POST',
@@ -101,12 +102,18 @@ class PreferencesPage extends Component {
       .then(resData => {
         if (resData.errors)
           throw new Error('Failed to update user preferences!');
+        this.setState({
+          updateSuccessful: true,
+        });
       })
       .catch(err => {
         console.log(err);
+        this.setState({
+          loadingSucessful: false,
+        });
         return err;
       })
-      .finally(() => this.setState({ isLoading: false }));
+      .finally(() => this.setState({ isUpdating: false }));
   };
 
   onPasswordChange = evt => {
@@ -115,10 +122,6 @@ class PreferencesPage extends Component {
   };
 
   render() {
-    // setInterval(() => {
-    //   this.setState({ isLoading: !this.state.isLoading });
-    // }, 1000);
-
     return (
       <form className="container form" onSubmit={this.handleUserPrefUpdate}>
         <label htmlFor="">Username</label>
@@ -169,7 +172,10 @@ class PreferencesPage extends Component {
             disabled={!this.isReadyToSubmit()}
           >
             Update
-            <LoadingIcon isLoading={this.state.isLoading} />
+            <DynamicLoadingOutcomeIcon
+              isLoading={this.state.isUpdating}
+              isSuccessful={this.state.updateSuccessful}
+            />
           </button>
         </div>
       </form>
