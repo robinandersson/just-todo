@@ -169,7 +169,7 @@ class PreferencesPage extends Component {
           <button
             type="submit"
             className="btn mode--positive py-1 px-3"
-            disabled={!this.isReadyToSubmit()}
+            disabled={!this.isReadyToSubmit() || this.state.isUpdating}
           >
             Update
             <DynamicLoadingOutcomeIcon
