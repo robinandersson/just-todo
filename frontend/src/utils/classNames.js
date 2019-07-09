@@ -1,8 +1,11 @@
 const concatClassNames = (...classNames) => {
   // split classNames into arrays and concatenate
+  const cssProperties = classNames.reduce((acc, css) => {
+    // sanitize falsey values
+    if (!css) return acc;
 
-  const cssProperties = classNames.reduce((arr, cssString = '') => {
-    return arr.concat(cssString.trim().split(' '));
+    // split and append css to accumulated css array
+    return acc.concat(css.trim().split(' '));
   }, []);
 
   // filter out distinct properties and create new css string
