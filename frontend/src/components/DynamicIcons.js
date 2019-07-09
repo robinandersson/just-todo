@@ -55,10 +55,8 @@ const DynamicLoadingOutcomeIcon = ({
   const forceUpdate = useForceUpdate();
   const timerRef = useRef();
 
-  // clean up timeout
-  useEffect(() => {
-    return () => clearTimeout(timerRef.current);
-  }, []);
+  // clean up timeout (observe curry – clear occurs on unmount)
+  useEffect(() => () => clearTimeout(timerRef.current), []);
 
   // Show loading icon if loading or wasn't previously loading (i.e. current state can't be success or failure).
   // Let LoadingIcon determine if it should occupy space regardless.
