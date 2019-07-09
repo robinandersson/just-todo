@@ -46,6 +46,7 @@ const FailureIcon = ({ isVisible = true, alwaysOccupySpace = false }) => (
 );
 
 // TODO: Redo using 'status' prop instead (e.g. ['loading', 'success', 'failure'])
+// TODO: Refactor component to be more general/dynamic - e.g. accept different icons as props
 const DynamicLoadingOutcomeIcon = ({
   isLoading,
   isSuccessful,
