@@ -8,7 +8,7 @@ const DynamicIcon = ({
   icon,
   className,
   isVisible = true,
-  alwaysOccupySpace,
+  alwaysOccupySpace = false,
 }) => {
   if (!isVisible && !alwaysOccupySpace) return null;
 
@@ -18,7 +18,7 @@ const DynamicIcon = ({
   return <Icon icon={icon} className={css} />;
 };
 
-const LoadingIcon = ({ isVisible = true, alwaysOccupySpace }) => (
+const LoadingIcon = ({ isVisible = true, alwaysOccupySpace = false }) => (
   <DynamicIcon
     icon="cog"
     className="ml-2 text-white transition mode--instant spin"
@@ -27,7 +27,7 @@ const LoadingIcon = ({ isVisible = true, alwaysOccupySpace }) => (
   />
 );
 
-const SuccessIcon = ({ isVisible = true, alwaysOccupySpace }) => (
+const SuccessIcon = ({ isVisible = true, alwaysOccupySpace = false }) => (
   <DynamicIcon
     icon="check"
     className="ml-2 text-white transition mode--instant"
@@ -36,7 +36,7 @@ const SuccessIcon = ({ isVisible = true, alwaysOccupySpace }) => (
   />
 );
 
-const FailureIcon = ({ isVisible = true, alwaysOccupySpace }) => (
+const FailureIcon = ({ isVisible = true, alwaysOccupySpace = false }) => (
   <DynamicIcon
     icon="cross"
     className="ml-2 text-white transition mode--instant"
@@ -45,6 +45,7 @@ const FailureIcon = ({ isVisible = true, alwaysOccupySpace }) => (
   />
 );
 
+// TODO: Redo using 'status' prop instead (e.g. ['loading', 'success', 'failure'])
 const DynamicLoadingOutcomeIcon = ({
   isLoading,
   isSuccessful,
@@ -55,7 +56,7 @@ const DynamicLoadingOutcomeIcon = ({
   const forceUpdate = useForceUpdate();
   const timerRef = useRef();
 
-  // clean up timeout (observe curry – clear occurs on unmount)
+  // clean up timeout (observe the curry – clear occurs on unmount)
   useEffect(() => () => clearTimeout(timerRef.current), []);
 
   // Show loading icon if loading or wasn't previously loading (i.e. current state can't be success or failure).
