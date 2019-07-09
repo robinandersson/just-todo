@@ -18,28 +18,49 @@ const DynamicIcon = ({
   return <Icon icon={icon} className={css} />;
 };
 
-const LoadingIcon = ({ isVisible = true, alwaysOccupySpace = false }) => (
+const LoadingIcon = ({
+  className,
+  isVisible = true,
+  alwaysOccupySpace = false,
+}) => (
   <DynamicIcon
     icon="cog"
-    className="ml-2 text-white transition mode--instant spin"
+    className={concatClassNames(
+      className,
+      'ml-2 text-blue transition mode--instant spin'
+    )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
   />
 );
 
-const SuccessIcon = ({ isVisible = true, alwaysOccupySpace = false }) => (
+const SuccessIcon = ({
+  className,
+  isVisible = true,
+  alwaysOccupySpace = false,
+}) => (
   <DynamicIcon
     icon="check"
-    className="ml-2 text-white transition mode--instant"
+    className={concatClassNames(
+      className,
+      'ml-2 text-green transition mode--instant'
+    )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
   />
 );
 
-const FailureIcon = ({ isVisible = true, alwaysOccupySpace = false }) => (
+const FailureIcon = ({
+  className,
+  isVisible = true,
+  alwaysOccupySpace = false,
+}) => (
   <DynamicIcon
     icon="cross"
-    className="ml-2 text-white transition mode--instant"
+    className={concatClassNames(
+      className,
+      'ml-2 text-red transition mode--instant'
+    )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
   />
@@ -48,6 +69,7 @@ const FailureIcon = ({ isVisible = true, alwaysOccupySpace = false }) => (
 // TODO: Redo using 'status' prop instead (e.g. ['loading', 'success', 'failure'])
 // TODO: Refactor component to be more general/dynamic - e.g. accept different icons as props
 const DynamicLoadingOutcomeIcon = ({
+  css = {},
   isLoading,
   isSuccessful,
   alwaysOccupySpace = false,
@@ -57,6 +79,8 @@ const DynamicLoadingOutcomeIcon = ({
   const forceUpdate = useForceUpdate();
   const timerRef = useRef();
 
+  const { loadingCSS, successCSS, failureCSS } = css;
+
   // clean up timeout (observe the curry – clear occurs on unmount)
   useEffect(() => () => clearTimeout(timerRef.current), []);
 
@@ -65,6 +89,7 @@ const DynamicLoadingOutcomeIcon = ({
   if (isLoading || !previousStatus) {
     return (
       <LoadingIcon
+        className={loadingCSS}
         isVisible={isLoading}
         alwaysOccupySpace={alwaysOccupySpace}
       />
@@ -78,9 +103,17 @@ const DynamicLoadingOutcomeIcon = ({
   }
 
   return isSuccessful ? (
-    <SuccessIcon isVisible={true} alwaysOccupySpace={alwaysOccupySpace} />
+    <SuccessIcon
+      className={successCSS}
+      isVisible={true}
+      alwaysOccupySpace={alwaysOccupySpace}
+    />
   ) : (
-    <FailureIcon isVisible={true} alwaysOccupySpace={alwaysOccupySpace} />
+    <FailureIcon
+      className={failureCSS}
+      isVisible={true}
+      alwaysOccupySpace={alwaysOccupySpace}
+    />
   );
 };
 
