@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import Icon from './Icon';
 import { usePrevious, useForceUpdate } from '../utils/stateHooks';
-import { concatenateClassNames } from '../utils/classNames';
+import { concatClassNames } from '../utils/classNames';
 
 const DynamicIcon = ({
   icon,
@@ -13,7 +13,7 @@ const DynamicIcon = ({
   if (!isVisible && !alwaysOccupySpace) return null;
 
   const opacity = isVisible ? 'opacity-100' : 'opacity-0';
-  const css = concatenateClassNames(className, opacity);
+  const css = concatClassNames(className, opacity);
 
   return <Icon icon={icon} className={css} />;
 };
