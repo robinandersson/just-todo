@@ -6,7 +6,7 @@ import {
   faLock,
   faCog,
   faCheck,
-  faCross,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconMap = {
@@ -14,7 +14,7 @@ const iconMap = {
   cog: faCog,
   check: faCheck,
   lock: faLock,
-  cross: faCross,
+  cross: faTimes,
 };
 
 const Icon = ({ icon = 'exclamationCircle', className, size = '1x' }) => {
