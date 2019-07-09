@@ -5,7 +5,8 @@ const concatClassNames = (...classNames) => {
     return arr.concat(cssString.trim().split(' '));
   }, []);
 
-  return cssProperties.join(' ');
+  // filter out distinct properties and create new css string
+  return [...new Set(cssProperties)].join(' ');
 };
 
 export { concatClassNames };
