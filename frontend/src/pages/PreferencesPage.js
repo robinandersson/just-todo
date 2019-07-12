@@ -123,6 +123,7 @@ class PreferencesPage extends Component {
     this.setState({ [name]: value });
   };
 
+  // TODO: improve update error UX, e.g. spring-animation on relevant elements, toast notification, etc.,
   render() {
     return (
       <form className="container form" onSubmit={this.handleUserPrefUpdate}>
