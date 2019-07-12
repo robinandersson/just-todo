@@ -46,7 +46,7 @@ const schema = new GraphQLSchema({
 const graphqlRoutes = graphqlHTTP({
   schema,
   customFormatErrorFn(err) {
-    console.table(err);
+    console.log(err);
     if (err.originalError) err.code = err.originalError.code;
     console.log(err.code);
 
