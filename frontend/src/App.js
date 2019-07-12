@@ -28,9 +28,10 @@ function App() {
     localStorage.setItem('auth', JSON.stringify({ userId, username, token })); // ...and persist state
   };
 
-  const logout = () => {
+  const logout = history => {
     setAuth(); // remove state...
     localStorage.clear(); // ...and remove local storage
+    history.push('/login');
   };
 
   const { userId, username, token } = auth || {};

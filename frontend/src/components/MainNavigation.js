@@ -1,9 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import AuthContext from '../context/auth-context';
 
 const MainNavigation = props => {
+  const handleLogout = context => () => context.logout(props.history);
+
   return (
     <AuthContext.Consumer>
       {context => (
@@ -56,7 +58,7 @@ const MainNavigation = props => {
                 <div className="absolute top-0 right-0 pt-6 pb-2 w-48 border border-blue-200 shadow flex flex-col items-center bg-white z-20 invisible group-hover:visible">
                   <hr className="border border-gray-200 w-11/12" />
                   <button
-                    onClick={context.logout}
+                    onClick={handleLogout(context)}
                     className="btn mode--danger mt-4 mb-2"
                   >
                     Logout
@@ -71,4 +73,4 @@ const MainNavigation = props => {
   );
 };
 
-export default MainNavigation;
+export default withRouter(MainNavigation);
