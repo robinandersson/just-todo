@@ -42,9 +42,6 @@ function App() {
         <MainNavigation />
         <main className="mb-10 mx-8 flex flex-col flex-grow items-start">
           <Switch>
-            {/* <Route path="/login" component={AuthPage} loggedInRedirectTo="/todos" />
-            <Route path="/signup" component={AuthPage} loggedInRedirectTo="/todos" /> */}
-
             <Route
               path="/login"
               render={props => (
