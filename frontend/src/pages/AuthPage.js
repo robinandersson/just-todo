@@ -24,6 +24,26 @@ class AuthPage extends Component {
     this.setState({ isLoginPath: nextProps.location.pathname === '/login' });
   }
 
+  componentDidMount() {
+    const isUnauthorizedRedirect =
+      this.props.location.state &&
+      this.props.location.state.from &&
+      this.props.location.state.from.unauthorizedRedirect;
+
+    if (isUnauthorizedRedirect) {
+      this.setState({
+        notifications: [
+          ...this.state.notifications,
+          {
+            type: 'error',
+            message:
+              'You need to be logged in to view the page you tried to access',
+          },
+        ],
+      });
+    }
+  }
+
   handleInputChange = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
@@ -103,18 +123,6 @@ class AuthPage extends Component {
   render() {
     if (this.context.token)
       return <Redirect to={this.props.authedRedirectTo} />;
-
-    const isUnauthorizedRedirect =
-      this.props.location.state &&
-      this.props.location.state.from &&
-      this.props.location.state.from.isUnauthorizedRedirect;
-
-    const unauthorizedInfo = isUnauthorizedRedirect && (
-      <div className="container mx-auto bg-red-200 text-center">
-        {/* TODO: Actually implement this unauthorized thing, will ya ;) */}
-        <p>Tokig??</p>
-      </div>
-    );
 
     const loginHint = (
       <p className="text-xs mt-5">
