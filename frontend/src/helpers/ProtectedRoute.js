@@ -6,7 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const context = useContext(AuthContext);
 
-  const compToRender = props =>
+  const componentToRender = props =>
     context.token ? (
       <Component {...props} />
     ) : (
@@ -20,7 +20,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       />
     );
 
-  return <Route {...rest} render={compToRender} />;
+  return <Route {...rest} render={componentToRender} />;
 };
 
 export default ProtectedRoute;
