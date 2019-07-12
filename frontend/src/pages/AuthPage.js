@@ -68,10 +68,13 @@ class AuthPage extends Component {
       }`
       : `mutation {
         createUser(username: "${username}", email: "${email}", password: "${password}") {
-          id
-          email
+          userId
+          username
+          token
+          tokenExpiration
         }
       }`;
+
     fetch('http://localhost:8000/graphql', {
       method: 'POST',
       body: JSON.stringify({ query }),
@@ -91,15 +94,17 @@ class AuthPage extends Component {
             resData.errors[0].code
           );
 
-        if (resData.data.login.token) {
-          const {
-            userId,
-            username: loginUsername,
-            token,
-            tokenExpiration,
-          } = resData.data.login;
+        const queryEndpoint = this.state.isLoginPath ? 'login' : 'createUser';
+
+        const {
+          userId,
+          username: loginUsername,
+          token,
+          tokenExpiration,
+        } = resData.data[queryEndpoint];
+
+        if (token)
           this.context.login(userId, loginUsername, token, tokenExpiration);
-        }
       })
       .catch(err => {
         this.setState({

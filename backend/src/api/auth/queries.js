@@ -1,11 +1,10 @@
 const { GraphQLString, GraphQLError } = require('graphql');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 const db = require('../pgAdapter');
 const { AuthDataType } = require('./types');
 
-const { AuthError } = require('../../helpers/auth');
+const { AuthError, loginUser } = require('../../helpers/auth');
 
 const loginQuery = {
   type: AuthDataType,
@@ -25,25 +24,13 @@ const loginQuery = {
       return bcrypt.compare(password, user.password);
     });
 
-    // login successfull
     return Promise.all([userPromise, passwordPromise])
       .then(([user, passwordIsCorrect]) => {
         if (!passwordIsCorrect)
           throw new AuthError('Password is incorrect!', 401);
 
-        const token = jwt.sign(
-          { userId: user.id, email: user.email },
-          'supersecretkey', //TODO: generate secure key and store elswehere
-          { expiresIn: '1h' }
-        );
-
-        // AuthDataType expected
-        return {
-          userId: user.id,
-          username: user.username,
-          token,
-          tokenExpiration: 1,
-        };
+        // login successfull
+        return loginUser(user);
       })
       .catch(err => {
         console.log(err);

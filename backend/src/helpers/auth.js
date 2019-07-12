@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 const secureGraphqlRoute = graphqlRoute => {
   return {
     ...graphqlRoute,
@@ -19,4 +21,20 @@ class AuthError extends Error {
   }
 }
 
-module.exports = { secureGraphqlRoute, AuthError };
+const loginUser = user => {
+  const token = jwt.sign(
+    { userId: user.id, email: user.email },
+    'supersecretkey', //TODO: generate secure key and store elswehere
+    { expiresIn: '1h' }
+  );
+
+  // AuthDataType expected
+  return {
+    userId: user.id,
+    username: user.username,
+    token,
+    tokenExpiration: 1,
+  };
+};
+
+module.exports = { secureGraphqlRoute, AuthError, loginUser };

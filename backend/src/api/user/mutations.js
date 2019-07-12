@@ -2,11 +2,12 @@ const { GraphQLString, GraphQLBool } = require('graphql');
 const bcrypt = require('bcryptjs');
 
 const db = require('../pgAdapter');
+const { AuthDataType } = require('../auth/types');
+const { AuthError, loginUser } = require('../../helpers/auth');
 const { UserType } = require('./types');
 
-//TODO: add password
 const createUserMutation = {
-  type: UserType,
+  type: AuthDataType,
   args: {
     username: { type: GraphQLString },
     email: { type: GraphQLString },
@@ -16,30 +17,33 @@ const createUserMutation = {
     // make sure there's not a user with same email
     const duplicateQuery = 'SELECT * FROM users WHERE email = $1';
     const duplicateValues = [args.email];
-    return db
-      .oneOrNone(duplicateQuery, duplicateValues)
-      .then(duplicateUser => {
+    const duplicatePromise = db.oneOrNone(duplicateQuery, duplicateValues);
+
+    const hashPaswordPromise = new Promise((resolve, reject) => {
+      if (!args.password) reject(new Error('No password submitted'));
+      resolve(bcrypt.hash(args.password, 12));
+    });
+
+    const createUserPromise = hashPaswordPromise.then(hashedPassword => {
+      const query =
+        'INSERT INTO users(username, email, password, joined_at) VALUES ($1, $2, $3, $4) RETURNING *';
+      const values = [
+        args.username,
+        args.email,
+        hashedPassword,
+        new Date().toISOString(),
+      ];
+
+      return db.oneOrNone(query, values);
+    });
+
+    return Promise.all([duplicatePromise, createUserPromise])
+      .then(([duplicateUser, newUser]) => {
         if (duplicateUser)
           throw new Error(`User with email: "${args.email}" exists already`);
 
-        // handle missing password error separately because bcrypt throws obscure error otherwise
-        if (!args.password) throw new Error('No password submitted');
-
-        return bcrypt.hash(args.password, 12);
+        return loginUser(newUser);
       })
-      .then(hashedPassword => {
-        const query =
-          'INSERT INTO users(username, email, password, joined_at) VALUES ($1, $2, $3, $4) RETURNING *';
-        const values = [
-          args.username,
-          args.email,
-          hashedPassword,
-          new Date().toISOString(),
-        ];
-
-        return db.oneOrNone(query, values);
-      })
-      .then(res => res)
       .catch(err => {
         console.log(err);
         throw err;
