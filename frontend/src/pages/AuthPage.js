@@ -82,13 +82,12 @@ class AuthPage extends Component {
         }
       })
       .catch(err => {
-        this.setState(prevState => ({
+        this.setState({
           notifications: [
-            ...prevState.notifications,
+            ...this.state.notifications,
             { type: 'error', message: err.message },
           ],
-        }));
-
+        });
         return err;
       });
   };
