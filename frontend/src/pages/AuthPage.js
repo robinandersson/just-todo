@@ -3,6 +3,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 
 import AuthContext from '../context/auth-context';
 import { AuthError } from '../helpers/auth';
+import ToastNotificationList from '../components/notifications/ToastNotificationList';
 
 class AuthPage extends Component {
   static contextType = AuthContext;
@@ -15,6 +16,7 @@ class AuthPage extends Component {
       username: '',
       email: '',
       password: '',
+      notifications: [],
     };
   }
 
@@ -80,12 +82,23 @@ class AuthPage extends Component {
         }
       })
       .catch(err => {
-        if (err.code === 401) {
-          console.log('handle login error');
-        }
-        console.table(err);
+        this.setState(prevState => ({
+          notifications: [
+            ...prevState.notifications,
+            { type: 'error', message: err.message },
+          ],
+        }));
+
         return err;
       });
+  };
+
+  removeToast = index => {
+    const newNotifications = [...this.state.notifications];
+
+    delete newNotifications[index];
+
+    this.setState({ notifications: newNotifications });
   };
 
   render() {
@@ -141,7 +154,10 @@ class AuthPage extends Component {
 
     return (
       <React.Fragment>
-        <div>{unauthorizedInfo}</div>
+        <ToastNotificationList
+          removeToast={this.removeToast}
+          notifications={this.state.notifications}
+        />
 
         <form
           className="container form self-start"
