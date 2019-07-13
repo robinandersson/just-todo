@@ -28,7 +28,7 @@ const ToastNotification = ({
   fixed = 'top',
   type,
   message,
-  duration = 2500,
+  duration = 3000,
 }) => {
   const removalTimer = useRef();
   // clean up timeout (observe the curry – clear occurs on unmount)
