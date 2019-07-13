@@ -23,7 +23,7 @@ const symbolMap = {
   crossCircle: faTimesCircle,
 };
 
-const Icon = ({ symbol = 'exclamation', className, size = '1x' }) => {
+const Icon = ({ symbol = 'exclamation', className, size }) => {
   const faIcon = typeof symbol === 'string' ? symbolMap[symbol] : symbol;
 
   return <FontAwesomeIcon icon={faIcon} className={className} size={size} />;
