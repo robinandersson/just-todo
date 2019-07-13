@@ -27,7 +27,7 @@ const ToastNotification = ({
 }) => {
   const removalTimer = useRef();
   // clean up timeout (observe the curry – clear occurs on unmount)
-  useEffect(() => () => clearTimeout(removalTimer.current));
+  useEffect(() => () => clearTimeout(removalTimer.current), []);
 
   // only show toast for [duration] milliseconds
   removalTimer.current = setTimeout(() => handleRemove(false), duration);
