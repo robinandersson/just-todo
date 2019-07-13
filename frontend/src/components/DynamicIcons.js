@@ -5,7 +5,7 @@ import { usePrevious, useForceUpdate } from '../utils/stateHooks';
 import { concatClassNames } from '../utils/classNames';
 
 const DynamicIcon = ({
-  icon,
+  symbol,
   className,
   isVisible = true,
   alwaysOccupySpace = false,
@@ -15,7 +15,7 @@ const DynamicIcon = ({
   const opacity = isVisible ? 'opacity-100' : 'opacity-0';
   const css = concatClassNames(className, opacity);
 
-  return <Icon symbol={icon} className={css} />;
+  return <Icon symbol={symbol} className={css} />;
 };
 
 const LoadingIcon = ({
