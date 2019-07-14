@@ -12,14 +12,14 @@ Uses PostgreSQL, Node, Express, GraphQL, and React.
 npm install
 ```
 
-### PostgreSQL database
-
-2. Set up a postgreSQL database and enter correct credentials in **/backend/.env**.
-3. Use `migrate`-script below to setup tables and columns (for now, migrate up as far as it goes to properly set up project).
-
 ### .env
 
-4. Config **.env** -file in **/backend** to setup environment variables pointing to backend-server, db, etc.
+2. Config **/backend/.env** to setup environment variables pointing to backend-server, db (set up below), etc.
+
+### PostgreSQL database
+
+3. Set up a postgreSQL database (double check **db-credentials in **/backend/.env\*\*).
+4. Use `npm run migrate up`-script below to setup tables and columns (for now, migrate up as far as it goes to properly set up project).
 
 ## Available Scripts
 
