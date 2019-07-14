@@ -55,6 +55,6 @@ Pro-Tip! Use format-on-save setting in your editor when making changes. See pret
 
 ### `npm run migrate [up/down]`
 
-Migrate db completely up or down from current step, use it to setup tables and columns.
+Migrate db up completely from current step (observe, migrates down one step at a time using `npm run migrate down`), use it to setup tables and columns from fresh database.
 
-To run N migrations from current step, use `npm run migrate [up/down] {N}`.
+To migrate up {N} migrations from current step, use `npm run migrate [up] {N}`.
