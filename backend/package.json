@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node -r dotenv/config src/app.js",
+    "migrate": "node-pg-migrate"
   },
   "keywords": [],
   "author": "",
