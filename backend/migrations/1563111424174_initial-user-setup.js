@@ -13,6 +13,10 @@ exports.up = pgm => {
       default: pgm.func('current_timestamp'),
     },
   });
+
+  pgm.addConstraint('users', 'unique_email', {
+    unique: ['username', 'email'],
+  });
 };
 
 exports.down = pgm => {
