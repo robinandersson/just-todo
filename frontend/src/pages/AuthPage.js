@@ -157,6 +157,7 @@ class AuthPage extends Component {
         <input
           name="username"
           type="text"
+          required
           className="text-input"
           onChange={this.handleInputChange}
           value={this.state.username}
@@ -182,6 +183,7 @@ class AuthPage extends Component {
           <input
             name="email"
             type="email"
+            required
             className="text-input"
             onChange={this.handleInputChange}
             value={this.state.email}
@@ -192,6 +194,7 @@ class AuthPage extends Component {
           <input
             name="password"
             type="password"
+            required
             className="text-input tracking-widest"
             onChange={this.handleInputChange}
             value={this.state.password}
