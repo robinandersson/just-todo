@@ -4,22 +4,20 @@ A todo fullstack application with user and login functionality.
 
 Uses PostgreSQL, Node, Express, GraphQL, and React.
 
+---
+
 ## Installation
 
-1. In **root** as well as **/frontend** and **/backend**, run:
+1. In **root** as well as **/frontend** and **/backend**, run `npm install`.
 
-```
-npm install
-```
+### Setup database
 
-### .env
+2. Set up a postgreSQL database (note credentials for config in step 4).
+3. Use `npm run migrate up`-script below to setup tables and columns.
 
-2. Config **/backend/.env** to setup environment variables pointing to backend-server, db (set up below), etc.
+### Configure .env
 
-### PostgreSQL database
-
-3. Set up a postgreSQL database (double check **db-credentials in **/backend/.env\*\*).
-4. Use `npm run migrate up`-script below to setup tables and columns (for now, migrate up as far as it goes to properly set up project).
+4. Configure **/backend/.env** to setup environment variables pointing to backend server, db, etc.
 
 ## Available Scripts
 
@@ -27,34 +25,30 @@ In the project directory, you may run:
 
 ### `npm start`
 
-Runs the backend and frontend in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Runs the backend and frontend in development mode.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits. You will also see any lint errors in the console.
 
 ### `npm run backend:start`
 
-Runs the backend in development mode.<br>
-Listens on port 8000 and uses /graphql for api calls.<br>
-Open [http://localhost:8000/graphql](http://localhost:8000/graphql) for interactive graphql interface.
+Runs the backend in development mode.
+
+Listens on port 8000 and uses /graphql for api calls. Open [http://localhost:8000/graphql](http://localhost:8000/graphql) for interactive graphql interface.
 
 ### `npm run frontend:start`
 
-Runs the frontend in development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Runs the frontend in development mode.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits. You will also see any lint errors in the console.
 
 ### `npm run prettier`
 
 Format project through [https://prettier.io/](Prettier). See _/.prettierrc_ for custom rules.
 
-Pro-Tip! Use format-on-save setting in your editor when making changes. See prettier and/or your editor documentation for how to set it up.
+Pro-Tip! Use format-on-save setting in your editor when making changes.
 
-### `npm run migrate [up/down]`
+### `npm run migrate [up|down]`
 
-Migrate db up completely from current step (observe, migrates down one step at a time using `npm run migrate down`), use it to setup tables and columns from fresh database.
+Migrate db from current version, use it to setup tables and columns from fresh database.
 
-To migrate up {N} migrations from current step, use `npm run migrate [up] {N}`.
+Use `npm run migrate up` to migrate up completely. To migrate {N} migrations from current step, use `npm run migrate up {N}`. `npm run migrate down` migrates down one step at a time.
