@@ -8,7 +8,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation
 
-Run: `npm install`
+In frontend root, run : `npm install`
+
+Setup backend and db (see backend project).
 
 ## Available Scripts
 
