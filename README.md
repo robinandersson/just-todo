@@ -17,7 +17,7 @@ Uses PostgreSQL, Node, Express, GraphQL, and React.
 
 ### Configure .env
 
-4. Configure **/backend/.env** to setup environment variables pointing to backend server, db, etc.
+4. Configure **/backend/.env** (and **/frontend/.env**) to setup environment variables pointing to backend server, db, etc.
 
 ## Available Scripts
 
