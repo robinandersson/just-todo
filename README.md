@@ -8,7 +8,11 @@ Uses PostgreSQL, Node, Express, GraphQL, and React.
 
 ## Installation
 
-1. In **root** as well as **/frontend** and **/backend**, run `npm install`.
+1. In **root** as well as **/frontend** and **/backend**, run `npm install`. Or just run:
+
+```
+npm run fullstack:install
+```
 
 ### Setup database
 
@@ -46,6 +50,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser. T
 Format project through [https://prettier.io/](Prettier). See _/.prettierrc_ for custom rules.
 
 Pro-Tip! Use format-on-save setting in your editor when making changes.
+
+### `npm run fullstack:install`
+
+Installs packages in project root, backend, and frontend.
 
 ### `npm run migrate [up|down]`
 

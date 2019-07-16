@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "migrate": "cd backend && npm run migrate",
+    "fullstack:install": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "backend:start": "cd backend && npm start",
     "frontend:start": "cd frontend && npm start",
     "start": "npm run backend:start & npm run frontend:start",
