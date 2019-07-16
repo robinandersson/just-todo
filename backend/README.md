@@ -11,15 +11,9 @@ Persists data in [PostgreSQL](https://www.postgresql.org/) – handled through [
 ## Installation
 
 1. in backend root, run: `npm install`
-
-### Setup database
-
-2. Set up a postgreSQL database (note credentials for config in step 4).
-3. Use `npm run migrate up`-script below to setup tables and columns.
-
-### Configure .env
-
-4. Configure **.env** to setup environment variables pointing to backend server, db, etc.
+2. Set up a postgreSQL database (note credentials for config in step 3).
+3. Configure **.env** to setup environment variables pointing to backend server, db, etc.
+4. Use `npm run migrate up`-script below to setup tables and columns.
 
 ## Available Scripts
 

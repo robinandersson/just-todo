@@ -14,14 +14,9 @@ Uses PostgreSQL, Node, Express, GraphQL, and React.
 npm run fullstack:install
 ```
 
-### Setup database
-
-2. Set up a postgreSQL database (note credentials for config in step 4).
-3. Use `npm run migrate up`-script below to setup tables and columns.
-
-### Configure .env
-
-4. Configure **/backend/.env** (and **/frontend/.env**) to setup environment variables pointing to backend server, db, etc.
+2. Set up a postgreSQL database (note credentials for config in step 3).
+3. Configure **/backend/.env** (and **/frontend/.env**) to setup environment variables pointing to backend server, db, etc.
+4. Use `npm run migrate up`-script below to setup tables and columns.
 
 ## Available Scripts
 
