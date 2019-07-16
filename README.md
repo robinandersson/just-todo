@@ -2,7 +2,7 @@
 
 A todo fullstack application with user and login functionality.
 
-Uses PostgreSQL, Node, Express, GraphQL, and React.
+Built with [PostgreSQL](https://www.postgresql.org/), [Node.js](https://nodejs.org), [Express](https://expressjs.com/), [GraphQL](https://graphql.org/), and [React.js](https://reactjs.org/).
 
 ---
 
