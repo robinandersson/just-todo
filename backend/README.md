@@ -2,6 +2,10 @@
 
 A todo fullstack application with user and login functionality.
 
+Backend built with Node, Express and GraphQL (_graphql_ and _express-graphql_ packages). Uses _jsonwebtoken_ to handle login-sessions.
+
+Uses _PostgreSQL_ database, handled through _pg-promise_-package.
+
 ---
 
 ## Installation
