@@ -2,7 +2,9 @@
 
 A todo fullstack application with user and login functionality.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+UI styled from scratch using [PostCSS](https://postcss.org/) and [TailwindCSS](https://tailwindcss.com). **(No hefty opinionated css-frameworks in my house!)** Imports icons using [Fontawesome react-packages](https://github.com/FortAwesome/react-fontawesome). Stylesheets should be purged with [Purgecss](https://www.purgecss.com/) before deployment to minimize size.
 
 ---
 
