@@ -14,10 +14,10 @@
     "react-scripts": "3.0.0"
   },
   "scripts": {
-    "build:css": "postcss src/styles/main.css -o src/index.build.css",
-    "watch:css": "postcss src/styles/main.css -o src/index.build.css -w",
-    "start": "npm run watch:css & react-scripts start",
-    "build": "npm run build:css && react-scripts build"
+    "css:build": "postcss src/styles/main.css -o src/index.build.css",
+    "css:watch": "postcss src/styles/main.css -o src/index.build.css -w",
+    "start": "npm run css:watch & react-scripts start",
+    "build": "npm run css:build && react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
