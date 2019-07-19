@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import AuthContext from '../context/auth-context';
 import TodoItem from '../components/TodoItem';
+import { getServerUrls } from '../helpers/url';
+
+const { SERVER_URL, GRAPHQL_ROUTE } = getServerUrls();
 
 class TodosPage extends Component {
   state = {
@@ -16,7 +19,7 @@ class TodosPage extends Component {
   }
 
   fetchTodos = () => {
-    fetch('http://localhost:8000/graphql', {
+    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
       method: 'POST',
       body: JSON.stringify({
         query: `
@@ -50,7 +53,7 @@ class TodosPage extends Component {
   };
 
   handleTodoToggle = todoId => {
-    fetch('http://localhost:8000/graphql', {
+    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
       method: 'POST',
       body: JSON.stringify({
         query: `
@@ -81,7 +84,7 @@ class TodosPage extends Component {
   };
 
   handleDescriptionChange = (todoId, todoDescription) => {
-    fetch('http://localhost:8000/graphql', {
+    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
       method: 'POST',
       body: JSON.stringify({
         query: `
@@ -120,7 +123,7 @@ class TodosPage extends Component {
 
     if (this.state.newTodoDescription.trim().length === 0) return;
 
-    fetch('http://localhost:8000/graphql', {
+    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
       method: 'POST',
       body: JSON.stringify({
         query: `
@@ -158,7 +161,7 @@ class TodosPage extends Component {
   };
 
   handleRemoveTodo = todoId => {
-    fetch('http://localhost:8000/graphql', {
+    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
       method: 'POST',
       body: JSON.stringify({
         query: `

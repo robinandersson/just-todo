@@ -3,11 +3,9 @@ import React, { Component } from 'react';
 import AuthContext from '../context/auth-context';
 import InputField from '../components/InputField';
 import { DynamicLoadingOutcomeIcon } from '../components/DynamicIcons';
+import { getServerUrls } from '../helpers/url';
 
-const {
-  REACT_APP_SERVER_URL: SERVER_URL,
-  REACT_APP_GRAPHQL_ROUTE: GRAPHQL_ROUTE,
-} = process.env;
+const { SERVER_URL, GRAPHQL_ROUTE } = getServerUrls();
 
 class PreferencesPage extends Component {
   static contextType = AuthContext;

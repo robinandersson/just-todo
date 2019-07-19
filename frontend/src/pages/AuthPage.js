@@ -4,6 +4,9 @@ import { NavLink, Redirect } from 'react-router-dom';
 import AuthContext from '../context/auth-context';
 import { AuthError } from '../helpers/auth';
 import ToastNotificationList from '../components/notifications/ToastNotificationList';
+import { getServerUrls } from '../helpers/url';
+
+const { SERVER_URL, GRAPHQL_ROUTE } = getServerUrls();
 
 class AuthPage extends Component {
   static contextType = AuthContext;
@@ -75,7 +78,7 @@ class AuthPage extends Component {
         }
       }`;
 
-    fetch('http://localhost:8000/graphql', {
+    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
       method: 'POST',
       body: JSON.stringify({ query }),
       headers: {
