@@ -2,7 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.js",
+  "engines": {
+    "node": "v10.16.0",
+    "npm": "6.9.0"
+  },
   "scripts": {
     "start": "node -r dotenv/config src/app.js",
     "migrate": "node-pg-migrate"
