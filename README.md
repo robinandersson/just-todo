@@ -6,6 +6,8 @@ Built with [PostgreSQL](https://www.postgresql.org/), [Node.js](https://nodejs.o
 
 See respective project root (**backend/** or **frontend/**) for more detailed descriptions and instructions.
 
+## [DEMO](https://justtodoit.herokuapp.com)
+
 ---
 
 ## Installation
