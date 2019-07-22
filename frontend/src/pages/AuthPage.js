@@ -4,9 +4,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import AuthContext from '../context/auth-context';
 import { AuthError } from '../helpers/auth';
 import ToastNotificationList from '../components/notifications/ToastNotificationList';
-import { getServerUrls } from '../helpers/url';
-
-const { SERVER_URL, GRAPHQL_ROUTE } = getServerUrls();
+import { SERVER_URL, GRAPHQL_ROUTE } from '../helpers/url';
 
 class AuthPage extends Component {
   static contextType = AuthContext;

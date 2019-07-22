@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import AuthContext from '../context/auth-context';
 import TodoItem from '../components/TodoItem';
-import { getServerUrls } from '../helpers/url';
-
-const { SERVER_URL, GRAPHQL_ROUTE } = getServerUrls();
+import { SERVER_URL, GRAPHQL_ROUTE } from '../helpers/url';
 
 class TodosPage extends Component {
   state = {
