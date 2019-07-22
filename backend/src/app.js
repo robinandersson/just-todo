@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/graphql', graphqlRoutes);
+app.use(process.env.GRAPHQL_ROUTE || '/graphql', graphqlRoutes);
 
 switch (process.env.NODE_ENV) {
   case 'production':
