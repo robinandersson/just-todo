@@ -3,20 +3,20 @@ const path = require('path');
 
 const { graphqlRoutes } = require('./api');
 const { isAuthenticated } = require('./middleware/is-auth');
+const { allowCORS, forceHTTPS } = require('./middleware/security-policies');
 
 const app = express();
+
+app.use(allowCORS);
+
+// TODO force https when deployment is ready
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(forceHTTPS);
+// }
 
 app.use(isAuthenticated);
 
 app.use(express.json());
-
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') return res.sendStatus(200);
-  next();
-});
 
 app.use(process.env.GRAPHQL_ROUTE || '/graphql', graphqlRoutes);
 
