@@ -44,10 +44,7 @@ const createUserMutation = {
 
         return loginUser(newUser);
       })
-      .catch(err => {
-        console.log(err);
-        throw err;
-      });
+      .catch(err => err);
   },
 };
 
@@ -67,10 +64,7 @@ const updateUserMutation = {
         return db.none(query, values);
       })
       .then(res => res)
-      .catch(err => {
-        console.log(err);
-        return err;
-      });
+      .catch(err => err);
   },
 };
 

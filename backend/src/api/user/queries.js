@@ -26,10 +26,7 @@ const usersQuery = {
     return db
       .manyOrNone(query)
       .then(res => res)
-      .catch(err => {
-        console.log(err);
-        throw err;
-      });
+      .catch(err => err);
   },
 };
 

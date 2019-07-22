@@ -33,7 +33,6 @@ const loginQuery = {
         return loginUser(user);
       })
       .catch(err => {
-        console.log(err);
         throw err;
       });
   },

@@ -22,10 +22,7 @@ const createTodoMutation = {
     return db
       .oneOrNone(query, values)
       .then(res => res)
-      .catch(err => {
-        console.log(err);
-        return err;
-      });
+      .catch(err => err);
   },
 };
 
@@ -41,10 +38,7 @@ const removeTodoMutation = {
     return db
       .one(query, args.id)
       .then(res => res)
-      .catch(err => {
-        console.log(err);
-        return err;
-      });
+      .catch(err => err);
   },
 };
 
@@ -60,10 +54,7 @@ const toggleTodoMutation = {
     return db
       .none(query, args.id)
       .then(res => res)
-      .catch(err => {
-        console.log(err);
-        return err;
-      });
+      .catch(err => err);
   },
 };
 
@@ -79,10 +70,7 @@ const modifyTodoDescriptionMutation = {
     return db
       .none(query, [args.id, args.description])
       .then(res => res)
-      .catch(err => {
-        console.log(err);
-        return err;
-      });
+      .catch(err => err);
   },
 };
 

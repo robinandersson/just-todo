@@ -22,7 +22,6 @@ const isAuthenticated = (req, res, next) => {
       ignoreExpiration: true, // TODO: make use of expiration
     });
   } catch (err) {
-    console.log(err);
     req.isAuth = false;
     return next();
   }
