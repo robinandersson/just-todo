@@ -2,7 +2,10 @@
   "name": "recap",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "engines": {
+    "node": "v10.16.0",
+    "npm": "6.9.0"
+  },
   "scripts": {
     "migrate": "cd backend && npm run migrate",
     "fullstack:install": "npm install && cd backend && npm install && cd ../frontend && npm install",
@@ -10,7 +13,8 @@
     "frontend:start": "cd frontend && npm start",
     "start": "npm run backend:start & npm run frontend:start",
     "prettier": "prettier --write '**/*.{js,css,html}'",
-    "postinstall": "npm install --prefix backend && npm install --prefix frontend"
+    "postinstall": "npm install --prefix backend",
+    "heroku-postbuild": "cd frontend ; npm install ; npm run build"
   },
   "keywords": [],
   "author": "",
