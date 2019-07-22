@@ -8,6 +8,8 @@ See respective project root (**backend/** or **frontend/**) for more detailed de
 
 ## [DEMO](https://justtodoit.herokuapp.com)
 
+Whole stack (including PostgreSQL) deployed as monrepo (Express app serving static React build) at [Heroku](https://www.heroku.com/).
+
 ---
 
 ## Installation
