@@ -6,7 +6,7 @@ Built with [PostgreSQL](https://www.postgresql.org/), [Node.js](https://nodejs.o
 
 See respective project root (**backend/** or **frontend/**) for more detailed descriptions and instructions.
 
-## [DEMO](https://justtodoit.herokuapp.com)
+## [DEMO](https://justtodoit.herokuapp.com) – Wait for host dyno to spin up on first page visit + first login/signup
 
 Whole stack (including PostgreSQL) deployed as monrepo (Express app serving static React build) at [Heroku](https://www.heroku.com/).
 
