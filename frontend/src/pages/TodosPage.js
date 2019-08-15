@@ -195,7 +195,7 @@ class TodosPage extends Component {
     const todos = this.state.todos || [];
 
     return (
-      <div className="container border border-gray rounded mx-auto p-10 shadow-lg">
+      <div className="container border border-gray rounded mx-auto p-8 shadow-lg">
         {todos
           .sort((a, b) => a.createdAt - b.createdAt)
           .map(todo => (
