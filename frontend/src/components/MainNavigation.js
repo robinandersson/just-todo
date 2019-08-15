@@ -9,11 +9,11 @@ const MainNavigation = props => {
   return (
     <AuthContext.Consumer>
       {context => (
-        <header className="relative mt-4 mb-32">
+        <header className="relative mt-4 mb-24 sm:mb-32">
           <div
             className={
               'flex flex-col' +
-              (context.token ? '' : ' items-center mt-24 mb-0')
+              (context.token ? '' : ' items-center mt-16 sm:mt-24 mb-0')
             }
           >
             <NavLink
