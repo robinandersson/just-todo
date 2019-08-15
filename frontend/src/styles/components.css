@@ -111,7 +111,7 @@
 .checkbox:after {
   @apply border-b-6 border-r-6 border-white w-4 h-7 left-0 top-0 ml-3 absolute hidden;
   margin-top: 0.2rem;
-  content: '️️';
+  content: '';
   transform: rotate(45deg);
 }
 
