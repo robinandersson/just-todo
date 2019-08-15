@@ -40,7 +40,7 @@ function App() {
     <BrowserRouter>
       <AuthContext.Provider value={{ userId, username, token, login, logout }}>
         <MainNavigation />
-        <main className="mb-10 mx-8 flex flex-col flex-grow items-start">
+        <main className="mb-10 mx-6 flex flex-col flex-grow items-start">
           <Switch>
             <Route
               path="/login"

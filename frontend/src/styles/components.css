@@ -45,7 +45,12 @@
 }
 
 .form {
-  @apply mx-auto flex flex-col p-10 border rounded-lg max-w-lg shadow-lg;
+  @apply mx-auto flex flex-col p-8 border rounded-lg max-w-lg shadow-lg;
+}
+@media (min-width: 640px) {
+  .form {
+    @apply p-10;
+  }
 }
 
 .input-label {
