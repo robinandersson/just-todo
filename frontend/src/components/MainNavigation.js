@@ -18,7 +18,7 @@ const MainNavigation = props => {
             }
           >
             <NavLink
-              className="font-bold focus:outline-none focus:shadow-none scale-75 sm:scale-100"
+              className="font-bold focus:outline-none focus:shadow-none scale-75 transform-l sm:scale-100"
               to="/"
             >
               <h1 className="title text-4xl font-bold">
