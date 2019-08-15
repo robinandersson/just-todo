@@ -36,7 +36,7 @@ function TodoItem(props) {
       <textarea
         rows="1"
         className={
-          'w-full resize-y text-lg p-5 rounded border border-gray-200 hover:border-gray-400 hover:shadow focus:outline-none focus:border-gray-400 focus:shadow-outline attached-right' +
+          'w-full resize-y text-sm sm:text-base md:text-lg p-5 rounded border border-gray-200 hover:border-gray-400 hover:shadow focus:outline-none focus:border-gray-400 focus:shadow-outline attached-right' +
           (isCompleted ? ' bg-gray-100 text-gray-500 line-through' : '')
         }
         value={description}
