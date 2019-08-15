@@ -22,10 +22,10 @@
   }
 }
 
-.spin {
+.animate-spin {
   animation: animate-spin linear 1.5s infinite;
 }
-.scale {
+.animate-scale {
   animation: animate-scale ease-in-out 2s infinite;
 }
 

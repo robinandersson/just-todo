@@ -27,7 +27,7 @@ const LoadingIcon = ({
     symbol="cog"
     className={concatClassNames(
       className,
-      'ml-2 text-blue transition mode--instant spin'
+      'ml-2 text-blue transition mode--instant animate-spin'
     )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
