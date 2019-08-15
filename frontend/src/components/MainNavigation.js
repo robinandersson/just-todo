@@ -16,11 +16,11 @@ const MainNavigation = props => {
               (context.token ? '' : ' items-center mt-24 mb-0')
             }
           >
-            <h1 className="title text-4xl font-bold">
-              <NavLink
-                className="font-bold focus:outline-none focus:shadow-none"
-                to="/"
-              >
+            <NavLink
+              className="font-bold focus:outline-none focus:shadow-none scale-75 md:scale-100"
+              to="/"
+            >
+              <h1 className="title text-4xl font-bold">
                 <svg
                   className={context.token ? 'h-16 ml-8 inline-block' : 'h-32'}
                   viewBox="0 0 142 47"
@@ -39,15 +39,15 @@ const MainNavigation = props => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </NavLink>
-            </h1>
-            {!context.token && (
-              <h3 className="text-logoBlue leading-tight tracking-widest ml-20 -mt-4">
-                You know what todo,
-                <br />
-                just start todo it!
-              </h3>
-            )}
+              </h1>
+              {!context.token && (
+                <h3 className="text-logoBlue font-normal leading-tight tracking-widest ml-32 -mt-4">
+                  You know what todo,
+                  <br />
+                  just start todo it!
+                </h3>
+              )}
+            </NavLink>
           </div>
           <div className="absolute top-0 right-0 mt-2 mr-8 pt-2 pr-4 group">
             {context.token && (
