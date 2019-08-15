@@ -23,8 +23,8 @@ function TodoItem(props) {
   };
 
   return (
-    <div className="flex relative justify-center mr-8 mt-4 mb-4 group">
-      <label className="checkbox-container self-start">
+    <div className="flex relative justify-center sm:mr-8 mt-4 mb-4 group">
+      <label className="checkbox-container self-center">
         <input
           type="checkbox"
           checked={isCompleted}

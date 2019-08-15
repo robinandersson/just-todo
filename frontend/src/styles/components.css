@@ -87,8 +87,14 @@
   @apply absolute opacity-0 w-0 h-0;
 }
 .checkbox {
-  @apply rounded-full border border-blue-350 p-5 my-4 mx-6 max-w-xs flex-grow-0 flex-shrink relative shadow;
+  @apply rounded-full border border-blue-350 p-4 my-4 ml-0 mr-4 max-w-xs flex-grow-0 flex-shrink relative shadow;
 }
+@media (min-width: 640px) {
+  .checkbox {
+    @apply p-5 mx-6;
+  }
+}
+
 .checkbox:focus {
   @apply shadow-outline;
 }
