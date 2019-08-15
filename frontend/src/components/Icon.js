@@ -10,6 +10,7 @@ import {
   faCheckCircle,
   faTimes,
   faTimesCircle,
+  faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
 const symbolMap = {
@@ -21,6 +22,7 @@ const symbolMap = {
   lock: faLock,
   cross: faTimes,
   crossCircle: faTimesCircle,
+  userCircle: faUserCircle,
 };
 
 const Icon = ({ symbol = 'exclamation', className, size }) => {

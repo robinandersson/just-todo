@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 
 import AuthContext from '../context/auth-context';
+import Icon from '../components/Icon';
 
 const MainNavigation = props => {
   const handleLogout = context => () => context.logout(props.history);
@@ -53,7 +54,8 @@ const MainNavigation = props => {
             {context.token && (
               <React.Fragment>
                 <NavLink className="relative font-bold z-30" to="/preferences">
-                  {context.username}
+                  {context.username}&nbsp;
+                  <Icon symbol="userCircle" />
                 </NavLink>
                 <div className="absolute top-0 right-0 pt-6 pb-2 w-48 border border-blue-200 shadow flex flex-col items-center bg-white z-20 invisible group-hover:visible">
                   <hr className="border border-gray-200 w-11/12" />
