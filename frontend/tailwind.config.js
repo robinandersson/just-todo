@@ -180,9 +180,9 @@ module.exports = {
         'monospace',
       ],
       //TODO: import the fonts pls ;)
-      title: ['Baumans', 'Optima', 'sans-serif'],
-      header: ['Quicksand', 'Futura', 'Roboto', 'sans-serif'],
-      body: ['Quicksand', 'Futura', 'Roboto', 'sans-serif'],
+      title: ['Baumans', 'sans-serif'],
+      header: ['Quicksand', 'Montserrat', 'sans-serif'],
+      body: ['Quicksand', 'Montserrat', 'sans-serif'],
     },
     fontSize: {
       xs: '0.75rem',
