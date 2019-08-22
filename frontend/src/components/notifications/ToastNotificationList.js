@@ -8,7 +8,7 @@ const ToastNotificationList = ({ removeToast, notifications }) => {
   const handleRemove = i => () => removeToast(i);
 
   return (
-    <div className="fixed bottom-1/12 top-auto left-1/6 right-1/6 p-10">
+    <div className="fixed top-1/24 bottom-auto left-1/12 sm:left-1/6 right-1/12 sm:right-1/6">
       {notifications.map((notification, index) => {
         if (!notification) return null;
 
