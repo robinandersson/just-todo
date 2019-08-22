@@ -21,6 +21,7 @@ const ToastNotificationList = ({ removeToast, notifications }) => {
             handleRemove={handleRemove(index)}
             type={type}
             message={message}
+            className={'opacity-90'}
           />
         );
       })}
