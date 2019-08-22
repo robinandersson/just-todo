@@ -23,6 +23,8 @@ In the project directory, you may run:
 
 Runs the backend in development mode at [http://localhost:8000](http://localhost:8000).
 
+Listens on port 8000 and uses `/graphql` for api calls. Open [http://localhost:8000/graphql](http://localhost:8000/graphql) for interactive graphql interface.
+
 ### `npm run migrate [up|down]`
 
 Migrate db from current version, use it to setup tables and columns from fresh database.
