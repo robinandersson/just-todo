@@ -19,7 +19,6 @@ const ToastNotificationList = ({ removeToast, notifications }) => {
             key={index}
             index={index}
             handleRemove={handleRemove(index)}
-            fixed={false}
             type={type}
             message={message}
           />

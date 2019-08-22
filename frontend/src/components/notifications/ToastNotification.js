@@ -25,7 +25,6 @@ const typeMap = {
 const ToastNotification = ({
   className,
   handleRemove,
-  fixed = 'top',
   type,
   message,
   duration = 3000,
@@ -42,15 +41,12 @@ const ToastNotification = ({
   const { hue, base } = typeMap.color[type];
 
   const cssColoring = `bg-${hue}-${base}`;
-  const fixedPositioning =
-    fixed && `fixed ${fixed}-1/12 left-1/6 right-1/6 p-8`;
 
   return (
     <div
       className={concatClassNames(
         className,
         cssColoring,
-        fixedPositioning,
         'shadow-2xl rounded flex flex-row p-6 text-white mt-4'
       )}
     >
