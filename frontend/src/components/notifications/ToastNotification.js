@@ -55,7 +55,7 @@ const ToastNotification = ({
       </div>
       <div>
         <h2>{header}</h2>
-        <p>{message}</p>
+        <div>{message}</div>
       </div>
     </div>
   );

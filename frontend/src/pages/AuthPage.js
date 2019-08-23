@@ -37,8 +37,19 @@ class AuthPage extends Component {
           ...this.state.notifications,
           {
             type: 'error',
-            message:
-              'You need to be logged in to view the page you tried to access',
+            message: (
+              <>
+                <p>
+                  You need to be logged in to view the page you tried to access
+                </p>
+              </>
+            ),
+          },
+        ],
+      });
+    }
+  }
+
           },
         ],
       });
@@ -111,7 +122,14 @@ class AuthPage extends Component {
         this.setState({
           notifications: [
             ...this.state.notifications,
-            { type: 'error', message: err.message },
+            {
+              type: 'error',
+              message: (
+                <>
+                  <p>{err.message}</p>
+                </>
+              ),
+            },
           ],
         });
         return err;
