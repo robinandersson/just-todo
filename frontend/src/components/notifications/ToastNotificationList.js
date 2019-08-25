@@ -9,7 +9,7 @@ const ToastNotificationList = ({
 }) => {
   if (!Array.isArray(notifications) || !notifications.length) return null;
 
-  const handleRemove = i => () => removeToast(i);
+  const handleRemoveToast = i => () => removeToast(i);
 
   const oppositePosition = fixedPosition === 'top' ? 'bottom' : 'top';
 
@@ -25,12 +25,11 @@ const ToastNotificationList = ({
         return (
           <ToastNotification
             key={index}
-            index={index}
-            handleRemove={handleRemove(index)}
+            handleRemove={handleRemoveToast(index)}
             type={type}
             heading={heading}
             message={message}
-            className={'opacity-90'}
+            className="opacity-90"
           />
         );
       })}

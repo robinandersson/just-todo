@@ -35,7 +35,7 @@ const ToastNotification = ({
   useEffect(() => () => clearTimeout(removalTimer.current), []);
 
   // only show toast for [duration] milliseconds
-  removalTimer.current = setTimeout(() => handleRemove(false), duration);
+  removalTimer.current = setTimeout(handleRemove, duration);
 
   const symbol = typeMap.symbol[type];
   const { hue, base } = typeMap.color[type];
