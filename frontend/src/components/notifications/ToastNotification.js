@@ -5,7 +5,7 @@ import Icon from '../Icon';
 import { concatClassNames } from '../../utils/classNames';
 
 const typeMap = {
-  header: {
+  heading: {
     success: 'Success!',
     warning: 'Warning',
     error: 'Error!',
@@ -26,6 +26,7 @@ const ToastNotification = ({
   className,
   handleRemove,
   type,
+  heading = typeMap.heading[type],
   message,
   duration = 3000,
 }) => {
@@ -36,7 +37,6 @@ const ToastNotification = ({
   // only show toast for [duration] milliseconds
   removalTimer.current = setTimeout(() => handleRemove(false), duration);
 
-  const header = typeMap.header[type];
   const symbol = typeMap.symbol[type];
   const { hue, base } = typeMap.color[type];
 
@@ -54,7 +54,7 @@ const ToastNotification = ({
         <Icon symbol={symbol} />
       </div>
       <div>
-        <h2>{header}</h2>
+        {heading && <h2>{heading}</h2>}
         <div>{message}</div>
       </div>
     </div>

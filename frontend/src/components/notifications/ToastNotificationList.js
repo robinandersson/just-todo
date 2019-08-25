@@ -20,7 +20,7 @@ const ToastNotificationList = ({
       {notifications.map((notification, index) => {
         if (!notification) return null;
 
-        const { type, message } = notification;
+        const { type, heading, message } = notification;
 
         return (
           <ToastNotification
@@ -28,6 +28,7 @@ const ToastNotificationList = ({
             index={index}
             handleRemove={handleRemove(index)}
             type={type}
+            heading={heading}
             message={message}
             className={'opacity-90'}
           />
