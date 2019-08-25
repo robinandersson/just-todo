@@ -37,6 +37,9 @@ const ToastNotification = ({
   // only show toast for [duration] milliseconds
   removalTimer.current = setTimeout(handleRemove, duration);
 
+  // simplify component usage by wrapping plain strings in paragraphs
+  const processedMessage =
+    typeof message === 'string' ? <p>{message}</p> : message;
   const symbol = typeMap.symbol[type];
   const { hue, base } = typeMap.color[type];
 
@@ -55,7 +58,7 @@ const ToastNotification = ({
       </div>
       <div>
         {heading && <h2>{heading}</h2>}
-        <div>{message}</div>
+        <div>{processedMessage}</div>
       </div>
     </div>
   );
