@@ -7,6 +7,14 @@ body,
   @apply flex flex-col;
 }
 
+p {
+  @apply mt-4;
+}
+
+p:first-child {
+  @apply mt-2;
+}
+
 a {
   @apply text-blue-700;
 }

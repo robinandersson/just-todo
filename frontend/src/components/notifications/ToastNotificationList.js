@@ -15,7 +15,7 @@ const ToastNotificationList = ({
 
   return (
     <div
-      className={`fixed ${fixedPosition}-1/24 ${oppositePosition}-auto left-1/12 sm:left-1/6 right-1/12 sm:right-1/6`}
+      className={`fixed ${fixedPosition}-1/24 ${oppositePosition}-auto left-1/12 right-1/12 md:left-1/8 md:right-1/8 xl:left-1/2 xl:right-0 xl:max-w-4xl xl:-translate-x-1/2`}
     >
       {notifications.map((notification, index) => {
         if (!notification) return null;
