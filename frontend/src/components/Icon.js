@@ -11,6 +11,7 @@ import {
   faTimes,
   faTimesCircle,
   faUserCircle,
+  faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
 const symbolMap = {
@@ -23,6 +24,7 @@ const symbolMap = {
   cross: faTimes,
   crossCircle: faTimesCircle,
   userCircle: faUserCircle,
+  exclamationCircle: faExclamationCircle,
 };
 
 const Icon = ({ symbol = 'exclamation', className, size }) => {

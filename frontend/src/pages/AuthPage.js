@@ -19,6 +19,8 @@ class AuthPage extends Component {
       password: '',
       notifications: [],
     };
+
+    this.signupNotificationSent = false;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,12 +46,6 @@ class AuthPage extends Component {
                 </p>
               </>
             ),
-          },
-        ],
-      });
-    }
-  }
-
           },
         ],
       });
@@ -183,6 +179,33 @@ class AuthPage extends Component {
         />
       </React.Fragment>
     );
+
+    // show signup info when first entering signup-page
+    if (!this.state.isLoginPath && !this.signupNotificationSent) {
+      this.setState({
+        notifications: [
+          ...this.state.notifications,
+          {
+            type: 'info',
+            duration: 10000,
+            heading: 'About that email',
+            message: (
+              <>
+                <p>
+                  This is merely a demo, so don't worry about entering your{' '}
+                  <strong>email</strong>.
+                </p>
+                <p>
+                  - it is only used as a login credential (no account
+                  confirmation email will be sent, etc.).
+                </p>
+              </>
+            ),
+          },
+        ],
+      });
+      this.signupNotificationSent = true;
+    }
 
     return (
       <React.Fragment>

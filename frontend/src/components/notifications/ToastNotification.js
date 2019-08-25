@@ -9,16 +9,19 @@ const typeMap = {
     success: 'Success!',
     warning: 'Warning',
     error: 'Error!',
+    info: 'Information',
   },
   symbol: {
     success: 'checkCircle',
     warning: 'exclamationTriangle',
     error: 'crossCircle',
+    info: 'exclamationCircle',
   },
   color: {
     success: { hue: 'green', base: 400 },
     warning: { hue: 'orange', base: 400 },
     error: { hue: 'red', base: 400 },
+    info: { hue: 'blue', base: 400 },
   },
 };
 
