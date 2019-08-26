@@ -31,7 +31,7 @@ const ToastNotification = ({
   type,
   heading = typeMap.heading[type],
   message,
-  duration = 3000,
+  duration = 4000,
 }) => {
   const removalTimer = useRef();
   // clean up timeout (observe the curry – i.e. clear occurs on unmount)
