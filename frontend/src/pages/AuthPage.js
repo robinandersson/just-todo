@@ -34,21 +34,25 @@ class AuthPage extends Component {
       this.props.location.state.from.unauthorizedRedirect;
 
     if (isUnauthorizedRedirect) {
-      this.setState({
-        notifications: [
-          ...this.state.notifications,
-          {
-            type: 'error',
-            message: (
-              <>
-                <p>
-                  You need to be logged in to view the page you tried to access
-                </p>
-              </>
-            ),
-          },
-        ],
+      this.showNotification({
+        type: 'error',
+        message:
+          'You need to be logged in to view the page you tried to access',
       });
+    }
+
+    // show signup info when first entering signup-page
+    if (!this.state.isLoginPath && !this.signupNotificationSent) {
+      this.showSignupNotification();
+      this.signupNotificationSent = true;
+    }
+  }
+
+  componentDidUpdate() {
+    // show signup info when first entering signup-page
+    if (!this.state.isLoginPath && !this.signupNotificationSent) {
+      this.showSignupNotification();
+      this.signupNotificationSent = true;
     }
   }
 
@@ -115,18 +119,9 @@ class AuthPage extends Component {
           this.context.login(userId, loginUsername, token, tokenExpiration);
       })
       .catch(err => {
-        this.setState({
-          notifications: [
-            ...this.state.notifications,
-            {
-              type: 'error',
-              message: (
-                <>
-                  <p>{err.message}</p>
-                </>
-              ),
-            },
-          ],
+        this.showNotification({
+          type: 'error',
+          message: err.message,
         });
         return err;
       });
@@ -139,6 +134,32 @@ class AuthPage extends Component {
 
     this.setState({ notifications: newNotifications });
   };
+
+  showNotification(notification) {
+    this.setState({
+      notifications: [...this.state.notifications, notification],
+    });
+  }
+
+  showSignupNotification() {
+    this.showNotification({
+      type: 'info',
+      duration: 10000,
+      heading: 'About that email',
+      message: (
+        <>
+          <p>
+            This is merely a demo, so don't worry about entering your{' '}
+            <b>email</b>.
+          </p>
+          <p>
+            - it is only used as a login credential (no account confirmation
+            email will be sent, etc.).
+          </p>
+        </>
+      ),
+    });
+  }
 
   render() {
     if (this.context.token)
@@ -179,33 +200,6 @@ class AuthPage extends Component {
         />
       </React.Fragment>
     );
-
-    // show signup info when first entering signup-page
-    if (!this.state.isLoginPath && !this.signupNotificationSent) {
-      this.setState({
-        notifications: [
-          ...this.state.notifications,
-          {
-            type: 'info',
-            duration: 10000,
-            heading: 'About that email',
-            message: (
-              <>
-                <p>
-                  This is merely a demo, so don't worry about entering your{' '}
-                  <strong>email</strong>.
-                </p>
-                <p>
-                  - it is only used as a login credential (no account
-                  confirmation email will be sent, etc.).
-                </p>
-              </>
-            ),
-          },
-        ],
-      });
-      this.signupNotificationSent = true;
-    }
 
     return (
       <React.Fragment>
