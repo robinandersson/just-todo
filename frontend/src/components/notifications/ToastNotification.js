@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
 import Icon from '../Icon';
 
 import { concatClassNames } from '../../utils/classNames';
+import { ProgressDonut } from '../animations/ProgressDonut';
 
 const typeMap = {
   heading: {
@@ -33,13 +34,6 @@ const ToastNotification = ({
   message,
   duration = 4000,
 }) => {
-  const removalTimer = useRef();
-  // clean up timeout (observe the curry – i.e. clear occurs on unmount)
-  useEffect(() => () => clearTimeout(removalTimer.current), []);
-
-  // only show toast for [duration] milliseconds
-  removalTimer.current = setTimeout(handleRemove, duration);
-
   // simplify component usage by wrapping plain strings in paragraphs
   const processedMessage =
     typeof message === 'string' ? <p>{message}</p> : message;
@@ -56,8 +50,14 @@ const ToastNotification = ({
         'shadow-2xl rounded flex flex-row p-6 text-white mt-4'
       )}
     >
-      <div className="pr-8 pl-4 text-4xl flex content-center items-center">
+      <div className="mr-8 ml-4 text-4xl flex items-center justify-center">
         <Icon symbol={symbol} />
+        <ProgressDonut
+          duration={duration}
+          onRest={handleRemove} // trigger removal when animation ends
+          stroke="white"
+          className="w-12 h-12 rotate-270 absolute"
+        />
       </div>
       <div>
         {heading && <h2>{heading}</h2>}
