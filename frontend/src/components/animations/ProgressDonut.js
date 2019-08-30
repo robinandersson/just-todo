@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
 
+// the donut is just a partially filled circle - based on the percentage prop, no animation
 const Donut = ({
   percentage,
   stroke = 'black',
@@ -31,9 +32,11 @@ const Donut = ({
   );
 };
 
+// this is where the donut's animation magic happens..
 const ProgressDonut = ({ stroke, duration, onRest, className }) => {
   const AnimatedDonut = animated(Donut);
 
+  // ..react spring updates the percentage prop to the Donut component, along with some other configs (e.g. duration)
   const progress = useSpring({
     config: { duration, clamp: true },
     from: { percentage: 0 },
