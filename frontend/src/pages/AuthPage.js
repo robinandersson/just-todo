@@ -34,7 +34,7 @@ class AuthPage extends Component {
       this.props.location.state.from.unauthorizedRedirect;
 
     if (isUnauthorizedRedirect) {
-      this.showNotification({
+      this.pushNotification({
         type: 'error',
         message:
           'You need to be logged in to view the page you tried to access',
@@ -113,7 +113,7 @@ class AuthPage extends Component {
           this.context.login(userId, loginUsername, token, tokenExpiration);
       })
       .catch(err => {
-        this.showNotification({
+        this.pushNotification({
           type: 'error',
           message: err.message,
         });
@@ -129,7 +129,7 @@ class AuthPage extends Component {
     this.setState({ notifications: newNotifications });
   };
 
-  showNotification(notification) {
+  pushNotification(notification) {
     this.setState({
       notifications: [...this.state.notifications, notification],
     });
@@ -137,7 +137,7 @@ class AuthPage extends Component {
 
   ensureSignupNotification() {
     if (!this.state.isLoginPath && !this.signupNotificationSent) {
-      this.showNotification({
+      this.pushNotification({
         type: 'info',
         duration: 10000,
         heading: 'About that email',
