@@ -41,19 +41,13 @@ class AuthPage extends Component {
       });
     }
 
-    // show signup info when first entering signup-page
-    if (!this.state.isLoginPath && !this.signupNotificationSent) {
-      this.showSignupNotification();
-      this.signupNotificationSent = true;
-    }
+    // show signup info when first landing on signup
+    this.ensureSignupNotification();
   }
 
   componentDidUpdate() {
-    // show signup info when first entering signup-page
-    if (!this.state.isLoginPath && !this.signupNotificationSent) {
-      this.showSignupNotification();
-      this.signupNotificationSent = true;
-    }
+    // show signup info when switching to signup
+    this.ensureSignupNotification();
   }
 
   handleInputChange = evt => {
@@ -141,24 +135,27 @@ class AuthPage extends Component {
     });
   }
 
-  showSignupNotification() {
-    this.showNotification({
-      type: 'info',
-      duration: 10000,
-      heading: 'About that email',
-      message: (
-        <>
-          <p>
-            This is merely a demo, so don't worry about entering your{' '}
-            <b>email</b>.
-          </p>
-          <p>
-            - it is only used as a login credential (no account confirmation
-            email will be sent, etc.).
-          </p>
-        </>
-      ),
-    });
+  ensureSignupNotification() {
+    if (!this.state.isLoginPath && !this.signupNotificationSent) {
+      this.showNotification({
+        type: 'info',
+        duration: 10000,
+        heading: 'About that email',
+        message: (
+          <>
+            <p>
+              This is merely a demo, so don't worry about entering your{' '}
+              <b>email</b>.
+            </p>
+            <p>
+              - it is only used as a login credential (no account confirmation
+              email will be sent, etc.).
+            </p>
+          </>
+        ),
+      });
+      this.signupNotificationSent = true;
+    }
   }
 
   render() {
