@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 
 import AuthContext from '../context/auth-context';
+import { withNotificationCenter } from '../context/notification-context';
+
 import { AuthError } from '../helpers/auth';
-import ToastNotificationList from '../components/notifications/ToastNotificationList';
 import { SERVER_URL, GRAPHQL_ROUTE } from '../helpers/url';
 
 class AuthPage extends Component {
@@ -17,7 +18,6 @@ class AuthPage extends Component {
       username: '',
       email: '',
       password: '',
-      notifications: [],
     };
 
     this.signupNotificationSent = false;
@@ -34,7 +34,7 @@ class AuthPage extends Component {
       this.props.location.state.from.unauthorizedRedirect;
 
     if (isUnauthorizedRedirect) {
-      this.pushNotification({
+      this.props.notificationCenter.pushNotification({
         type: 'error',
         message:
           'You need to be logged in to view the page you tried to access',
@@ -113,7 +113,7 @@ class AuthPage extends Component {
           this.context.login(userId, loginUsername, token, tokenExpiration);
       })
       .catch(err => {
-        this.pushNotification({
+        this.props.notificationCenter.pushNotification({
           type: 'error',
           message: err.message,
         });
@@ -121,23 +121,9 @@ class AuthPage extends Component {
       });
   };
 
-  removeToast = index => {
-    const newNotifications = [...this.state.notifications];
-
-    delete newNotifications[index];
-
-    this.setState({ notifications: newNotifications });
-  };
-
-  pushNotification(notification) {
-    this.setState({
-      notifications: [...this.state.notifications, notification],
-    });
-  }
-
   ensureSignupNotification() {
     if (!this.state.isLoginPath && !this.signupNotificationSent) {
-      this.pushNotification({
+      this.props.notificationCenter.pushNotification({
         type: 'info',
         duration: 10000,
         heading: 'About that email',
@@ -200,11 +186,6 @@ class AuthPage extends Component {
 
     return (
       <React.Fragment>
-        <ToastNotificationList
-          removeToast={this.removeToast}
-          notifications={this.state.notifications}
-        />
-
         <form
           className="container form self-start"
           onSubmit={this.handleSubmit}
@@ -251,4 +232,4 @@ class AuthPage extends Component {
   }
 }
 
-export default AuthPage;
+export default withNotificationCenter(AuthPage);

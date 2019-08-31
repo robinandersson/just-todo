@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import AuthContext from './context/auth-context';
+import { NotificationCenterProvider } from './context/notification-context';
+
 import ProtectedRoute from './helpers/ProtectedRoute';
 import MainNavigation from './components/MainNavigation';
 
@@ -38,31 +40,35 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AuthContext.Provider value={{ userId, username, token, login, logout }}>
-        <MainNavigation />
-        <main className="mb-10 mx-6 flex flex-col flex-grow items-start">
-          <Switch>
-            <Route
-              path="/login"
-              render={props => (
-                <AuthPage {...props} authedRedirectTo="/todos" />
-              )}
-            />
-            <Route
-              path="/signup"
-              render={props => (
-                <AuthPage {...props} authedRedirectTo="/todos" />
-              )}
-            />
+      <NotificationCenterProvider>
+        <AuthContext.Provider
+          value={{ userId, username, token, login, logout }}
+        >
+          <MainNavigation />
+          <main className="mb-10 mx-6 flex flex-col flex-grow items-start">
+            <Switch>
+              <Route
+                path="/login"
+                render={props => (
+                  <AuthPage {...props} authedRedirectTo="/todos" />
+                )}
+              />
+              <Route
+                path="/signup"
+                render={props => (
+                  <AuthPage {...props} authedRedirectTo="/todos" />
+                )}
+              />
 
-            <ProtectedRoute path="/todos" component={TodosPage} />
-            <ProtectedRoute path="/preferences" component={PreferencesPage} />
+              <ProtectedRoute path="/todos" component={TodosPage} />
+              <ProtectedRoute path="/preferences" component={PreferencesPage} />
 
-            <Redirect path="/" to="/login" exact />
-            <Route path="/" component={NotFoundPage} />
-          </Switch>
-        </main>
-      </AuthContext.Provider>
+              <Redirect path="/" to="/login" exact />
+              <Route path="/" component={NotFoundPage} />
+            </Switch>
+          </main>
+        </AuthContext.Provider>
+      </NotificationCenterProvider>
     </BrowserRouter>
   );
 }

@@ -2,16 +2,21 @@ import React from 'react';
 
 import ToastNotification from './ToastNotification';
 
+/*
+ * ToastNotificationList is a container (and presenter) for notifications.
+ *
+ * It is kept separate from e.g. NotificationHub to allow for reuse in other ways
+ * (even though they could be merged and probably decrease complexity as of right now).
+ */
 const ToastNotificationList = ({
-  removeToast,
   notifications,
+  removeNotification,
   fixedPosition = 'top',
 }) => {
   if (!Array.isArray(notifications) || !notifications.length) return null;
 
-  const handleRemoveToast = i => () => removeToast(i);
-
   const oppositePosition = fixedPosition === 'top' ? 'bottom' : 'top';
+  const handleRemoveNotification = i => () => removeNotification(i); // observe curry
 
   return (
     <div
@@ -20,17 +25,18 @@ const ToastNotificationList = ({
       {notifications.map((notification, index) => {
         if (!notification) return null;
 
+        // explicit declaration for brevity's sake (instead of simply spreading notification object)
         const { type, heading, message, duration } = notification;
 
         return (
           <ToastNotification
             key={index}
-            handleRemove={handleRemoveToast(index)}
+            handleRemove={handleRemoveNotification(index)}
             type={type}
             heading={heading}
             message={message}
-            className="opacity-90"
             duration={duration}
+            className="opacity-90"
           />
         );
       })}

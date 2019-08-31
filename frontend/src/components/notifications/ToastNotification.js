@@ -26,6 +26,15 @@ const typeMap = {
   },
 };
 
+/*
+ * A toast notification for displaying status messages to the user.
+ *
+ * The messages comes in four flavours, each with their own icon, style, and default heading. It can by customized by
+ * specifying it's heading (or supplying false to remove heading), message, type, etc. It's message accepts JSX (or
+ * defaults a string to be wrapped in a paragraph).
+ *
+ * The component should be positioned by the parent container (or by supplying styles through className).
+ */
 const ToastNotification = ({
   className,
   handleRemove,
@@ -34,6 +43,9 @@ const ToastNotification = ({
   message,
   duration = 4000,
 }) => {
+  // TODO: Add option to close notification on click.
+  // TODO: Expand component to allow notification that doesn't remove itself automatically
+
   // simplify component usage by wrapping plain strings in paragraphs
   const processedMessage =
     typeof message === 'string' ? <p>{message}</p> : message;
