@@ -20,9 +20,8 @@
     "express-graphql": "^0.8.0",
     "graphql": "^14.4.2",
     "jsonwebtoken": "^8.5.1",
+    "nodemon": "^1.19.1",
     "pg-promise": "^8.7.4"
   },
-  "devDependencies": {
-    "nodemon": "^1.19.1"
-  }
+  "devDependencies": {}
 }
