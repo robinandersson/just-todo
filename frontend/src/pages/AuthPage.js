@@ -115,6 +115,7 @@ class AuthPage extends Component {
       .catch(err => {
         this.props.notificationCenter.pushNotification({
           type: 'error',
+          heading: this.state.isLoginPath ? 'Login error' : 'Signup error',
           message: err.message,
         });
         return err;
