@@ -8,7 +8,7 @@
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "node -r dotenv/config src/app.js",
+    "start": "nodemon --exec 'node -r dotenv/config src/app.js' dotenv_config_path=.env",
     "migrate": "node-pg-migrate"
   },
   "keywords": [],
