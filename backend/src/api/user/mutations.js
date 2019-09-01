@@ -14,33 +14,45 @@ const createUserMutation = {
     password: { type: GraphQLString },
   },
   resolve(parent, args) {
-    // make sure there's not a user with same email
-    const duplicateQuery = 'SELECT * FROM users WHERE email = $1';
-    const duplicateValues = [args.email];
-    const duplicatePromise = db.oneOrNone(duplicateQuery, duplicateValues);
+    // first, make sure there's not a user with same email
+    const duplicateUserQuery = 'SELECT * FROM users WHERE email = $1';
+    const duplicateUserValues = [args.email];
+    const duplicateUserPromise = db.oneOrNone(
+      duplicateUserQuery,
+      duplicateUserValues
+    );
 
+    // hash password in parallel (neglible performance gain, but still)
     const hashPaswordPromise = new Promise((resolve, reject) => {
       if (!args.password) reject(new Error('No password submitted'));
       resolve(bcrypt.hash(args.password, 12));
     });
 
-    const createUserPromise = hashPaswordPromise.then(hashedPassword => {
-      const query =
+    // if no duplicate user, then try to insert new user (with freshly hashed password)
+    const insertNewUserPromise = Promise.all([
+      duplicateUserPromise,
+      hashPaswordPromise,
+    ]).then(([duplicateUser, hashedPassword]) => {
+      if (duplicateUser)
+        throw new Error(`User with email: "${args.email}" exists already`);
+
+      const insertQuery =
         'INSERT INTO users(username, email, password, joined_at) VALUES ($1, $2, $3, $4) RETURNING *';
-      const values = [
+      const insertValues = [
         args.username,
         args.email,
         hashedPassword,
         new Date().toISOString(),
       ];
 
-      return db.oneOrNone(query, values);
+      return db.oneOrNone(insertQuery, insertValues);
     });
 
-    return Promise.all([duplicatePromise, createUserPromise])
-      .then(([duplicateUser, newUser]) => {
-        if (duplicateUser)
-          throw new Error(`User with email: "${args.email}" exists already`);
+    // if all went well, then login user with newly created credentials
+    return insertNewUserPromise
+      .then(newUser => {
+        if (!newUser)
+          throw new Error(`Something went wrong! New user not created`);
 
         return loginUser(newUser);
       })
