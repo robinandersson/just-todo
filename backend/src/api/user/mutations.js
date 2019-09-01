@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const db = require('../pgAdapter');
 const { AuthDataType } = require('../auth/types');
-const { AuthError, loginUser } = require('../../helpers/auth');
+const { loginUser } = require('../../helpers/auth');
 const { UserType } = require('./types');
 
 const createUserMutation = {
