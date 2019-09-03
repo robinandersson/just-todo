@@ -19,8 +19,11 @@ a {
   @apply text-blue-700;
 }
 a:hover {
-  @apply text-blue-900;
+  @apply text-blue-500;
 }
 a:focus {
   @apply outline-none shadow-outline;
+}
+a:active {
+  @apply text-blue-900;
 }
