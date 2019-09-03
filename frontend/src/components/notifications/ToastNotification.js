@@ -62,7 +62,9 @@ const ToastNotification = ({
   const symbol = typeMap.symbol[type];
   const { hue, base } = typeMap.color[type];
 
-  const cssColoring = `bg-${hue}-${base}`;
+  const cssBackgroundColoring = `bg-${hue}-${base}`;
+  const cssIconColoringDark = `text-${hue}-${base + 300}`;
+  const cssIconColoringLight = `text-${hue}-${base + 100}`;
   const initialRouteRef = useRef(location.pathname);
 
   useEffect(() => {
@@ -84,7 +86,7 @@ const ToastNotification = ({
     <div
       className={concatClassNames(
         className,
-        cssColoring,
+        cssBackgroundColoring,
         'shadow-2xl rounded flex flex-row p-6 text-white mt-4'
       )}
     >
@@ -101,7 +103,7 @@ const ToastNotification = ({
         <div className="flex flex-row justify-between">
           {heading && <h2>{heading}</h2>}
           <button
-            className="self-center justify-end px-2 py-1 focus:text-blue-600 active:text-blue-600 active:shadow-none active:outline-none hover:text-gray-300 cursor-pointer inline-block focus:outline-none focus:shadow-outline"
+            className={`self-center justify-end px-2 py-1 focus:${cssIconColoringDark} active:${cssIconColoringDark} active:shadow-none active:outline-none hover:${cssIconColoringLight} cursor-pointer inline-block focus:outline-none focus:shadow-outline`}
             onClick={handleRemove}
           >
             <Icon symbol={'cross'} className="" size="lg" />
