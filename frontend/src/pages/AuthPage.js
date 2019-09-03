@@ -155,9 +155,7 @@ class AuthPage extends Component {
     const loginHint = (
       <p className="text-xs mt-5">
         New user?
-        <NavLink to="/signup" className="text-blue-700 hover:text-blue-900">
-          &nbsp;Signup
-        </NavLink>
+        <NavLink to="/signup">&nbsp;Signup</NavLink>
         &nbsp;instead!
       </p>
     );
@@ -165,9 +163,7 @@ class AuthPage extends Component {
     const signupHint = (
       <p className="text-xs mt-5">
         Existing user?
-        <NavLink to="/login" className="text-blue-700 hover:text-blue-900">
-          &nbsp;Login
-        </NavLink>
+        <NavLink to="/login">&nbsp;Login</NavLink>
         &nbsp;instead!
       </p>
     );
