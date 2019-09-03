@@ -128,7 +128,7 @@ class AuthPage extends Component {
       this.props.notificationCenter.pushNotification({
         type: 'info',
         duration: 10000,
-        heading: 'About that email',
+        heading: 'About that email field',
         message: (
           <>
             <p>
