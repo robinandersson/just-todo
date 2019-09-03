@@ -5,7 +5,7 @@ import AuthContext from '../context/auth-context';
 import { withNotificationCenter } from '../context/notification-context';
 
 import { AuthError } from '../helpers/auth';
-import { SERVER_URL, GRAPHQL_ROUTE } from '../helpers/url';
+import { attemptLogin, attemptSignup } from '../helpers/auth';
 
 class AuthPage extends Component {
   static contextType = AuthContext;
@@ -65,31 +65,10 @@ class AuthPage extends Component {
     // TODO: handle incorrect credentials correctly
     if (email.trim().length === 0 || password.trim().length === 0) return;
 
-    const query = isLoginPath
-      ? `query {
-        login(email: "${email}", password: "${password}") {
-          userId
-          username
-          token
-          tokenExpiration
-        }
-      }`
-      : `mutation {
-        createUser(username: "${username}", email: "${email}", password: "${password}") {
-          userId
-          username
-          token
-          tokenExpiration
-        }
-      }`;
-
-    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
-      method: 'POST',
-      body: JSON.stringify({ query }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    (isLoginPath
+      ? attemptLogin(email, password)
+      : attemptSignup(username, email, password)
+    )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
           throw new Error('Failed!');
