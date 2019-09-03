@@ -14,6 +14,7 @@ import {
   faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
+// symbolmap used to gather all used icons and to solidify icon-id's in case icon library is exchanged
 const symbolMap = {
   exclamation: faExclamation,
   exclamationTriangle: faExclamationTriangle,
@@ -27,7 +28,13 @@ const symbolMap = {
   exclamationCircle: faExclamationCircle,
 };
 
-const Icon = ({ symbol = 'exclamation', className, size }) => {
+/*
+ * Icon component, actual svg-icon specified through symbol prop
+ * - either pass in string corresponding to symbolMap above or pass in vailid fortawesome svg
+ *
+ * Change color by passing in color-css property (text-[color] in tailwindcss).
+ */
+const Icon = ({ symbol = 'exclamation', size, className }) => {
   const faIcon = typeof symbol === 'string' ? symbolMap[symbol] : symbol;
 
   return <FontAwesomeIcon icon={faIcon} className={className} size={size} />;
