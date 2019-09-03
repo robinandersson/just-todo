@@ -59,6 +59,7 @@ class AuthPage extends Component {
     evt.preventDefault();
 
     const { username, email, password } = this.state;
+    const { pathname } = this.props.location;
     const isLoginPath = this.state.isLoginPath; // declare to be used with async (path may change)
 
     // TODO: handle incorrect credentials correctly
@@ -118,6 +119,7 @@ class AuthPage extends Component {
           type: 'error',
           heading: isLoginPath ? 'Login error' : 'Signup error',
           message: err.message,
+          limitTo: [pathname],
         });
         return err;
       });
