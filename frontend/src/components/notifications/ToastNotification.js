@@ -97,8 +97,16 @@ const ToastNotification = ({
           className="w-12 h-12 rotate-270 absolute"
         />
       </div>
-      <div>
-        {heading && <h2>{heading}</h2>}
+      <div className="flex-grow">
+        <div className="flex flex-row justify-between">
+          {heading && <h2>{heading}</h2>}
+          <button
+            className="self-center justify-end px-2 py-1 focus:text-blue-600 active:text-blue-600 active:shadow-none active:outline-none hover:text-gray-300 cursor-pointer inline-block focus:outline-none focus:shadow-outline"
+            onClick={handleRemove}
+          >
+            <Icon symbol={'cross'} className="" size="lg" />
+          </button>
+        </div>
         <div>{processedMessage}</div>
       </div>
     </div>
