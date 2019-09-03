@@ -66,7 +66,7 @@ const ToastNotification = ({
   const initialRouteRef = useRef(location.pathname);
 
   useEffect(() => {
-    // remove notification if accessing route outside it's limits (defaults to)
+    // remove notification if accessing route outside it's limits (defaults to limit to current route)
     if (
       limitTo
         ? !limitTo.includes(location.pathname)
