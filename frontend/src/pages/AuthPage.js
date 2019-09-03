@@ -59,11 +59,12 @@ class AuthPage extends Component {
     evt.preventDefault();
 
     const { username, email, password } = this.state;
+    const isLoginPath = this.state.isLoginPath; // declare to be used with async (path may change)
 
     // TODO: handle incorrect credentials correctly
     if (email.trim().length === 0 || password.trim().length === 0) return;
 
-    const query = this.state.isLoginPath
+    const query = isLoginPath
       ? `query {
         login(email: "${email}", password: "${password}") {
           userId
@@ -100,7 +101,7 @@ class AuthPage extends Component {
             resData.errors[0].code
           );
 
-        const queryEndpoint = this.state.isLoginPath ? 'login' : 'createUser';
+        const queryEndpoint = isLoginPath ? 'login' : 'createUser';
 
         const {
           userId,
@@ -115,7 +116,7 @@ class AuthPage extends Component {
       .catch(err => {
         this.props.notificationCenter.pushNotification({
           type: 'error',
-          heading: this.state.isLoginPath ? 'Login error' : 'Signup error',
+          heading: isLoginPath ? 'Login error' : 'Signup error',
           message: err.message,
         });
         return err;

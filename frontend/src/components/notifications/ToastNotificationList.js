@@ -25,8 +25,8 @@ const ToastNotificationList = ({
       {notifications.map((notification, index) => {
         if (!notification) return null;
 
-        // explicit declaration for brevity's sake (instead of simply spreading notification object)
-        const { type, heading, message, duration } = notification;
+        // explicit declaration for brevity's sake (instead of simply spreading object over component keys)
+        const { type, heading, message, duration, limitTo } = notification;
 
         return (
           <ToastNotification
@@ -36,6 +36,7 @@ const ToastNotificationList = ({
             heading={heading}
             message={message}
             duration={duration}
+            limitTo={limitTo}
             className="opacity-90"
           />
         );

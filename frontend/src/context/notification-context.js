@@ -20,7 +20,7 @@ const NotificationCenterProvider = ({ children }) => {
   const removeNotification = index =>
     setNotifications(prevNotifications => {
       const arr = [...prevNotifications];
-      delete arr[index];
+      arr[index] = undefined;
       return arr;
     });
 

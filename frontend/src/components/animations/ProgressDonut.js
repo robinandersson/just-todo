@@ -56,7 +56,7 @@ const ProgressDonut = ({
     config: { duration, clamp: true },
     from: { percentage: 0 },
     to: { percentage: 100 },
-    onRest,
+    onRest, // cleanup, etc. when all animations have finished (instead of trying to time it, which isn't easily synced)
   });
 
   return (

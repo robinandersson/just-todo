@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import Icon from '../Icon';
+import { withRouter } from 'react-router-dom';
 
 import { concatClassNames } from '../../utils/classNames';
 import { ProgressDonut } from '../animations/ProgressDonut';
 
+// defaults for the four base notification types
 const typeMap = {
   heading: {
     success: 'Success!',
@@ -42,6 +44,14 @@ const ToastNotification = ({
   heading = typeMap.heading[type],
   message,
   duration = 4000,
+  location,
+  // limitTo-array specifies routes the notification should be limited to (unmounts if current route is not in set)
+  // Observe! Defaults to initial route in code below (can't use ES6 default param since location-prop changes on each
+  // render).
+  // Double Observe! If notification is sent after some async process (e.g. login failure), then user may change route
+  // before notification is sent (thus changing default limitTo-location). Specifically pass limitTo prop to be sure.
+  // Pro Tip! Pass empty array to allow array to stay regardless of route change
+  limitTo,
 }) => {
   // TODO: Add option to close notification on click.
   // TODO: Expand component to allow notification that doesn't remove itself automatically
@@ -53,6 +63,22 @@ const ToastNotification = ({
   const { hue, base } = typeMap.color[type];
 
   const cssColoring = `bg-${hue}-${base}`;
+  const initialRouteRef = useRef(location.pathname);
+
+  useEffect(() => {
+    // remove notification if accessing route outside it's limits (defaults to)
+    if (
+      limitTo
+        ? !limitTo.includes(location.pathname)
+        : initialRouteRef.current !== location.pathname
+    ) {
+      /* Need to put removal handler at the end of js-event queue to avoid possible memory leak stemming from React
+      Spring animation trying to update the unmounted component. Shouldn't have to, but simply stopping animation etc.
+      doesn't help. (React Spring documentation does not cover this, but a official forum thread has been created by
+      yours truly) */
+      setTimeout(handleRemove, 0);
+    }
+  }, [location, limitTo, handleRemove]);
 
   return (
     <div
@@ -79,4 +105,4 @@ const ToastNotification = ({
   );
 };
 
-export default ToastNotification;
+export default withRouter(ToastNotification);
