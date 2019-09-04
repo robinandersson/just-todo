@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import AuthContext from '../context/auth-context';
+import { useAuthContext } from '../context/auth-context';
 import { Route, Redirect } from 'react-router-dom';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const context = useContext(AuthContext);
+  const authContext = useAuthContext();
 
   const componentToRender = props =>
-    context.token ? (
+    authContext.token ? (
       <Component {...props} />
     ) : (
       <Redirect

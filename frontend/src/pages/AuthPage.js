@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 
-import AuthContext from '../context/auth-context';
+import { AuthContext } from '../context/auth-context';
 import { withNotificationCenter } from '../context/notification-context';
-
-import { AuthError } from '../helpers/auth';
-import { attemptLogin, attemptSignup } from '../helpers/auth';
 
 class AuthPage extends Component {
   static contextType = AuthContext;
@@ -65,43 +62,20 @@ class AuthPage extends Component {
     // TODO: handle incorrect credentials correctly
     if (email.trim().length === 0 || password.trim().length === 0) return;
 
-    (isLoginPath
-      ? attemptLogin(email, password)
-      : attemptSignup(username, email, password)
-    )
-      .then(res => {
-        if (res.status !== 200 && res.status !== 201)
-          throw new Error('Failed!');
-        return res.json();
-      })
-      .then(resData => {
-        if (resData.errors)
-          throw new AuthError(
-            resData.errors[0].message,
-            resData.errors[0].code
-          );
+    // attempt login or signup (determined by route pathname)
+    const loginOrSignupPromise = isLoginPath
+      ? this.context.login(email, password)
+      : this.context.signup(username, email, password);
 
-        const queryEndpoint = isLoginPath ? 'login' : 'createUser';
-
-        const {
-          userId,
-          username: loginUsername,
-          token,
-          tokenExpiration,
-        } = resData.data[queryEndpoint];
-
-        if (token)
-          this.context.login(userId, loginUsername, token, tokenExpiration);
-      })
-      .catch(err => {
-        this.props.notificationCenter.pushNotification({
-          type: 'error',
-          heading: isLoginPath ? 'Login error' : 'Signup error',
-          message: err.message,
-          limitTo: [pathname],
-        });
-        return err;
+    loginOrSignupPromise.catch(err => {
+      this.props.notificationCenter.pushNotification({
+        type: 'error',
+        heading: isLoginPath ? 'Login error' : 'Signup error',
+        message: err.message,
+        limitTo: [pathname],
       });
+      return err;
+    });
   };
 
   ensureSignupNotification() {

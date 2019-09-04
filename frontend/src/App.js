@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-import AuthContext from './context/auth-context';
+import { AuthContextProvider } from './context/auth-context';
 import { NotificationCenterProvider } from './context/notification-context';
 
 import ProtectedRoute from './helpers/ProtectedRoute';
@@ -13,37 +13,10 @@ import PreferencesPage from './pages/PreferencesPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
-  const [auth, setAuth] = useState(() => {
-    if (!localStorage.hasOwnProperty('auth')) return {};
-    try {
-      return JSON.parse(localStorage.getItem('auth'));
-    } catch (err) {
-      console.log(err);
-      localStorage.clear(); // reset localstorage, could be corrupt
-    }
-  });
-
-  const login = (userId, username, token, tokenExpiration) => {
-    // TODO: make use of tokenExpiration
-    setAuth({ userId, username, token }); // set local state...
-    // TODO: use cookies instead?
-    localStorage.setItem('auth', JSON.stringify({ userId, username, token })); // ...and persist state
-  };
-
-  const logout = history => {
-    setAuth(); // remove state...
-    localStorage.clear(); // ...and remove local storage
-    history.push('/login');
-  };
-
-  const { userId, username, token } = auth || {};
-
   return (
     <BrowserRouter>
       <NotificationCenterProvider>
-        <AuthContext.Provider
-          value={{ userId, username, token, login, logout }}
-        >
+        <AuthContextProvider>
           <MainNavigation />
           <main className="mb-10 mx-6 flex flex-col flex-grow items-start">
             <Switch>
@@ -67,7 +40,7 @@ function App() {
               <Route path="/" component={NotFoundPage} />
             </Switch>
           </main>
-        </AuthContext.Provider>
+        </AuthContextProvider>
       </NotificationCenterProvider>
     </BrowserRouter>
   );
