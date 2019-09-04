@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth-context';
 import { withNotificationCenter } from '../context/notification-context';
+import AuthForm from '../components/AuthForm';
 
 class AuthPage extends Component {
   static contextType = AuthContext;
@@ -12,9 +13,6 @@ class AuthPage extends Component {
 
     this.state = {
       isLoginPath: props.location.pathname === '/login',
-      username: '',
-      email: '',
-      password: '',
     };
 
     this.signupNotificationSent = false;
@@ -43,24 +41,21 @@ class AuthPage extends Component {
   }
 
   componentDidUpdate() {
-    // show signup info when switching to signup
+    // show signup info when switching to signup for the first time
     this.ensureSignupNotification();
   }
 
-  handleInputChange = evt => {
-    const { name, value } = evt.target;
-    this.setState({ [name]: value });
-  };
-
-  handleSubmit = evt => {
-    evt.preventDefault();
-
-    const { username, email, password } = this.state;
-    const { pathname } = this.props.location;
+  handleAuthFormSubmit = ({ username, email, password }) => {
     const isLoginPath = this.state.isLoginPath; // declare to be used with async (path may change)
 
-    // TODO: handle incorrect credentials correctly
-    if (email.trim().length === 0 || password.trim().length === 0) return;
+    // (too) simple guard, doesn't allow empty inputs (or only white spaces)
+    // TODO: handle incorrect credentials correctly/better
+    if (
+      (!isLoginPath && username.trim().length === 0) ||
+      email.trim().length === 0 ||
+      password.trim().length === 0
+    )
+      return;
 
     // attempt login or signup (determined by route pathname)
     const loginOrSignupPromise = isLoginPath
@@ -72,12 +67,13 @@ class AuthPage extends Component {
         type: 'error',
         heading: isLoginPath ? 'Login error' : 'Signup error',
         message: err.message,
-        limitTo: [pathname],
+        limitTo: [this.props.location.pathname],
       });
       return err;
     });
   };
 
+  // checks if signup-notification has been sent, sends it if not
   ensureSignupNotification() {
     if (!this.state.isLoginPath && !this.signupNotificationSent) {
       this.props.notificationCenter.pushNotification({
@@ -97,90 +93,21 @@ class AuthPage extends Component {
           </>
         ),
       });
+
       this.signupNotificationSent = true;
     }
   }
 
   render() {
+    // TODO: don't handle redirects here? Handle it in App.js?
     if (this.context.token)
       return <Redirect to={this.props.authedRedirectTo} />;
 
-    const loginHint = (
-      <p className="text-xs mt-5">
-        New user?
-        <NavLink to="/signup">&nbsp;Signup</NavLink>
-        &nbsp;instead!
-      </p>
-    );
-
-    const signupHint = (
-      <p className="text-xs mt-5">
-        Existing user?
-        <NavLink to="/login">&nbsp;Login</NavLink>
-        &nbsp;instead!
-      </p>
-    );
-
-    const usernameInput = (
-      <React.Fragment>
-        <label htmlFor="email" className="input-label">
-          Username
-        </label>
-        <input
-          name="username"
-          type="text"
-          required
-          className="text-input"
-          onChange={this.handleInputChange}
-          value={this.state.username}
-        />
-      </React.Fragment>
-    );
-
     return (
-      <React.Fragment>
-        <form
-          className="container form self-start"
-          onSubmit={this.handleSubmit}
-        >
-          {!this.state.isLoginPath && usernameInput}
-          <label htmlFor="email" className="input-label">
-            Email
-          </label>
-          <input
-            name="email"
-            type="email"
-            required
-            className="text-input"
-            onChange={this.handleInputChange}
-            value={this.state.email}
-          />
-          <label htmlFor="password" className="input-label">
-            Password
-          </label>
-          <input
-            name="password"
-            type="password"
-            required
-            className="text-input tracking-widest"
-            onChange={this.handleInputChange}
-            value={this.state.password}
-          />
-          <div>
-            <button
-              type="submit"
-              className={
-                'btn mt-5 mb-2 py-1 px-3' +
-                (!this.state.isLoginPath ? ' mode--positive' : '')
-              }
-            >
-              {this.state.isLoginPath ? 'Login' : 'Signup'}
-            </button>
-
-            {this.state.isLoginPath ? loginHint : signupHint}
-          </div>
-        </form>
-      </React.Fragment>
+      <AuthForm
+        handleSubmit={this.handleAuthFormSubmit}
+        isLoginPath={this.state.isLoginPath}
+      />
     );
   }
 }
