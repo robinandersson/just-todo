@@ -42,21 +42,19 @@ const NotificationCenterProvider = ({ children }) => {
   );
 };
 
-const NotificationCenterConsumer = NotificationCenterContext.Consumer;
-
 // wrap a component, turning it nto a NotificationCenterContext consumer - supplying it with a 'notificationCenter' prop
 const withNotificationCenter = Component => props => (
-  <NotificationCenterConsumer>
+  <NotificationCenterContext.Consumer>
     {context => <Component notificationCenter={context} {...props} />}
-  </NotificationCenterConsumer>
+  </NotificationCenterContext.Consumer>
 );
 
 // returns a hook for accessing the NotificationCenterContext
 const useNotificationCenter = () => useContext(NotificationCenterContext);
 
 export {
+  NotificationCenterContext,
   NotificationCenterProvider,
-  NotificationCenterConsumer,
   withNotificationCenter, // HOC for easy use with class components
   useNotificationCenter, // hook for easy use with functional components
 };

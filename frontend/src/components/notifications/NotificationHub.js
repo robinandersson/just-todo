@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ToastNotificationList from './ToastNotificationList';
-import { NotificationCenterConsumer } from '../../context/notification-context';
+import { NotificationCenterContext } from '../../context/notification-context';
 
 /* The NotificationHub component presents all 'global' notificaions
  * (although there's just one type atm). It is supplied with data and functionality by the NotificationCenterContext.
@@ -11,11 +11,11 @@ import { NotificationCenterConsumer } from '../../context/notification-context';
  */
 // TODO: expand with more types of notifications, modals, etc.
 const NotificationHub = () => (
-  <NotificationCenterConsumer>
+  <NotificationCenterContext.Consumer>
     {NotificationCenterContext => (
       <ToastNotificationList {...NotificationCenterContext} />
     )}
-  </NotificationCenterConsumer>
+  </NotificationCenterContext.Consumer>
 );
 
 export default NotificationHub;
