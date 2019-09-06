@@ -31,3 +31,8 @@ it('respects disabled prop', () => {
   const wrapper = mount(<InputField disabled />);
   expect(wrapper.find('input').props().disabled).toBeTruthy();
 });
+
+it('defaults to text input', () => {
+  const wrapper = mount(<InputField />);
+  expect(wrapper.find('input').props().type).toEqual('text');
+});

@@ -5,7 +5,7 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { concatClassNames } from '../utils/classNames';
 
 const InputField = props => {
-  const { name, type, className, value, onChange, disabled } = props;
+  const { name, type = 'text', className, value, onChange, disabled } = props;
 
   return (
     <div className="relative">
