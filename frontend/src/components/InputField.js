@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { concatClassNames } from '../utils/classNames';
 
 const InputField = props => {
   const { name, type, className, value, onChange, disabled } = props;
@@ -11,7 +12,7 @@ const InputField = props => {
       <input
         name={name}
         type={type}
-        className={className + ' w-full'}
+        className={concatClassNames(className, 'w-full')}
         value={value}
         onChange={onChange}
         disabled={disabled}
