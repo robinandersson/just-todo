@@ -26,3 +26,8 @@ it('renders text input value based on value prop', () => {
   wrapper.setProps({ value: 'Value Changed' });
   expect(wrapper.find('input').props().value).toEqual('Value Changed');
 });
+
+it('respects disabled prop', () => {
+  const wrapper = mount(<InputField disabled />);
+  expect(wrapper.find('input').props().disabled).toBeTruthy();
+});
