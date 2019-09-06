@@ -32,6 +32,12 @@ it('respects disabled prop', () => {
   expect(wrapper.find('input').props().disabled).toBeTruthy();
 });
 
+it('shows lock icon when disabled', () => {
+  const wrapper = mount(<InputField disabled />);
+  const icon = wrapper.find('svg').props();
+  expect(icon['data-icon']).toEqual('lock');
+});
+
 it('defaults to text input', () => {
   const wrapper = mount(<InputField />);
   expect(wrapper.find('input').props().type).toEqual('text');
