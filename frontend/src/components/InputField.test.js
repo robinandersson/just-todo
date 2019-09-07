@@ -42,7 +42,7 @@ it('shows lock icon when disabled', () => {
   expect(icon['data-icon']).toEqual('lock');
 });
 
-it('defaults to text input', () => {
+it('defaults to input type to text', () => {
   const wrapper = mount(<InputField />);
   expect(wrapper.find('input').props().type).toEqual('text');
 });
