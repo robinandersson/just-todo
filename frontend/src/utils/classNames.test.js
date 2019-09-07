@@ -116,3 +116,17 @@ it('accepts crazy combinations of everything', () => {
     'first-class second-class third-class fourth-class fifth-class sixth-class'
   );
 });
+
+it('doesn\t accept objects', () => {
+  expect(() => {
+    concatClassNames({ class: 'class' });
+  }).toThrow();
+
+  expect(() => {
+    concatClassNames({});
+  }).toThrow();
+
+  expect(() => {
+    concatClassNames('class', {});
+  }).toThrow();
+});
