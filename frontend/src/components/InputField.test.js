@@ -1,20 +1,25 @@
 import React from 'react';
 import InputField from './InputField';
 
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 it('calls onChange', () => {
-  const onChange = jest.fn();
-  const wrapper = mount(<InputField onChange={onChange} />);
+  const onChangeMock = jest.fn();
+  const wrapper = shallow(<InputField onChange={onChangeMock} />);
 
-  wrapper.find('input').simulate('change', { target: { value: 'New Value' } });
+  const event = { target: { value: 'This is just for test' } };
 
-  expect(onChange).toHaveBeenCalledTimes(1);
+  wrapper.find('input').simulate('change', event);
+
+  expect(onChangeMock).toHaveBeenCalledTimes(1);
+  expect(onChangeMock).toHaveBeenCalledWith({
+    target: { value: 'This is just for test' },
+  });
 });
 
 it('renders text input value based on value prop', () => {
-  const onChange = jest.fn();
-  const wrapper = mount(<InputField onChange={onChange} value="" />);
+  const onChangeMock = jest.fn();
+  const wrapper = mount(<InputField onChange={onChangeMock} value="" />);
 
   expect(wrapper.find('input').props().value).toEqual('');
 
