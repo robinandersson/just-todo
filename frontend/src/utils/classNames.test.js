@@ -83,12 +83,18 @@ it('accepts crazy combinations of everything', () => {
     concatClassNames(
       [],
       ' first-class ',
-      [('', [undefined, 'second-class '])],
-      [('', [''], ['', 'first-class', ''])],
+      ['', [undefined, 'second-class ']],
+      ['', ['', []], ['', 'first-class', '']],
       ['', 'third-class'],
       'fourth-class',
-      ['third-class', ['first-class fifth-class third-class']],
-      [null, 'sixth-class ']
+      [
+        'third-class',
+        [],
+        ['', undefined, [[], null]],
+        ['fourth-class'],
+        ['first-class fifth-class third-class'],
+      ],
+      [(null, 'sixth-class ')]
     )
   ).toEqual(
     'first-class second-class third-class fourth-class fifth-class sixth-class'
