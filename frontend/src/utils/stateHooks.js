@@ -1,10 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
 
+// hook for accessing previous value of prop or state in a functional component
+// sort of a replacement to how class components receives previous state and props in componentDidUpdate
 const usePrevious = val => {
   const ref = useRef();
+
+  // update value AFTER current render
   useEffect(() => {
     ref.current = val;
   });
+
+  // the return happens before useEffect above, thus returning the old value :)
   return ref.current;
 };
 
