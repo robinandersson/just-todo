@@ -8,7 +8,7 @@ const usePrevious = val => {
   // update value AFTER current render
   useEffect(() => {
     ref.current = val;
-  });
+  }, [val]);
 
   // the return happens before useEffect above, thus returning the old value :)
   return ref.current;
