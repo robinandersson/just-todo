@@ -68,12 +68,12 @@ const ToastNotification = ({
   const initialRouteRef = useRef(location.pathname);
 
   useEffect(() => {
+    const allowedOnEveryPath = limitTo && limitTo.length === 0;
+    const currentPathIncluded = limitTo && limitTo.includes(location.pathname);
+    const isOnDefaultPath = initialRouteRef.current === location.pathname;
+
     // remove notification if accessing route outside it's limits (defaults to limit to current route)
-    if (
-      limitTo
-        ? !limitTo.includes(location.pathname)
-        : initialRouteRef.current !== location.pathname
-    ) {
+    if (!allowedOnEveryPath && !currentPathIncluded && !isOnDefaultPath) {
       /* Need to put removal handler at the end of js-event queue to avoid possible memory leak stemming from React
       Spring animation trying to update the unmounted component. Shouldn't have to, but simply stopping animation etc.
       doesn't help. (React Spring documentation does not cover this, but a official forum thread has been created by
