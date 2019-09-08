@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { AuthContextProvider } from './context/auth-context';
 import { NotificationCenterProvider } from './context/notification-context';
 
-import ProtectedRoute from './helpers/ProtectedRoute';
+import ProtectedRoute from './utils/ProtectedRoute';
 import MainNavigation from './components/MainNavigation';
 
 import AuthPage from './pages/AuthPage';

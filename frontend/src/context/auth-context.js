@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { backendRequest } from '../utils/request';
-import { AuthError } from '../helpers/auth';
+import { AuthError } from '../utils/auth';
 
 const AuthContext = React.createContext();
 
