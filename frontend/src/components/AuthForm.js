@@ -8,6 +8,23 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
     password: '',
   });
 
+  const focusInput = component => {
+    if (component) {
+      switch (component.name) {
+        case 'email':
+          if (isLoginPath) component.focus();
+          break;
+
+        case 'username':
+          if (!isLoginPath) component.focus();
+          break;
+
+        default:
+          break;
+      }
+    }
+  };
+
   const onSubmit = evt => {
     evt.preventDefault();
     handleSubmit(inputValues);
@@ -32,6 +49,7 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
             name="username"
             type="text"
             required
+            autoFocus
             className="text-input"
             onChange={handleInputChange}
             value={inputValues.username}
@@ -46,6 +64,8 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
         name="email"
         type="email"
         required
+        autoFocus={isLoginPath}
+        ref={focusInput}
         className="text-input"
         onChange={handleInputChange}
         value={inputValues.email}
