@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../contexts/auth-context';
 import TodoItem from '../components/TodoItem';
 import { SERVER_URL, GRAPHQL_ROUTE } from '../utils/url';
 

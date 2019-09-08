@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-import { AuthContextProvider } from './context/auth-context';
-import { NotificationCenterProvider } from './context/notification-context';
+import { AuthContextProvider } from './contexts/auth-context';
+import { NotificationCenterProvider } from './contexts/notification-context';
 
 import ProtectedRoute from './utils/ProtectedRoute';
 import MainNavigation from './components/MainNavigation';

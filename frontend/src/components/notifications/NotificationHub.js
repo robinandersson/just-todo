@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ToastNotificationList from './ToastNotificationList';
-import { NotificationCenterContext } from '../../context/notification-context';
+import { NotificationCenterContext } from '../../contexts/notification-context';
 
 /* The NotificationHub component presents all 'global' notificaions
  * (although there's just one type atm). It is supplied with data and functionality by the NotificationCenterContext.

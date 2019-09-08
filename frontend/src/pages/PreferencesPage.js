@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../contexts/auth-context';
 import InputField from '../components/InputField';
 import { DynamicLoadingOutcomeIcon } from '../components/DynamicIcons';
 import { SERVER_URL, GRAPHQL_ROUTE } from '../utils/url';

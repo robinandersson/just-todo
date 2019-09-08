@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { AuthContext } from '../context/auth-context';
-import { withNotificationCenter } from '../context/notification-context';
+import { AuthContext } from '../contexts/auth-context';
+import { withNotificationCenter } from '../contexts/notification-context';
 import AuthForm from '../components/AuthForm';
 
 class AuthPage extends Component {

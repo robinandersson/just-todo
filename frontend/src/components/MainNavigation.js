@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../contexts/auth-context';
 import Icon from '../components/Icon';
 
 const MainNavigation = props => {
