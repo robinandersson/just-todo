@@ -63,3 +63,15 @@ Installs packages in project root, backend, and frontend.
 Migrate db from current version, use it to setup tables and columns from fresh database.
 
 Use `npm run migrate up` to migrate up completely. To migrate {N} migrations from current step, use `npm run migrate up {N}`. `npm run migrate down` migrates down one step at a time.
+
+### `npm run frontend:test`
+
+Unit and Integration tests for the frontend; Launches the test runner in the interactive watch mode.
+
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run fullstack:cypress`
+
+End-to-end tests; Opens the Cypress Test Runner in interactive mode.
+
+Observe! Needs whole stack (frontend, backend, db) to be run locally (according to default config) in order for all tests to succeed. Also needs db to be seeded with some data (readme will be updated with info at later time, for now see comments in Cypress test files).

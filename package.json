@@ -14,7 +14,9 @@
     "start": "npm run backend:start & npm run frontend:start",
     "prettier": "prettier --write '**/*.{js,css,html}'",
     "postinstall": "npm install --prefix backend",
-    "heroku-postbuild": "cd frontend ; npm install ; npm run build"
+    "heroku-postbuild": "cd frontend ; npm install ; npm run build",
+    "frontend:test": "cd frontend ; npm test",
+    "fullstack:cypress": "cd frontend ; npm run cypress"
   },
   "keywords": [],
   "author": "",
