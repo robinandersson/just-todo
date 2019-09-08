@@ -41,3 +41,15 @@ Observe that the js:build/js:start bundles and minifies the css even further (th
 Same as css:build, but also watches for changes.
 
 Observe that the js:build/js:start bundles and minifies the css even further _(I know, I know, this step should be piped in to CRA's build setup)_.
+
+### `npm run test`
+
+Unit and Integration tests; Launches the test runner in the interactive watch mode.
+
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run cypress`
+
+End-to-end tests; Opens the Cypress Test Runner in interactive mode.
+
+Observe! Needs whole stack (frontend, backend, db) to be run locally (according to default config) in order for all tests to succeed. Also needs db to be seeded with some data (readme will be updated with info at later time, for now see comments in Cypress test files).
