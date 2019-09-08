@@ -1,6 +1,6 @@
 describe('Signup page', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/signup');
   });
 
   it('focuses on username input', () => {
