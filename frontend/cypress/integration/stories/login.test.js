@@ -8,7 +8,7 @@ describe('Login page', () => {
   });
 
   it('shows login button ', () => {
-    cy.get('button[type="submit"]').contains('Login');
+    cy.get('button[type=submit]').contains('Login');
   });
 
   describe('Unauthorized route', () => {
