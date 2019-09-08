@@ -89,6 +89,7 @@ const ToastNotification = ({
         cssBackgroundColoring,
         'shadow-2xl rounded flex flex-row p-6 text-white mt-4'
       )}
+      data-testid="notification"
     >
       <div className="mr-8 ml-4 text-4xl flex items-center justify-center">
         <Icon symbol={symbol} />
