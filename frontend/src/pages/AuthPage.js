@@ -31,8 +31,9 @@ class AuthPage extends Component {
     if (isUnauthorizedRedirect) {
       this.props.notificationCenter.pushNotification({
         type: 'error',
+        heading: 'Please login',
         message:
-          'You need to be logged in to view the page you tried to access',
+          'You need to be authenticated to view the page you tried to access',
       });
     }
 
