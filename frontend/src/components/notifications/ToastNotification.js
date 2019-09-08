@@ -16,7 +16,7 @@ const typeMap = {
   },
   symbol: {
     success: 'checkCircle',
-    warning: 'exclamationTriangle',
+    warning: 'exclamationCircle',
     error: 'crossCircle',
     info: 'exclamationCircle',
   },
