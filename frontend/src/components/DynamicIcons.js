@@ -75,7 +75,7 @@ const DynamicLoadingOutcomeIcon = ({
   alwaysOccupySpace = false,
   autoHideTimer = 2500,
 }) => {
-  const previousStatus = usePrevious(isLoading);
+  const previousLoadingStatus = usePrevious(isLoading);
   const forceUpdate = useForceUpdate();
   const timerRef = useRef();
 
@@ -86,7 +86,7 @@ const DynamicLoadingOutcomeIcon = ({
 
   // Show loading icon if loading or wasn't previously loading (i.e. current state can't be success or failure).
   // Let LoadingIcon determine if it should occupy space regardless.
-  if (isLoading || !previousStatus) {
+  if (isLoading || !previousLoadingStatus) {
     return (
       <LoadingIcon
         className={loadingCSS}
