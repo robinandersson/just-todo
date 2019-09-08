@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const AuthForm = ({ handleSubmit, isLoginPath }) => {
@@ -8,22 +8,14 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
     password: '',
   });
 
-  const focusInput = component => {
-    if (component) {
-      switch (component.name) {
-        case 'email':
-          if (isLoginPath) component.focus();
-          break;
+  const usernameInputRef = useRef();
+  const emailInputRef = useRef();
 
-        case 'username':
-          if (!isLoginPath) component.focus();
-          break;
-
-        default:
-          break;
-      }
-    }
-  };
+  // refocus when path changes (and after render)
+  useEffect(() => {
+    if (isLoginPath) emailInputRef.current.focus();
+    else usernameInputRef.current.focus();
+  }, [isLoginPath]);
 
   const onSubmit = evt => {
     evt.preventDefault();
@@ -49,7 +41,7 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
             name="username"
             type="text"
             required
-            autoFocus
+            ref={usernameInputRef}
             className="text-input"
             onChange={handleInputChange}
             value={inputValues.username}
@@ -64,8 +56,7 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
         name="email"
         type="email"
         required
-        autoFocus={isLoginPath}
-        ref={focusInput}
+        ref={emailInputRef}
         className="text-input"
         onChange={handleInputChange}
         value={inputValues.email}
