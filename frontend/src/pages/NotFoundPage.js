@@ -18,11 +18,7 @@ const NotFoundPage = props => (
           </span>
         </>
       }
-      message={
-        <>
-          <p>The page you tried to visit does not exist.</p>
-        </>
-      }
+      message="The page you tried to visit does not exist."
     />
     <p className="mt-12">
       Back to <NavLink to="/">home page</NavLink>
