@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { AuthContext } from '../contexts/auth-context';
 import InputField from '../components/InputField';
 import { DynamicLoadingOutcomeIcon } from '../components/DynamicIcons';
-import { SERVER_URL, GRAPHQL_ROUTE } from '../utils/url';
 import { withNotificationCenter } from '../contexts/notification-context';
 
 class PreferencesPage extends Component {
@@ -73,22 +72,15 @@ class PreferencesPage extends Component {
 
     this.setState({ isUpdating: true });
 
-    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          mutation {
+    // attempt user update request, handle follow up and potential errors
+    this.context
+      .authedRequest(
+        ` mutation {
             updateUser(password: "${newPassword}") {
               id
             }
-          }
-        `,
-      }),
-      headers: {
-        'Content-type': 'Application/json',
-        Authorization: `Bearer ${this.context.token}`,
-      },
-    })
+          }`
+      )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
           throw new Error('Failed to update user preferences!');
@@ -105,9 +97,10 @@ class PreferencesPage extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
-        this.setState({
-          loadingSucessful: false,
+        this.props.notificationCenter.pushNotification({
+          type: 'error',
+          heading: 'Something went wrong',
+          message: err.message,
         });
         return err;
       })
