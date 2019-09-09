@@ -9,6 +9,7 @@ const request = ({ url, method, query, headers }) =>
     },
   });
 
+// backend graqphQL request, simply pass the graphQL-query as param to use
 const backendRequest = query => request({ query });
 
 export { request, backendRequest };
