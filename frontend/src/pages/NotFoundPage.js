@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Icon from '../components/Icon';
 import ToastNotification from '../components/notifications/ToastNotification';
 
 const NotFoundPage = props => (
