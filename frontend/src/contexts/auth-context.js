@@ -100,9 +100,21 @@ const AuthContextProvider = ({ children }) => {
 
   const { userId, username, token } = auth || {};
 
+  // helper for making backend requests that need authorization
+  const authedRequest = query =>
+    backendRequest(query, { Authorization: `Bearer ${token}` });
+
   return (
     <AuthContext.Provider
-      value={{ userId, username, token, login, logout: logoutFrontend, signup }}
+      value={{
+        userId,
+        username,
+        token,
+        login,
+        logout: logoutFrontend,
+        signup,
+        authedRequest,
+      }}
     >
       {children}
     </AuthContext.Provider>

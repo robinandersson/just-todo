@@ -4,6 +4,7 @@ import { AuthContext } from '../contexts/auth-context';
 import InputField from '../components/InputField';
 import { DynamicLoadingOutcomeIcon } from '../components/DynamicIcons';
 import { SERVER_URL, GRAPHQL_ROUTE } from '../utils/url';
+import { withNotificationCenter } from '../contexts/notification-context';
 
 class PreferencesPage extends Component {
   static contextType = AuthContext;
@@ -19,38 +20,36 @@ class PreferencesPage extends Component {
   };
 
   //TODO: store all userdata when first logging in (along with username, id, etc.?)
-
   componentWillMount() {
-    // TODO: refactor all fetches to a generic fetch function
-    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          query {
-            user(id: ${this.context.userId}) {
-              username
-              email
-            }
+    // fetch user preferences (and handle errors)
+    this.context
+      .authedRequest(
+        `query {
+          user(id: ${this.context.userId}) {
+            username
+            email
           }
-        `,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.context.token}`,
-      },
-    })
+        }`
+      )
       .then(res => {
         if (res.status !== 200 && res.status !== 200)
-          throw new Error('Fetching user data failed!');
+          throw new Error('Fetching your user data failed! :O');
 
         return res.json();
       })
       .then(resData => {
+        if (!resData.data || !resData.data.user)
+          throw new Error('Fetching your user data failed :O');
+
         const { username, email } = resData.data.user;
         this.setState({ username, email });
       })
       .catch(err => {
-        console.log(err);
+        this.props.notificationCenter.pushNotification({
+          type: 'error',
+          heading: 'Something went wrong',
+          message: err.message,
+        });
         return err;
       });
   }
@@ -184,4 +183,4 @@ class PreferencesPage extends Component {
   }
 }
 
-export default PreferencesPage;
+export default withNotificationCenter(PreferencesPage);
