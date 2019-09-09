@@ -21,15 +21,15 @@ class PreferencesPage extends Component {
 
   //TODO: store all userdata when first logging in (along with username, id, etc.?)
   componentWillMount() {
-    // fetch user preferences (and handle errors)
+    // attempt request for fetching user preferences, handle follow up and potential errors
     this.context
       .authedRequest(
-        `query {
-          user(id: ${this.context.userId}) {
-            username
-            email
-          }
-        }`
+        ` query {
+            user(id: ${this.context.userId}) {
+              username
+              email
+            }
+          }`
       )
       .then(res => {
         if (res.status !== 200 && res.status !== 200)
@@ -97,6 +97,7 @@ class PreferencesPage extends Component {
       .then(resData => {
         if (resData.errors)
           throw new Error('Failed to update user preferences!');
+
         this.setState({
           updateSuccessful: true,
           newPassword: '',
