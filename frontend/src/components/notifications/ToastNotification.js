@@ -41,7 +41,7 @@ const ToastNotification = ({
   className,
   handleRemove,
   isCancelable = true,
-  type,
+  type = 'info',
   heading = typeMap.heading[type],
   message,
   duration = 4000,
