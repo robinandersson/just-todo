@@ -34,13 +34,14 @@ const symbolMap = {
  *
  * Change color by passing in color-css property (text-[color] in tailwindcss).
  */
-const Icon = ({ symbol = 'exclamation', size, onClick, className }) => {
+const Icon = ({ symbol = 'exclamation', size, color, onClick, className }) => {
   const faIcon = typeof symbol === 'string' ? symbolMap[symbol] : symbol;
 
   return (
     <FontAwesomeIcon
       icon={faIcon}
       size={size}
+      color={color}
       onClick={onClick}
       className={className}
     />

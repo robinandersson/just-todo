@@ -90,7 +90,7 @@ const DynamicLoadingOutcomeIcon = ({
     return (
       <LoadingIcon
         className={loadingCSS}
-        isVisible={isLoading}
+        isVisible={!!isLoading} // need explicit boolean, otherwise LoadingIcon defaults prop to true
         alwaysOccupySpace={alwaysOccupySpace}
       />
     );
