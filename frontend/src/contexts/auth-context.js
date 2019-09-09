@@ -70,7 +70,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   // attempts to signup user (includes backend request and frontend logic). Performs login if successfull.
-  // returns a promise resolving with an object containing the user credentials (on successfull signup) r tohrows error
+  // returns a promise resolving with an object containing the user credentials (on successfull signup) or throws error
   // detailing what went wrong.
   const signup = (username, email, password, errorCallback) => {
     // graphql-query
