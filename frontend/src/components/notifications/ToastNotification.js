@@ -40,6 +40,7 @@ const typeMap = {
 const ToastNotification = ({
   className,
   handleRemove,
+  isCancelable = true,
   type,
   heading = typeMap.heading[type],
   message,
@@ -93,22 +94,26 @@ const ToastNotification = ({
     >
       <div className="mr-8 ml-4 text-4xl flex items-center justify-center">
         <Icon symbol={symbol} />
-        <ProgressDonut
-          duration={duration}
-          onRest={handleRemove} // trigger removal when animation ends
-          stroke="white"
-          className="w-12 h-12 rotate-270 absolute"
-        />
+        {duration ? (
+          <ProgressDonut
+            duration={duration}
+            onRest={handleRemove} // trigger removal when animation ends
+            stroke="white"
+            className="w-12 h-12 rotate-270 absolute"
+          />
+        ) : null}
       </div>
       <div className="flex-grow">
         <div className="flex flex-row justify-between">
           {heading && <h2>{heading}</h2>}
-          <button
-            className={`self-center justify-end px-2 py-1 focus:${cssIconColoringDark} active:${cssIconColoringDark} active:shadow-none active:outline-none hover:${cssIconColoringLight} cursor-pointer inline-block focus:outline-none focus:shadow-outline`}
-            onClick={handleRemove}
-          >
-            <Icon symbol={'cross'} className="" size="lg" />
-          </button>
+          {handleRemove && isCancelable ? (
+            <button
+              className={`self-center justify-end px-2 py-1 focus:${cssIconColoringDark} active:${cssIconColoringDark} active:shadow-none active:outline-none hover:${cssIconColoringLight} cursor-pointer inline-block focus:outline-none focus:shadow-outline`}
+              onClick={handleRemove}
+            >
+              <Icon symbol={'cross'} className="" size="lg" />
+            </button>
+          ) : null}
         </div>
         <div>{processedMessage}</div>
       </div>

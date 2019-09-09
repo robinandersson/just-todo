@@ -1,24 +1,33 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import Icon from '../components/Icon';
+import ToastNotification from '../components/notifications/ToastNotification';
 
-const NotFoundPage = props => {
-  return (
-    <div className="mx-auto shadow bg-red-400 rounded shadow-2xl w-4/6 flex flex-row p-6 text-white">
-      <div className="pr-8 pl-4 text-4xl flex content-center items-center">
-        <Icon symbol="crossCircle" />
-      </div>
-      <div>
-        <h2 className="text-2xl">404 Not Found!</h2>
-        <p>
-          The page you tried to visit does not exist{' '}
+const NotFoundPage = props => (
+  <div className="mx-auto text-center min-w min-w-1/2">
+    <ToastNotification
+      type="error"
+      duration={0}
+      className="text-left"
+      heading={
+        <>
+          404 Not Found!{' '}
           <span role="img" aria-label="screaming emoji">
             😱
           </span>
-        </p>
-      </div>
-    </div>
-  );
-};
+        </>
+      }
+      message={
+        <>
+          <p>The page you tried to visit does not exist.</p>
+        </>
+      }
+    />
+    <p className="mt-12">
+      Back to <NavLink to="/">home page</NavLink>
+    </p>
+  </div>
+);
 
 export default NotFoundPage;
