@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { AuthContext } from '../contexts/auth-context';
 import TodoItem from '../components/TodoItem';
-import { SERVER_URL, GRAPHQL_ROUTE } from '../utils/url';
 
 class TodosPage extends Component {
   state = {
@@ -17,25 +16,17 @@ class TodosPage extends Component {
   }
 
   fetchTodos = () => {
-    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          query {
+    this.context
+      .authedRequest(
+        ` query {
             todos(userId: "${this.context.userId}") {
               id
               description
               isCompleted
               createdAt
             }
-          }
-        `,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.context.token}`,
-      },
-    })
+          }`
+      )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
           throw new Error("Couldn't fetch todos!");
@@ -51,22 +42,15 @@ class TodosPage extends Component {
   };
 
   handleTodoToggle = todoId => {
-    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          mutation {
+    this.context
+      .authedRequest(
+        ` mutation {
             toggleTodo(id: ${todoId}) {
               id
               description
             }
-          }`,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.context.token}`,
-      },
-    })
+          }`
+      )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
           throw new Error('Todo Toggle Failed!');
@@ -82,22 +66,15 @@ class TodosPage extends Component {
   };
 
   handleDescriptionChange = (todoId, todoDescription) => {
-    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          mutation {
+    this.context
+      .authedRequest(
+        ` mutation {
             modifyTodoDescription(id: "${todoId}", description: "${todoDescription}") {
               id
               description
             }
-          }`,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.context.token}`,
-      },
-    })
+          }`
+      )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
           throw new Error('Updating Todo Description Failed!');
@@ -121,11 +98,9 @@ class TodosPage extends Component {
 
     if (this.state.newTodoDescription.trim().length === 0) return;
 
-    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          mutation {
+    this.context
+      .authedRequest(
+        ` mutation {
             createTodo(description: "${this.state.newTodoDescription}") {
               id
               description
@@ -134,13 +109,8 @@ class TodosPage extends Component {
               completedAt
               userId
             }
-          }`,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.context.token}`,
-      },
-    })
+          }`
+      )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
           throw new Error('Todo Creation Failed!');
@@ -159,23 +129,15 @@ class TodosPage extends Component {
   };
 
   handleRemoveTodo = todoId => {
-    fetch(`${SERVER_URL}${GRAPHQL_ROUTE}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          mutation {
+    this.context
+      .authedRequest(
+        ` mutation {
             removeTodo(id: ${todoId}) {
               id
               description
             }
-          }
-        `,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.context.token}`,
-      },
-    })
+          }`
+      )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
           throw new Error('Todo Removal Failed!');
