@@ -21,18 +21,18 @@ const UserPreferencesForm = ({
   username,
   email,
   isSubmitting,
-  submitSuccessful,
+  submitWasSuccessful,
 }) => {
   const [formInputs, setFormInputs] = useState(initialInputValues);
   const inputRef = useRef(formInputs.values); // ref needed for submit handler below
 
   // reset input fields if submit successful
   useEffect(() => {
-    if (submitSuccessful) {
+    if (submitWasSuccessful) {
       setFormInputs(initialInputValues);
       inputRef.current = Object.values(initialInputValues);
     }
-  }, [submitSuccessful]);
+  }, [submitWasSuccessful]);
 
   const passwordsMatch =
     !!formInputs['new-password'] &&
@@ -46,7 +46,7 @@ const UserPreferencesForm = ({
 
   const handleChange = useFunction(e => {
     const { name, value } = e.target;
-    // shouldn't do side-effects in here, but hey. It's an experiment! :D
+    // shouldn't do side-effects (setting inputRef) in here, but hey. It's an experiment! :D
     setFormInputs(prevInputs => {
       const newInputValues = {
         ...prevInputs,
@@ -58,14 +58,16 @@ const UserPreferencesForm = ({
     });
   });
 
+  const submitOptions = {
+    submitText: 'Update',
+    submitClassName: 'mode--positive',
+    submitIsReady: passwordsMatch,
+    isSubmitting,
+    submitWasSuccessful,
+  };
+
   return (
-    <Form
-      onSubmit={handleSubmit}
-      submitText="Update"
-      submitIsReady={passwordsMatch}
-      isSubmitting={isSubmitting}
-      submitSuccessful={submitSuccessful}
-    >
+    <Form onSubmit={handleSubmit} submitOptions={submitOptions}>
       <Input name="username" label="Username" value={username} disabled />
       <Input name="email" label="Email" value={email} disabled />
       <Input

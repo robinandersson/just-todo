@@ -98,7 +98,7 @@ class PreferencesPage extends Component {
         email={this.state.email}
         onSubmit={this.handlePreferencesUpdate}
         isSubmitting={this.state.isUpdating}
-        submitSuccessful={this.state.updateSuccessful}
+        submitWasSuccessful={this.state.updateSuccessful}
       />
     );
   }

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import { AuthContext } from '../contexts/auth-context';
 import { withNotificationCenter } from '../contexts/notification-context';
-import AuthForm from '../components/AuthForm';
+import AuthForm from '../components/forms/AuthForm';
 
 class AuthPage extends Component {
   static contextType = AuthContext;
