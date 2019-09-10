@@ -1,11 +1,11 @@
 import React from 'react';
-import InputField from './InputField';
+import Input from './Input';
 
 import { mount, shallow } from 'enzyme';
 
 it('calls onChange', () => {
   const onChangeMock = jest.fn();
-  const wrapper = shallow(<InputField onChange={onChangeMock} />);
+  const wrapper = shallow(<Input onChange={onChangeMock} />);
 
   const event = { target: { value: 'This is just for test' } };
 
@@ -19,7 +19,7 @@ it('calls onChange', () => {
 
 it('renders text input value based on value prop', () => {
   const onChangeMock = jest.fn();
-  const wrapper = mount(<InputField onChange={onChangeMock} value="" />);
+  const wrapper = mount(<Input onChange={onChangeMock} value="" />);
 
   expect(wrapper.find('input').props().value).toEqual('');
 
@@ -32,17 +32,17 @@ it('renders text input value based on value prop', () => {
 });
 
 it('respects disabled prop', () => {
-  const wrapper = mount(<InputField disabled />);
+  const wrapper = mount(<Input disabled />);
   expect(wrapper.find('input').props().disabled).toBeTruthy();
 });
 
 it('shows lock icon when disabled', () => {
-  const wrapper = mount(<InputField disabled />);
+  const wrapper = mount(<Input disabled />);
   const icon = wrapper.find('svg').props();
   expect(icon['data-icon']).toEqual('lock');
 });
 
 it('defaults to input type to text', () => {
-  const wrapper = mount(<InputField />);
+  const wrapper = mount(<Input />);
   expect(wrapper.find('input').props().type).toEqual('text');
 });
