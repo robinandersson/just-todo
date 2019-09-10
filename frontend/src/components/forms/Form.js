@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DynamicLoadingOutcomeIcon } from '../DynamicIcons';
+import { DynamicLoadingOutcomeIcon } from '../icons/DynamicIcons';
 
 const Form = ({
   children,

@@ -11,6 +11,7 @@ const initialInputValues = {
 
 /*
  * Form for displaying and handling user preferences
+ * (specialized Form-component)
  *
  * Internally, it uses some experimentation for optimizing performance with sending parameters to handlers
  * (without causing rerender) - a hotly debated topic.

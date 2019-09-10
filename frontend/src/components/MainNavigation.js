@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 
 import { useAuthContext } from '../contexts/auth-context';
-import Icon from '../components/Icon';
-import SiteLogo from '../components/SiteLogo';
+import Icon from '../components/icons/Icon';
+import SiteLogo from '../components/icons/SiteLogo';
 import { concatClassNames } from '../utils/classNames';
 
 const MainNavigation = ({ history }) => {

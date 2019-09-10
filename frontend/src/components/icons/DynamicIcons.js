@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 
 import Icon from './Icon';
-import { usePrevious, useForceUpdate } from '../utils/stateHooks';
-import { concatClassNames } from '../utils/classNames';
+
+import { usePrevious, useForceUpdate } from '../../utils/stateHooks';
+import { concatClassNames } from '../../utils/classNames';
 
 const DynamicIcon = ({
   symbol,

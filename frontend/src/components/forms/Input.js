@@ -1,9 +1,12 @@
 import React from 'react';
 
-import Icon from '../Icon';
+import Icon from '../icons/Icon';
 import { concatClassNames } from '../../utils/classNames';
 
-// TODO: redo with container for setting className?
+// TODO: redo with container – for setting className (weird if setting className on one of two components)?
+/*
+ * Component for displaying Component (and accompanying Label)
+ */
 const Input = ({ name, type = 'text', label, value, onChange, disabled }) => (
   <>
     {label && (

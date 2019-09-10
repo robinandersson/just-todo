@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 
-import Icon from '../Icon';
+import Icon from '../icons/Icon';
 import { withRouter } from 'react-router-dom';
 
 import { concatClassNames } from '../../utils/classNames';
-import { ProgressDonut } from '../animations/ProgressDonut';
+import { ProgressDonut } from '../icons/ProgressDonut';
 
 // defaults for the four base notification types
 const typeMap = {
