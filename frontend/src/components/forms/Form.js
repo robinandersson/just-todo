@@ -13,7 +13,7 @@ const Form = ({
   return (
     <form className="container form" onSubmit={onSubmit}>
       {children}
-      <div className="mt-5 mb-2 flex items-center">
+      <div className="mt-5 mb-2">
         <button
           type="submit"
           className="btn mode--positive py-1 px-3"
