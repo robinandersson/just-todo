@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { escapeLineBreaks } from '../utils/string';
+import { escapeLineBreaks } from '../../utils/string';
 
 function TodoItem(props) {
   const { id, description, isCompleted } = props.data;

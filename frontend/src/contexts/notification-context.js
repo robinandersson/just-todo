@@ -50,11 +50,12 @@ const withNotificationCenter = Component => props => (
 );
 
 // returns a hook for accessing the NotificationCenterContext
-const useNotificationCenter = () => useContext(NotificationCenterContext);
+const useNotificationCenterContext = () =>
+  useContext(NotificationCenterContext);
 
 export {
   NotificationCenterContext,
   NotificationCenterProvider,
   withNotificationCenter, // HOC for easy use with class components
-  useNotificationCenter, // hook for easy use with functional components
+  useNotificationCenterContext, // hook for easy use with functional components
 };
