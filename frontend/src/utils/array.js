@@ -10,7 +10,7 @@ const deepCopy = item => {
   if (Array.isArray(item)) return item.map(deepCopy);
 
   // object: return new object and recursively go through each key-value pair
-  if (typeof item === 'object') {
+  if (typeof item === 'object' && item !== null) {
     const newObj = { ...item };
     Object.keys(newObj).forEach(key => {
       newObj[key] = deepCopy(newObj[key]);
