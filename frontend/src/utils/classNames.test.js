@@ -1,4 +1,4 @@
-import { concatClassNames } from '../utils/classNames';
+import { concatClassNames } from './classNames';
 
 it('concatenates classNames', () => {
   expect(concatClassNames('class')).toEqual('class');
