@@ -14,7 +14,8 @@ class PreferencesPage extends Component {
     updateSuccessful: null,
   };
 
-  //TODO: store all userdata when first logging in (along with username, id, etc.?)
+  // TODO: Move all user preferences-stuff to userPreferencesForm?
+  // TODO: store all userdata when first logging in (along with username, id, etc.?)
   componentWillMount() {
     // attempt request for fetching user preferences, handle follow up and potential errors
     this.context
