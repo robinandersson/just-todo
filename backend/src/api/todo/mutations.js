@@ -69,7 +69,10 @@ const modifyTodoDescriptionMutation = {
     const query = 'UPDATE todos SET description = $2 WHERE id = $1';
     return db
       .none(query, [args.id, args.description])
-      .then(res => res)
+      .then(res => {
+        // res will be undefined, instead simply return the arguments to show it was successful
+        return args;
+      })
       .catch(err => err);
   },
 };

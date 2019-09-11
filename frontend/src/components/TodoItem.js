@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { escapeLineBreaks } from '../utils/string';
 
 function TodoItem(props) {
   const { id, description, isCompleted } = props.data;
@@ -15,10 +16,8 @@ function TodoItem(props) {
   };
   const handleChange = evt => {
     // escape line breaks (otherwise causes unterminated string)
-    const escapedDescription = evt.target.value.replace(
-      /(?:\r\n|\r|\n)/g,
-      '\\n'
-    );
+    const escapedDescription = escapeLineBreaks(evt.target.value);
+
     handleDescriptionChange(id, escapedDescription);
   };
 

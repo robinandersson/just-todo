@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import { AuthContext } from '../contexts/auth-context';
 import TodoItem from '../components/TodoItem';
 import { withNotificationCenter } from '../contexts/notification-context';
+import ToastError from '../utils/errors/ToastError';
+import { deepCopy } from '../utils/array';
+import { escapeLineBreaks } from '../utils/string';
 
 class TodosPage extends Component {
   state = {
@@ -89,17 +92,36 @@ class TodosPage extends Component {
       )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
-          throw new Error('Updating Todo Description Failed!');
+          throw new Error('Updating Todo Failed! :O');
         return res.json();
       })
       .then(resData => {
-        this.fetchTodos(); // TODO: obviously, don't refresh all todos whenever a description changes xD
+        if (resData.errors) throw new Error('Updating todo failed! :O');
+
+        const { id, description } = resData.data.modifyTodoDescription; // why extract? see end of this then-block
+
+        // make deep copy of todos, then edit the copy
+        const newTodos = deepCopy(this.state.todos);
+        newTodos.find(todo => todo.id === id).description = description;
+
+        // TODO: handle possible asynchronicity race conditions - update responses etc. may overlap
+        this.setState({ todos: newTodos });
+
+        /* The returned values from the update mutation should be same as todoId and todoDescription (the values sent
+        to the mutation). The returned values are what actually got updated however, so the local state needed to be updated to reflect that to avoid multiple sources of truth. */
+        if (id !== todoId || todoDescription !== escapeLineBreaks(description))
+          throw new ToastError({
+            type: 'warning',
+            heading: 'Oops!',
+            message: 'Something went wrong when updating your todo! :S',
+          });
       })
       .catch(err => {
         this.props.notificationCenter.pushNotification({
           type: 'error',
           heading: 'Something went wrong',
           message: err.message,
+          ...err.toast, // overwrite possible previous keys if they're precent in error toast property (from ToastError)
         });
         return err;
       });
