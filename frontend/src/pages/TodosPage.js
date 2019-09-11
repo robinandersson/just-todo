@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { AuthContext } from '../contexts/auth-context';
 import TodoItem from '../components/TodoItem';
+import { withNotificationCenter } from '../contexts/notification-context';
 
 class TodosPage extends Component {
   state = {
@@ -29,14 +30,21 @@ class TodosPage extends Component {
       )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
-          throw new Error("Couldn't fetch todos!");
+          throw new Error("Couldn't fetch todos! :S");
         return res.json();
       })
       .then(resData => {
+        if (!resData.data || !resData.data.todos)
+          throw new Error("Couldn't fetch todos! :S");
+
         this.setState({ todos: resData.data.todos || [] });
       })
       .catch(err => {
-        console.log(err);
+        this.props.notificationCenter.pushNotification({
+          type: 'error',
+          heading: 'Something went wrong',
+          message: err.message,
+        });
         return err;
       });
   };
@@ -53,14 +61,18 @@ class TodosPage extends Component {
       )
       .then(res => {
         if (res.status !== 200 && res.status !== 201)
-          throw new Error('Todo Toggle Failed!');
+          throw new Error("Couldn't toggle todo! :O");
         return res.json();
       })
       .then(resData => {
         this.fetchTodos();
       })
       .catch(err => {
-        console.log(err);
+        this.props.notificationCenter.pushNotification({
+          type: 'error',
+          heading: 'Something went wrong',
+          message: err.message,
+        });
         return err;
       });
   };
@@ -84,7 +96,11 @@ class TodosPage extends Component {
         this.fetchTodos(); // TODO: obviously, don't refresh all todos whenever a description changes xD
       })
       .catch(err => {
-        console.log(err);
+        this.props.notificationCenter.pushNotification({
+          type: 'error',
+          heading: 'Something went wrong',
+          message: err.message,
+        });
         return err;
       });
   };
@@ -123,7 +139,11 @@ class TodosPage extends Component {
         this.setState({ newTodoDescription: '' });
       })
       .catch(err => {
-        console.log(err);
+        this.props.notificationCenter.pushNotification({
+          type: 'error',
+          heading: 'Something went wrong',
+          message: err.message,
+        });
         return err;
       });
   };
@@ -148,7 +168,11 @@ class TodosPage extends Component {
         this.fetchTodos();
       })
       .catch(err => {
-        console.log(err);
+        this.props.notificationCenter.pushNotification({
+          type: 'error',
+          heading: 'Something went wrong',
+          message: err.message,
+        });
         return err;
       });
   };
@@ -190,4 +214,4 @@ class TodosPage extends Component {
   }
 }
 
-export default TodosPage;
+export default withNotificationCenter(TodosPage);
