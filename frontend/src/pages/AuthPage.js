@@ -5,6 +5,11 @@ import { AuthContext } from '../contexts/auth-context';
 import { withNotificationCenter } from '../contexts/notification-context';
 import AuthForm from '../components/forms/AuthForm';
 
+/*
+ * Page for displaying login/signup
+ *
+ */
+// TODO: refactor to let all state and logic belong to AuthForm (like TodosPage)
 class AuthPage extends Component {
   static contextType = AuthContext;
 
