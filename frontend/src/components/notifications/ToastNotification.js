@@ -40,12 +40,11 @@ const typeMap = {
 const ToastNotification = ({
   className,
   handleRemove,
-  isCancelable = true,
   type = 'info',
   heading = typeMap.heading[type],
   message,
   duration = 4000,
-  location,
+  isCancelable = true,
   // limitTo-array specifies routes the notification should be limited to (unmounts if current route is not in set)
   // Observe! Defaults to initial route in code below (can't use ES6 default param since location-prop changes on each
   // render).
@@ -53,6 +52,7 @@ const ToastNotification = ({
   // before notification is sent (thus changing default limitTo-location). Specifically pass limitTo prop to be sure.
   // Pro Tip! Pass empty array to allow array to stay regardless of route change
   limitTo,
+  location,
 }) => {
   // TODO: Add option to close notification on click.
   // TODO: Expand component to allow notification that doesn't remove itself automatically
