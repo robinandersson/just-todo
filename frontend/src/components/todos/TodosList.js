@@ -40,6 +40,7 @@ const TodosList = ({ todosListLib }) => {
           value={newTodoDescription}
           onChange={handleNewTodoDescriptionChange}
           className="text-input px-5 py-3 tracking-wide w-2/3 text-lg"
+          required
         />
         <button className="btn attached-left text-lg px-5 py-3" type="submit">
           Add
