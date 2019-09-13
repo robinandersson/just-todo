@@ -23,13 +23,18 @@ const deepCopy = item => {
 };
 
 /*
- * Removes the first object (in an array) with certain key-value pair and returns the resulting array.
+ * Removes the first object in the array matching with the supplied key-value pair. It preserves array reference.
  *
- * Function takes an array, the object key to look for and the corresponding value.
+ * Function takes an array, the key and the corresponding value to match for. The operation is notdone in-place though.
  */
 const removeObjectFromArray = (arr, key, value) => {
   const index = arr.findIndex(obj => obj[key] === value);
-  return index >= 0 ? [...arr.slice(0, index), ...arr.slice(index + 1)] : arr;
+
+  if (index >= 0) {
+    const tempArray = [...arr.slice(0, index), ...arr.slice(index + 1)];
+    arr.length = 0; // first reset array
+    arr.push(...tempArray);
+  }
 };
 
 export { deepCopy, removeObjectFromArray };
