@@ -12,7 +12,7 @@ import { useConstant } from './functionHooks';
  *
  * Of course, it being a custom hook makes it limited in how it can be used (see react rules of hooks).
  */
-const useDebouncedState = (state, delay) => {
+const useDebouncedState = (state, delay = 300) => {
   const [debouncedState, setDebouncedState] = useState(state);
 
   useEffect(
@@ -38,7 +38,7 @@ const useDebouncedState = (state, delay) => {
  *
  * Of course, it being a custom hook makes it limited in how it can be used (see react rules of hooks).
  */
-const useDebouncedFunction = (callback, delay = 500) => {
+const useDebouncedFunction = (callback, delay = 300) => {
   const [callbackArgs, setCallbackArgs] = useState([]);
 
   const initRef = useRef(false);
@@ -81,7 +81,7 @@ const useDebouncedFunction = (callback, delay = 500) => {
  * cancel: a function that simply cancels the timeout
  * timeout: the timeout itself (unnecessary?)
  */
-const debounceFunction = (callback, delay) => {
+const debounceFunction = (callback, delay = 300) => {
   let timeout;
 
   const fn = (...args) => {
