@@ -43,7 +43,7 @@ const TodoItem = props => {
 
   // make toggle instant - don't wait for handler to finish setting state (server request etc.)
   const extendedHandleTodoToggle = evt => {
-    setInternalIsCompleted(true);
+    setInternalIsCompleted(isCompleted => !isCompleted);
     handleTodoToggle(id); // no need to debounce toggle
   };
 
