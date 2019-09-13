@@ -58,7 +58,7 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
         <Input
           name="username"
           label="Username"
-          value={formInputs.email}
+          value={formInputs.username}
           required
           ref={usernameInputRef}
           onChange={handleInputChange}
