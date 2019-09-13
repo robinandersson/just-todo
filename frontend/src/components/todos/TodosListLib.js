@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 
 // functionality for TodoList, extracted to minimize code bloat
 // (not put in helpers folder since it's not meant for general use + keep relevant code close)
@@ -10,17 +10,43 @@ import ToastError from '../../utils/errors/ToastError';
 import { useAuthContext } from '../../contexts/auth-context';
 import { useNotificationCenterContext } from '../../contexts/notification-context';
 
-import { useFunction } from '../../utils/functionHooks';
+import { useConstant } from '../../utils/functionHooks';
 
 const withTodosListLib = WrappedComponent => props => {
   const authContext = useAuthContext();
   const notificationCenter = useNotificationCenterContext();
 
-  const [todos, setTodos] = useState([]);
   const [newTodoDescription, setNewTodoDescription] = useState('');
 
+  const [todos, dispatch] = useReducer((todos, action) => {
+    switch (action.type) {
+      case 'ADD_TODO':
+        return [...todos, { ...action.todo }];
+
+      case 'REMOVE_TODO':
+        return todos.filter(todo => todo.id !== action.todo.id);
+
+      case 'MODIFY_TODO':
+        // make deep copy of todos, then replace the changed todo (to keep array order) with updated properties
+        const todosCopy = deepCopy(todos);
+        const index = todosCopy.findIndex(todo => todo.id === action.todo.id);
+        todosCopy[index] = {
+          ...todosCopy[index],
+          ...action.todo,
+        };
+
+        return todosCopy;
+
+      case 'REPLACE_TODOS':
+        return action.todos;
+
+      default:
+        throw new Error('reducer missing supported action.type!');
+    }
+  }, []);
+
   // use the custom hook useFunction to avoid rerender on every update
-  const fetchTodos = useFunction(() => {
+  const fetchTodos = useConstant(() => {
     authContext
       .authedRequest(
         ` query {
@@ -40,7 +66,7 @@ const withTodosListLib = WrappedComponent => props => {
       .then(resData => {
         if (!resData.data || !resData.data.todos)
           throw new Error("Couldn't fetch todos! :S");
-        setTodos(resData.data.todos || []);
+        dispatch({ type: 'REPLACE_TODOS', todos: resData.data.todos || [] });
       })
       .catch(err => {
         notificationCenter.pushNotification({
@@ -70,7 +96,7 @@ const withTodosListLib = WrappedComponent => props => {
       })
       .then(resData => {
         if (resData.errors) throw new Error('Removing todo failed! :O');
-        fetchTodos();
+        dispatch({ type: 'REMOVE_TODO', todo: { id: todoId } });
       })
       .catch(err => {
         notificationCenter.pushNotification({
@@ -130,15 +156,10 @@ const withTodosListLib = WrappedComponent => props => {
 
         const { id, description } = resData.data.modifyTodoDescription; // why extract? see end of this then-block
 
-        // make deep copy of todos, then edit the copy
-        const newTodos = deepCopy(todos);
-        newTodos.find(todo => todo.id === id).description = description;
-
-        // TODO: handle possible asynchronicity race conditions - update responses etc. may overlap
-        setTodos(newTodos);
+        dispatch({ type: 'MODIFY_TODO', todo: { id, description } });
 
         /* The returned values from the update mutation should be same as todoId and todoDescription (the values sent
-        to the mutation). The returned values are what actually got updated however, so the local state needed to be 
+        to the mutation). The returned values are what actually got updated however, so the local state needed to be
         updated to reflect that to avoid multiple sources of truth. */
         if (id !== todoId || todoDescription !== escapeLineBreaks(description))
           throw new ToastError({
@@ -189,7 +210,7 @@ const withTodosListLib = WrappedComponent => props => {
         newTodos.push(resData.data.createTodo);
 
         // TODO: handle possible asynchronicity race conditions - update responses etc. may overlap
-        setTodos(newTodos);
+        dispatch({ type: 'ADD_TODO', todo: resData.data.createTodo });
         setNewTodoDescription('');
       })
       .catch(err => {
@@ -209,7 +230,7 @@ const withTodosListLib = WrappedComponent => props => {
   return (
     <WrappedComponent
       todosListLib={{
-        todosState: [todos, setTodos],
+        todosState: [todos],
         newTodoDescriptionState: [newTodoDescription, setNewTodoDescription],
         fetchTodos,
         handleRemoveTodo,

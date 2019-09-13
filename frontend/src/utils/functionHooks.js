@@ -1,5 +1,8 @@
 import { useRef } from 'react';
 
+// TODO: replace all uses of useFunction to useConstant ()
+// TODO: rename file to something better (simply useConstant.js?)
+
 /*
  * useFunction is a little helper for using functions in functional components similar to class component's instance
  * functions (defines function once to avoid rerendering children)
@@ -12,10 +15,21 @@ const useFunction = f => {
   return fRef.current;
 };
 
-// similar to useFunction, but returns a bound function
-const useBind = (f, that, ...params) => {
-  const fRef = useRef(f.bind(that, ...params));
-  return fRef.current;
+/*
+ * Custom hook ensuring the passed 'item' is declared only once (useMemo doesn't guarantee this)
+ *
+ * Works with functions, objects, primitives; you name it.
+ *
+ * Shamelessly copied from https://github.com/Andarist/use-constant
+ */
+const useConstant = item => {
+  const ref = useRef();
+
+  if (!ref.current) {
+    ref.current = { v: item };
+  }
+
+  return ref.current.v;
 };
 
-export { useFunction, useBind };
+export { useFunction, useConstant };
