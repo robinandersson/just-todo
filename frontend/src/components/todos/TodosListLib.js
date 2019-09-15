@@ -56,7 +56,7 @@ const withTodosListLib = WrappedComponent => props => {
 
   // use the custom hook useFunction to avoid rerender on every update
   const fetchTodos = useConstant(() => {
-    authContext
+    return authContext
       .authedRequest(
         ` query {
           todos(userId: "${authContext.userId}") {
@@ -73,9 +73,11 @@ const withTodosListLib = WrappedComponent => props => {
         return res.json();
       })
       .then(resData => {
-        if (!resData.data || !resData.data.todos)
-          throw new Error("Couldn't fetch todos! :S");
-        dispatch({ type: 'REPLACE_TODOS', todos: resData.data.todos || [] });
+        const todosResults = resData.data && resData.data.todos;
+        if (!todosResults) throw new Error("Couldn't fetch todos! :S");
+
+        dispatch({ type: 'REPLACE_TODOS', todos: todosResults || [] });
+        return todosResults;
       })
       .catch(err => {
         notificationCenter.pushNotification({

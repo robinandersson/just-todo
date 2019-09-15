@@ -10,28 +10,31 @@ const DynamicIcon = ({
   className,
   isVisible = true,
   alwaysOccupySpace = false,
+  ...props
 }) => {
   if (!isVisible && !alwaysOccupySpace) return null;
 
   const opacity = isVisible ? 'opacity-100' : 'opacity-0';
   const css = concatClassNames(className, opacity);
 
-  return <Icon symbol={symbol} className={css} />;
+  return <Icon symbol={symbol} className={css} {...props} />;
 };
 
 const LoadingIcon = ({
   className,
   isVisible = true,
   alwaysOccupySpace = false,
+  ...props
 }) => (
   <DynamicIcon
     symbol="cog"
     className={concatClassNames(
       className,
-      'ml-2 text-gray-500 transition mode--instant animate-spin'
+      'ml-2 text-gray-500 transition animate-spin'
     )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
+    {...props}
   />
 );
 
@@ -39,15 +42,17 @@ const SuccessIcon = ({
   className,
   isVisible = true,
   alwaysOccupySpace = false,
+  ...props
 }) => (
   <DynamicIcon
     symbol="check"
     className={concatClassNames(
       className,
-      'ml-2 text-green-400 transition mode--instant'
+      'ml-2 text-green-400 transition animate-instant'
     )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
+    {...props}
   />
 );
 
@@ -55,15 +60,17 @@ const FailureIcon = ({
   className,
   isVisible = true,
   alwaysOccupySpace = false,
+  ...props
 }) => (
   <DynamicIcon
     symbol="cross"
     className={concatClassNames(
       className,
-      'ml-2 text-red-400 transition mode--instant'
+      'ml-2 text-red-400 transition animate-instant'
     )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
+    {...props}
   />
 );
 

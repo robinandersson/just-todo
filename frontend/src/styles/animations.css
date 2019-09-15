@@ -28,16 +28,25 @@
 .animate-scale {
   animation: animate-scale ease-in-out 2s infinite;
 }
+.animate-instant {
+  animation-duration: 0.1s;
+}
+.animate-fast {
+  animation-duration: 0.25s;
+}
+.animate-slow {
+  animation-duration: 3s;
+}
 
 .transition {
   transition: all 0.5s;
 }
-.mode--instant {
+.transition-instant {
   transition-duration: 0.1s;
 }
-.mode--fast {
+.transition-fast {
   transition-duration: 0.25s;
 }
-.mode--slow {
+.transition-slow {
   transition-duration: 3s;
 }
