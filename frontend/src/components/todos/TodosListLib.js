@@ -27,12 +27,12 @@ const withTodosListLib = WrappedComponent => props => {
         return todos.filter(todo => todo.id !== action.todo.id);
 
       case 'MODIFY_TODO':
-        // make deep copy of todos, then replace the changed todo (to keep array order) with updated properties
+        // make deep copy of todos, then replace the changed todo (keep array order - dont push) with updated properties
         const todosCopy = deepCopy(todos);
         const index = todosCopy.findIndex(todo => todo.id === action.todo.id);
         todosCopy[index] = {
-          ...todosCopy[index],
-          ...action.todo,
+          ...todosCopy[index], // copy properties...
+          ...action.todo, // ...but replace the updated ones
         };
 
         return todosCopy;
@@ -111,6 +111,7 @@ const withTodosListLib = WrappedComponent => props => {
   const handleTodoToggle = todoId => {
     authContext
       .authedRequest(
+        // the mutation actually toggles the boolean (doesn't set the boolean) to avoid race conditions
         ` mutation {
             toggleTodo(id: ${todoId}) {
               id

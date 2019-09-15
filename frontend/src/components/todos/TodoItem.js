@@ -22,6 +22,7 @@ const TodoItem = props => {
   const [internalIsCompleted, setInternalIsCompleted] = useState(isCompleted);
   const [internalIsRemoved, setInternalIsRemoved] = useState(false);
 
+  // update internal description if changes happen to main-description state (e.g. to reflect update errors)
   useEffect(() => {
     setInternalDescription(description);
   }, [description]);
