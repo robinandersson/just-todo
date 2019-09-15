@@ -30,10 +30,25 @@ const TodosList = ({ todosListLib }) => {
 
   return (
     <div className="container border border-gray rounded mx-auto p-8 shadow-lg">
-      {isInitialFetch ? (
+      {isInitialFetch && (
         <div className="text-center">
           <h2 className="text-gray-500 my-10">Fetching your todos</h2>
           <LoadingIcon size="3x" className="animate-slow mb-10" />
+        </div>
+      )}
+
+      {/* TODO: Animate reaching inbox zero */}
+      {/* skips ternary on first isInitialFetch conditional to avoid nested ternary */}
+      {!isInitialFetch && todos.length === 0 ? (
+        <div className="text-center text-gray-500 my-20">
+          <p>You've reached</p>
+          <h2 className="text-4xl">Inbox Zero</h2>
+          <h3 className="text-8xl">
+            <span role="img" aria-label="Nature Camping emoji">
+              🏕
+            </span>
+          </h3>
+          <p>– Peaceful, isn't it –</p>
         </div>
       ) : (
         todos
