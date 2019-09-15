@@ -130,12 +130,14 @@ const withTodosListLib = WrappedComponent => props => {
         return res.json();
       })
       .then(resData => {
-        if (resData.errors || !resData.data || !resData.data.toggleTodo)
+        const todoId =
+          resData.data && resData.data.toggleTodo && resData.data.toggleTodo.id;
+        if (resData.errors || !todoId)
           throw new Error('Toggling todo failed! :O');
         // avoid race conditions by only toggling local state instead of using state from server
         dispatch({
           type: 'TOGGLE_TODO',
-          todo: { id: resData.data.toggleTodo },
+          todo: { id: todoId },
         });
       })
       .catch(err => {
