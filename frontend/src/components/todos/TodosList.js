@@ -3,6 +3,11 @@ import React, { useEffect } from 'react';
 import TodoItem from './TodoItem';
 import withTodosListLib from './TodosListLib';
 
+/*
+ * This component houses all logic pertaining the presentation the list of todos, this includes all lifecycle logic.
+ *
+ * The withTodosListLib Hoc is consumed by this component to supply all state and handlers/logic modifying state.
+ */
 const TodosList = ({ todosListLib }) => {
   const {
     todosState: [todos],

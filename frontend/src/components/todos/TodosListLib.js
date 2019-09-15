@@ -1,9 +1,5 @@
 import React, { useState, useReducer } from 'react';
 
-// functionality for TodoList, extracted to minimize code bloat
-// (not put in helpers folder since it's not meant for general use + keep relevant code close)
-// (also not using useReducer bc. it's a hassle to use it for async IMO)
-
 import { deepCopy } from '../../utils/array';
 import { escapeLineBreaks } from '../../utils/string';
 import ToastError from '../../utils/errors/ToastError';
@@ -12,6 +8,7 @@ import { useNotificationCenterContext } from '../../contexts/notification-contex
 
 import { useConstant } from '../../utils/functionHooks';
 
+// Reducer for modifying todos state
 const todosReducer = (todos, action) => {
   switch (action.type) {
     case 'ADD_TODO':
@@ -44,6 +41,11 @@ const todosReducer = (todos, action) => {
   }
 };
 
+/*
+ * HOC for TodoList, containing state, handlers, etc.
+ *
+ * Extracted to minimize code bloat (keep relevant code close, thus not put in the generalized helper folder)
+ */
 const withTodosListLib = WrappedComponent => props => {
   const authContext = useAuthContext();
   const notificationCenter = useNotificationCenterContext();
