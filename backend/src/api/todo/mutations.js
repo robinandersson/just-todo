@@ -49,6 +49,7 @@ const toggleTodoMutation = {
     id: { type: GraphQLID },
   },
   resolve(parent, args, req) {
+    // return what was updated to allow frontend to do better error checks
     const query =
       'UPDATE todos SET is_completed = NOT is_completed WHERE id = $1 RETURNING id, is_completed;';
     return db

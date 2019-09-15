@@ -34,7 +34,6 @@ const withTodosListLib = WrappedComponent => props => {
           ...todosCopy[index], // copy properties...
           ...action.todo, // ...but replace the updated ones
         };
-
         return todosCopy;
 
       case 'REPLACE_TODOS':
