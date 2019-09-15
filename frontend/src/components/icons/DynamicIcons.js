@@ -28,7 +28,7 @@ const LoadingIcon = ({
     symbol="cog"
     className={concatClassNames(
       className,
-      'ml-2 text-blue transition mode--instant animate-spin'
+      'ml-2 text-gray-500 transition mode--instant animate-spin'
     )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
@@ -44,7 +44,7 @@ const SuccessIcon = ({
     symbol="check"
     className={concatClassNames(
       className,
-      'ml-2 text-green transition mode--instant'
+      'ml-2 text-green-400 transition mode--instant'
     )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
@@ -60,7 +60,7 @@ const FailureIcon = ({
     symbol="cross"
     className={concatClassNames(
       className,
-      'ml-2 text-red transition mode--instant'
+      'ml-2 text-red-400 transition mode--instant'
     )}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
