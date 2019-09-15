@@ -27,8 +27,6 @@ const TodoItem = props => {
     setInternalDescription(description);
   }, [description]);
 
-  // TODO: add status indicator showing that status update is happening
-
   // debounce text input change so as to not flood backend with change-requests
   const dbdHandleDescriptionChange = useDebouncedFunction(
     handleDescriptionChange
