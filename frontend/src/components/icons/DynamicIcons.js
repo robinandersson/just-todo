@@ -70,11 +70,12 @@ const FailureIcon = ({
 // TODO: Redo using 'status' prop instead (e.g. ['loading', 'success', 'failure'])
 // TODO: Refactor component to be more general/dynamic - e.g. accept different icons as props
 const DynamicLoadingOutcomeIcon = ({
-  css = {},
   isLoading,
   isSuccessful,
   alwaysOccupySpace = false,
   autoHideTimer = 2500,
+  css = {},
+  className,
 }) => {
   const previousLoadingStatus = usePrevious(isLoading);
   const forceUpdate = useForceUpdate();
@@ -90,7 +91,7 @@ const DynamicLoadingOutcomeIcon = ({
   if (isLoading || !previousLoadingStatus) {
     return (
       <LoadingIcon
-        className={loadingCSS}
+        className={concatClassNames(className, loadingCSS)}
         isVisible={!!isLoading} // need explicit boolean, otherwise LoadingIcon defaults prop to true
         alwaysOccupySpace={alwaysOccupySpace}
       />
@@ -105,13 +106,13 @@ const DynamicLoadingOutcomeIcon = ({
 
   return isSuccessful ? (
     <SuccessIcon
-      className={successCSS}
+      className={concatClassNames(className, successCSS)}
       isVisible={true}
       alwaysOccupySpace={alwaysOccupySpace}
     />
   ) : (
     <FailureIcon
-      className={failureCSS}
+      className={concatClassNames(className, failureCSS)}
       isVisible={true}
       alwaysOccupySpace={alwaysOccupySpace}
     />
