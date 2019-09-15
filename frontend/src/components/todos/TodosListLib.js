@@ -12,43 +12,45 @@ import { useNotificationCenterContext } from '../../contexts/notification-contex
 
 import { useConstant } from '../../utils/functionHooks';
 
+const todosReducer = (todos, action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [...todos, { ...action.todo }];
+
+    case 'REMOVE_TODO':
+      return todos.filter(todo => todo.id !== action.todo.id);
+
+    case 'TOGGLE_TODO':
+      // calculate 'isCompleted' property (append to action) for MODIFY_TODO-case to handle (to simply for consumers)
+      const { isCompleted } = todos.find(todo => todo.id === action.todo.id);
+      action.todo.isCompleted = !isCompleted;
+    // falls through
+
+    case 'MODIFY_TODO':
+      // make deep copy of todos, then replace the changed todo (keep array order - dont push) with updated properties
+      const todosCopy = deepCopy(todos);
+      const index = todosCopy.findIndex(todo => todo.id === action.todo.id);
+      todosCopy[index] = {
+        ...todosCopy[index], // copy properties...
+        ...action.todo, // ...but replace the updated ones
+      };
+      return todosCopy;
+
+    case 'REPLACE_TODOS':
+      return action.todos;
+
+    default:
+      throw new Error('reducer missing supported action.type!');
+  }
+};
+
 const withTodosListLib = WrappedComponent => props => {
   const authContext = useAuthContext();
   const notificationCenter = useNotificationCenterContext();
 
   const [newTodoDescription, setNewTodoDescription] = useState('');
 
-  const [todos, dispatch] = useReducer((todos, action) => {
-    switch (action.type) {
-      case 'ADD_TODO':
-        return [...todos, { ...action.todo }];
-
-      case 'REMOVE_TODO':
-        return todos.filter(todo => todo.id !== action.todo.id);
-
-      case 'TOGGLE_TODO':
-        // calculate 'isCompleted' property (append to action) for MODIFY_TODO-case to handle (to simply for consumers)
-        const { isCompleted } = todos.find(todo => todo.id === action.todo.id);
-        action.todo.isCompleted = !isCompleted;
-      // falls through
-
-      case 'MODIFY_TODO':
-        // make deep copy of todos, then replace the changed todo (keep array order - dont push) with updated properties
-        const todosCopy = deepCopy(todos);
-        const index = todosCopy.findIndex(todo => todo.id === action.todo.id);
-        todosCopy[index] = {
-          ...todosCopy[index], // copy properties...
-          ...action.todo, // ...but replace the updated ones
-        };
-        return todosCopy;
-
-      case 'REPLACE_TODOS':
-        return action.todos;
-
-      default:
-        throw new Error('reducer missing supported action.type!');
-    }
-  }, []);
+  const [todos, dispatch] = useReducer(todosReducer, []);
 
   // use the custom hook useFunction to avoid rerender on every update
   const fetchTodos = useConstant(() => {
