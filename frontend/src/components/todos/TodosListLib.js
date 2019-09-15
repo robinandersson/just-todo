@@ -26,6 +26,12 @@ const withTodosListLib = WrappedComponent => props => {
       case 'REMOVE_TODO':
         return todos.filter(todo => todo.id !== action.todo.id);
 
+      case 'TOGGLE_TODO':
+        // calculate 'isCompleted' property (append to action) for MODIFY_TODO-case to handle (to simply for consumers)
+        const { isCompleted } = todos.find(todo => todo.id === action.todo.id);
+        action.todo.isCompleted = !isCompleted;
+      // falls through
+
       case 'MODIFY_TODO':
         // make deep copy of todos, then replace the changed todo (keep array order - dont push) with updated properties
         const todosCopy = deepCopy(todos);
@@ -126,8 +132,11 @@ const withTodosListLib = WrappedComponent => props => {
       .then(resData => {
         if (resData.errors || !resData.data || !resData.data.toggleTodo)
           throw new Error('Toggling todo failed! :O');
-        const { id, isCompleted } = resData.data.toggleTodo;
-        dispatch({ type: 'MODIFY_TODO', todo: { id, isCompleted } });
+        // avoid race conditions by only toggling local state instead of using state from server
+        dispatch({
+          type: 'TOGGLE_TODO',
+          todo: { id: resData.data.toggleTodo },
+        });
       })
       .catch(err => {
         notificationCenter.pushNotification({
