@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -21,11 +21,6 @@ const TodoItem = props => {
   const [internalDescription, setInternalDescription] = useState(description);
   const [internalIsCompleted, setInternalIsCompleted] = useState(isCompleted);
   const [internalIsRemoved, setInternalIsRemoved] = useState(false);
-
-  // update internal description if changes happen to main-description state (e.g. to reflect update errors)
-  useEffect(() => {
-    setInternalDescription(description);
-  }, [description]);
 
   // debounce text input change so as to not flood backend with change-requests
   const dbdHandleDescriptionChange = useDebouncedFunction(
