@@ -32,7 +32,7 @@ const TodoItem = props => {
 
     // escape line breaks (otherwise causes unterminated string)
     const escapedDescription = escapeLineBreaks(evt.target.value);
-    dbdHandleDescriptionChange(id, escapedDescription);
+    dbdHandleDescriptionChange(id, escapedDescription); // TODO: complete debounced/waiting handlers on unmount
   };
 
   // make toggle instant - don't wait for handler to finish setting state (server request etc.)

@@ -49,7 +49,7 @@ const withTodosListLib = WrappedComponent => props => {
   const notificationCenter = useNotificationCenterContext();
 
   const [newTodoDescription, setNewTodoDescription] = useState('');
-
+  // think of todos as representing server state (internal states are used in each child component for snappier UX)
   const [todos, dispatch] = useReducer(todosReducer, []);
 
   // use the custom hook useFunction to avoid rerender on every update
