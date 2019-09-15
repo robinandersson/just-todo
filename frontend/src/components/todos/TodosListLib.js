@@ -115,7 +115,7 @@ const withTodosListLib = WrappedComponent => props => {
         ` mutation {
             toggleTodo(id: ${todoId}) {
               id
-              description
+              isCompleted
             }
           }`
       )
@@ -125,7 +125,10 @@ const withTodosListLib = WrappedComponent => props => {
         return res.json();
       })
       .then(resData => {
-        fetchTodos();
+        if (resData.errors || !resData.data || !resData.data.toggleTodo)
+          throw new Error('Toggling todo failed! :O');
+        const { id, isCompleted } = resData.data.toggleTodo;
+        dispatch({ type: 'MODIFY_TODO', todo: { id, isCompleted } });
       })
       .catch(err => {
         notificationCenter.pushNotification({

@@ -50,9 +50,9 @@ const toggleTodoMutation = {
   },
   resolve(parent, args, req) {
     const query =
-      'UPDATE todos SET is_completed = NOT is_completed WHERE id = $1';
+      'UPDATE todos SET is_completed = NOT is_completed WHERE id = $1 RETURNING id, is_completed;';
     return db
-      .none(query, args.id)
+      .oneOrNone(query, args.id)
       .then(res => res)
       .catch(err => err);
   },
