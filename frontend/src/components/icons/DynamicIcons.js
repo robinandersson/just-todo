@@ -28,10 +28,7 @@ const LoadingIcon = ({
 }) => (
   <DynamicIcon
     symbol="cog"
-    className={concatClassNames(
-      className,
-      'ml-2 text-gray-500 transition animate-spin'
-    )}
+    className={concatClassNames('ml-2 transition animate-spin', className)}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
     {...props}
@@ -46,10 +43,7 @@ const SuccessIcon = ({
 }) => (
   <DynamicIcon
     symbol="check"
-    className={concatClassNames(
-      className,
-      'ml-2 text-green-400 transition animate-instant'
-    )}
+    className={concatClassNames('ml-2 transition animate-instant', className)}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
     {...props}
@@ -64,10 +58,7 @@ const FailureIcon = ({
 }) => (
   <DynamicIcon
     symbol="cross"
-    className={concatClassNames(
-      className,
-      'ml-2 text-red-400 transition animate-instant'
-    )}
+    className={concatClassNames('ml-2 transition animate-instant', className)}
     isVisible={isVisible}
     alwaysOccupySpace={alwaysOccupySpace}
     {...props}
