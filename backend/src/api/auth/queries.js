@@ -26,6 +26,7 @@ const loginQuery = {
 
     return Promise.all([userPromise, passwordPromise])
       .then(([user, passwordIsCorrect]) => {
+        // TODO: don't explicitly state that password is incorrect. (For user safety reasons)
         if (!passwordIsCorrect)
           throw new AuthError('Password is incorrect!', 401);
 
