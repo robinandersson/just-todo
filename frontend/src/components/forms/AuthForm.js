@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import Form from './Form';
 import Input from './Input';
+import { useAutoCleanupPromises } from '../../utils/promises';
 
 const AuthForm = ({ handleSubmit, isLoginPath }) => {
   const [formInputs, setFormInputs] = useState({
@@ -9,9 +11,12 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
     email: '',
     password: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitWasSuccessful, setSubmitWasSuccessful] = useState(false);
 
   const usernameInputRef = useRef();
   const emailInputRef = useRef();
+  const { autoCleanupPromise } = useAutoCleanupPromises();
 
   // refocus when path changes (and after render)
   useEffect(() => {
@@ -21,7 +26,24 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
 
   const onSubmit = evt => {
     evt.preventDefault();
-    handleSubmit(formInputs);
+    setIsSubmitting(true);
+
+    // cancel submit handler on unmount
+    const [submitPromise] = autoCleanupPromise(handleSubmit(formInputs));
+
+    submitPromise
+      // update async status-flags when promise is resolved
+      .then(
+        value => {
+          setIsSubmitting(false);
+          const submitWasSuccessful = !(value instanceof Error);
+          setSubmitWasSuccessful(submitWasSuccessful);
+        },
+        // rejection should only be done by promise cancellation (autoCleanupPromise) on unmount. Rethrow otherwise
+        reason => {
+          if (!reason.isCanceled) throw new Error(reason);
+        }
+      );
   };
 
   const handleInputChange = evt => {
@@ -44,6 +66,8 @@ const AuthForm = ({ handleSubmit, isLoginPath }) => {
   const submitOptions = {
     submitText: isLoginPath ? 'Login' : 'Signup',
     submitClassName: !isLoginPath && 'mode--positive',
+    isSubmitting,
+    submitWasSuccessful,
   };
 
   return (

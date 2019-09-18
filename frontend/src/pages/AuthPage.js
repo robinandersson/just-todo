@@ -68,13 +68,14 @@ class AuthPage extends Component {
       ? this.context.login(email, password)
       : this.context.signup(username, email, password);
 
-    loginOrSignupPromise.catch(err => {
+    return loginOrSignupPromise.catch(err => {
       this.props.notificationCenter.pushNotification({
         type: 'error',
         heading: isLoginPath ? 'Login error' : 'Signup error',
         message: err.message,
         limitTo: [this.props.location.pathname],
       });
+
       return err;
     });
   };
