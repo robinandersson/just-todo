@@ -40,7 +40,7 @@ const TodosList = ({ todosListLib }) => {
       {/* TODO: Animate reaching inbox zero */}
       {/* skips ternary on first isInitialFetch conditional to avoid nested ternary */}
       {!isInitialFetch && todos.length === 0 ? (
-        <div className="text-center text-gray-500 my-20">
+        <div className="text-center text-gray-500 my-20 cursor-default">
           <p>You've reached</p>
           <h2 className="text-4xl">Inbox Zero</h2>
           <h3 className="text-8xl">
